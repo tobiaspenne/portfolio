@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tobias Penne – Senior Digital Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background: #ffffff;
+      color: #000000;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    .portfolio {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 100px;
+      padding: 48px 72px;
+      max-width: 1232px;
+      margin: 0 auto;
+    }
+
+    /* ─── Header ─────────────────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .header-name {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: normal;
+    }
+
+    .header-linkedin {
+      display: flex;
+      align-items: center;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .header-linkedin:hover {
+      opacity: 1;
+    }
+    .header-linkedin img {
+      width: 40px;
+      height: 40px;
+    }
+
+    /* ─── Hero Text ───────────────────────────────────────── */
+    .hero-text {
+      width: 100%;
+      font-size: 44px;
+      line-height: 62px;
+      font-weight: 400;
+    }
+
+    .hero-text .bold-italic {
+      font-weight: 700;
+      font-style: italic;
+    }
+
+    /* ─── Portrait ────────────────────────────────────────── */
+    .portrait-section {
+      position: relative;
+      width: 100%;
+      height: 641px;
+      display: flex;
+      align-items: center;
+    }
+
+    .portrait-container {
+      position: relative;
+      width: 641px;
+      height: 641px;
+      border-radius: 24px;
+      flex-shrink: 0;
+    }
+
+    .portrait-bg {
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      background: linear-gradient(to bottom, #ccc8e5 0%, #cae0e9 64.942%, #c8e2ef 100%);
+    }
+
+    .portrait-img-wrapper {
+      position: absolute;
+      inset: 0;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .portrait-img {
+      position: absolute;
+      width: 173.15%;
+      height: 260.27%;
+      left: -38.91%;
+      top: -15.86%;
+      max-width: none;
+    }
+
+    .portrait-note {
+      position: absolute;
+      left: 529px;
+      top: 186px;
+      width: 595px;
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 20px 24px 24px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+    }
+
+    .portrait-note p {
+      font-size: 28px;
+      line-height: 46px;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .portrait-note .bold {
+      font-weight: 700;
+    }
+
+    /* ─── Bullet Sections ─────────────────────────────────── */
+    .bullet-section {
+      display: flex;
+      flex-direction: column;
+      gap: 72px;
+      width: 100%;
+    }
+
+    .bullet-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 40px;
+    }
+
+    .bullet-label {
+      font-size: 36px;
+      font-weight: 400;
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 260px;
+    }
+
+    .bullet-label .label-bold {
+      font-weight: 700;
+    }
+
+    .bullet-text {
+      font-size: 18px;
+      line-height: 32px;
+      max-width: 752px;
+      flex: 1;
+    }
+
+    /* ─── Subheadline ─────────────────────────────────────── */
+    .subheadline {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 62px;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* ─── Cases Section ──────────────────────────────────── */
+    .cases-section {
+      width: 100%;
+    }
+
+    .cases-heading {
+      font-size: 44px;
+      font-weight: 700;
+      line-height: 62px;
+      margin-bottom: 48px;
+    }
+
+    .cases-scroll-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+      user-select: none;
+    }
+    .cases-scroll-wrapper::-webkit-scrollbar { display: none; }
+    .cases-scroll-wrapper.is-grabbing { cursor: grabbing; }
+
+    .cases-track {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 4px;
+      width: max-content;
+    }
+
+    /* ── Card ── */
+    .case-card {
+      width: 360px;
+      height: 360px;
+      border-radius: 24px;
+      flex-shrink: 0;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .case-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.10);
+    }
+
+    .case-card-number {
+      position: absolute;
+      top: 20px;
+      left: 26px;
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(0,0,0,0.07);
+      pointer-events: none;
+    }
+
+    .case-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 28px;
+    }
+
+    .case-card-tag {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.45);
+      margin-bottom: 10px;
+    }
+
+    .case-card-title {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #000;
+    }
+
+    /* Hover CTA overlay */
+    .case-card-hover {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      border-radius: 24px;
+    }
+    .case-card:hover .case-card-hover { opacity: 1; }
+
+    .case-card-hover-label {
+      font-size: 17px;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: 0.01em;
+    }
+
+    /* Card gradient backgrounds */
+    .case-card--1 { background: linear-gradient(145deg, #d4cfe8 0%, #c2bcd8 100%); }
+    .case-card--2 { background: linear-gradient(145deg, #c0dced 0%, #a8cfe0 100%); }
+    .case-card--3 { background: linear-gradient(145deg, #cce5d8 0%, #b0d4c4 100%); }
+    .case-card--4 { background: linear-gradient(145deg, #e8dcc8 0%, #d4c8a8 100%); }
+    .case-card--5 { background: linear-gradient(145deg, #e0c8d4 0%, #ccb0c0 100%); }
+
+    /* ── Detail Overlay ── */
+    .case-overlay {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 200;
+      transform: translateX(100%);
+      transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    .case-overlay.is-open {
+      transform: translateX(0);
+    }
+
+    .case-overlay-inner {
+      max-width: 1232px;
+      margin: 0 auto;
+      padding: 48px 72px 96px;
+    }
+
+    .case-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-family: 'Lora', serif;
+      font-weight: 400;
+      color: #000;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 56px;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .case-back-btn:hover { opacity: 1; }
+    .case-back-arrow { font-size: 22px; line-height: 1; }
+
+    .case-hero-area {
+      width: 100%;
+      height: 480px;
+      border-radius: 24px;
+      margin-bottom: 56px;
+      display: flex;
+      align-items: flex-end;
+      padding: 40px 44px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-hero-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.25);
+    }
+
+    .case-hero-title {
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 1.1;
+      color: #000;
+      position: relative;
+      z-index: 1;
+    }
+
+    .case-meta {
+      display: flex;
+      gap: 48px;
+      padding-bottom: 40px;
+      margin-bottom: 56px;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .case-meta-item label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 8px;
+    }
+    .case-meta-item span {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .case-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+
+    .case-body-section label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 16px;
+    }
+
+    .case-body-section p {
+      font-size: 18px;
+      line-height: 32px;
+    }
+
+    /* Overlay enter animations */
+    .case-overlay .case-back-btn,
+    .case-overlay .case-hero-area,
+    .case-overlay .case-meta,
+    .case-overlay .case-body {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .case-overlay.is-open .case-back-btn  { opacity: 0.5; transform: none; transition-delay: 0.25s; }
+    .case-overlay.is-open .case-back-btn:hover { opacity: 1; }
+    .case-overlay.is-open .case-hero-area { opacity: 1; transform: none; transition-delay: 0.35s; }
+    .case-overlay.is-open .case-meta      { opacity: 1; transform: none; transition-delay: 0.45s; }
+    .case-overlay.is-open .case-body      { opacity: 1; transform: none; transition-delay: 0.55s; }
+
+    @media (max-width: 680px) {
+      .case-card { width: 280px; height: 280px; }
+      .case-hero-area { height: 320px; }
+      .case-hero-title { font-size: 36px; }
+      .case-meta { flex-wrap: wrap; gap: 28px; }
+      .case-body { grid-template-columns: 1fr; gap: 40px; }
+      .case-overlay-inner { padding: 32px 24px 72px; }
+    }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+    .footer {
+      width: 100%;
+      padding-top: 40px;
+      border-top: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 48px;
+    }
+
+    .footer p {
+      font-size: 14px;
+      color: #888;
+    }
+
+    /* ─── Animations: Hero ───────────────────────────────── */
+    @keyframes heroLineIn {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-text p {
+      opacity: 0;
+      animation: heroLineIn 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+    .hero-text p:nth-child(1) { animation-delay: 0.15s; }
+    .hero-text p:nth-child(2) { animation-delay: 0.38s; }
+    .hero-text p:nth-child(3) { animation-delay: 0.61s; }
+
+    /* Header fades in together with first hero line */
+    .header {
+      opacity: 0;
+      animation: heroLineIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s forwards;
+    }
+
+    /* ─── Animations: Scroll Reveal ──────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition:
+        opacity 0.65s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays for children with data-delay */
+    .reveal[data-delay="1"] { transition-delay: 0.10s; }
+    .reveal[data-delay="2"] { transition-delay: 0.22s; }
+    .reveal[data-delay="3"] { transition-delay: 0.34s; }
+    .reveal[data-delay="4"] { transition-delay: 0.46s; }
+    .reveal[data-delay="5"] { transition-delay: 0.58s; }
+
+    /* Portrait note slides in from right */
+    .portrait-note.reveal {
+      transform: translateX(20px) translateY(0px);
+    }
+    .portrait-note.reveal.is-visible {
+      transform: translateX(0) translateY(0);
+    }
+
+    /* Respect reduced-motion preference */
+    @media (prefers-reduced-motion: reduce) {
+      .hero-text p,
+      .header {
+        opacity: 1;
+        animation: none;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ─── Responsive ──────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .portfolio {
+        padding: 48px 40px;
+        gap: 72px;
+      }
+
+      .portrait-section {
+        flex-direction: column;
+        height: auto;
+        gap: 24px;
+      }
+
+      .portrait-container {
+        width: 100%;
+        max-width: 480px;
+        height: 480px;
+        margin: 0 auto;
+      }
+
+      .portrait-note {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .bullet-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .bullet-label {
+        min-width: auto;
+      }
+
+      .bullet-text {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .portfolio {
+        padding: 32px 24px;
+        gap: 56px;
+      }
+
+      .hero-text {
+        font-size: 28px;
+        line-height: 42px;
+      }
+
+      .portrait-container {
+        height: 360px;
+      }
+
+      .portrait-note p {
+        font-size: 20px;
+        line-height: 34px;
+      }
+
+      .bullet-label {
+        font-size: 26px;
+      }
+
+      .bullet-text {
+        font-size: 16px;
+        line-height: 28px;
+      }
+
+      .subheadline {
+        font-size: 32px;
+        line-height: 46px;
+      }
+
+      .header-name {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="portfolio">
+
+  <!-- ── Header ────────────────────────────────────────── -->
+  <header class="header">
+    <p class="header-name">Tobias Penne</p>
+    <a
+      href="https://www.linkedin.com/in/tobias-penne"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="header-linkedin"
+      aria-label="LinkedIn Profil"
+    >
+      <img
+        src="https://www.figma.com/api/mcp/asset/eaabf9e0-4817-4402-84d0-cc4c83be6c5b"
+        alt="LinkedIn"
+      />
+    </a>
+  </header>
+
+  <!-- ── Hero Text ─────────────────────────────────────── -->
+  <section class="hero-text" aria-label="Einleitung">
+    <p>Hallo, mein Name ist Tobias Penne.</p>
+    <p>Ich bin <span class="bold-italic">Senior Digital Designer</span> aus Hannover</p>
+    <p>und entwickle kreative UX/UI Lösungen.</p>
+  </section>
+
+  <!-- ── Portrait ──────────────────────────────────────── -->
+  <section class="portrait-section reveal" aria-label="Portrait">
+    <div class="portrait-container">
+      <div class="portrait-bg"></div>
+      <div class="portrait-img-wrapper">
+        <img
+          class="portrait-img"
+          src="https://www.figma.com/api/mcp/asset/3e4fea01-8173-44fe-8a37-c5a4f030a738"
+          alt="Tobias Penne"
+        />
+      </div>
+    </div>
+    <div class="portrait-note reveal" data-delay="2">
+      <p>
+        Als studierter <span class="bold">Kommunikationsdesigner</span>
+        habe ich mehr als <span class="bold">20 Jahre Projekterfahrung</span>
+        im digitalen Raum und bewege mich an der Schnittstelle zwischen
+        <span class="bold">Marke, Strategie und Nutzerführung</span>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Berufliches ────────────────────────────────────── -->
+  <section class="bullet-section" aria-label="Professionelles">
+
+    <div class="bullet-item reveal" data-delay="1">
+      <div class="bullet-label">🤓&nbsp;<span class="label-bold">Expertise</span></div>
+      <p class="bullet-text">
+        Ich konzipiere und gestalte digitale Produkte und Anwendungen. Nulla vitae elit libero,
+        a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus
+        et magnis dis parturient montes, nascetur ridiculus mus.
+      </p>
+    </div>
+
+    <div class="bullet-item reveal" data-delay="2">
+      <div class="bullet-label">📂&nbsp;<span class="label-bold">Projekte</span></div>
+      <p class="bullet-text">
+        Im Laufe der Jahre durfte ich an einer Vielzahl spannender Projekte für renommierte
+        Kunden mitwirken, darunter: VHV Versicherungen, VHV Gruppe, Hannoversche
+        Lebensversicherung, Mecklenburgische, enercity, Toto-Lotto Niedersachsen, Talanx,
+        Vaillant, Stebel Eltron, Rossmann.
+      </p>
+    </div>
+
+    <div class="bullet-item reveal" data-delay="3">
+      <div class="bullet-label">🧠&nbsp;<span class="label-bold">Arbeitsweise</span></div>
+      <p class="bullet-text">
+        Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod.
+        Curabitur blandit tempus porttitor.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ── Cases Section ────────────────────────────────────── -->
+  <section class="cases-section reveal" aria-label="Arbeitsbeispiele">
+
+    <h2 class="cases-heading">Ausgewählte Cases.</h2>
+
+    <div class="cases-scroll-wrapper" id="casesScroll">
+      <div class="cases-track">
+
+        <!-- Card 1 -->
+        <article class="case-card case-card--1" onclick="openCase('case-1')" role="button" tabindex="0" aria-label="Case öffnen: VHV Versicherungen">
+          <span class="case-card-number">01</span>
+          <div class="case-card-content">
+            <p class="case-card-tag">Brand & Digital</p>
+            <p class="case-card-title">VHV Versicherungen</p>
+          </div>
+          <div class="case-card-hover">
+            <span class="case-card-hover-label">Case ansehen →</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="case-card case-card--2" onclick="openCase('case-2')" role="button" tabindex="0" aria-label="Case öffnen: Hannoversche">
+          <span class="case-card-number">02</span>
+          <div class="case-card-content">
+            <p class="case-card-tag">UX / UI Design</p>
+            <p class="case-card-title">Hannoversche Lebens&shy;versicherung</p>
+          </div>
+          <div class="case-card-hover">
+            <span class="case-card-hover-label">Case ansehen →</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="case-card case-card--3" onclick="openCase('case-3')" role="button" tabindex="0" aria-label="Case öffnen: enercity">
+          <span class="case-card-number">03</span>
+          <div class="case-card-content">
+            <p class="case-card-tag">Product Design</p>
+            <p class="case-card-title">enercity</p>
+          </div>
+          <div class="case-card-hover">
+            <span class="case-card-hover-label">Case ansehen →</span>
+          </div>
+        </article>
+
+        <!-- Placeholder Card 4 (kommt noch) -->
+        <article class="case-card case-card--4" style="opacity:0.4; pointer-events:none;">
+          <span class="case-card-number">04</span>
+          <div class="case-card-content">
+            <p class="case-card-tag">Demnächst</p>
+            <p class="case-card-title">Coming soon</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── Subheadline ────────────────────────────────────── -->
+  <h2 class="subheadline reveal">Und sonst so?</h2>
+
+  <!-- ── Persönliches ───────────────────────────────────── -->
+  <section class="bullet-section" aria-label="Persönliches">
+
+    <div class="bullet-item reveal" data-delay="1">
+      <div class="bullet-label">🎤&nbsp;<span class="label-bold">Podcast</span></div>
+      <p class="bullet-text">
+        Im Laufe der Jahre durfte ich an einer Vielzahl spannender Projekte für renommierte
+        Kunden mitwirken, darunter: VHV Versicherungen, VHV Gruppe, Hannoversche
+        Lebensversicherung, Mecklenburgische, enercity, Toto-Lotto Niedersachsen, Talanx,
+        Vaillant, Stebel Eltron, Rossmann.
+      </p>
+    </div>
+
+    <div class="bullet-item reveal" data-delay="2">
+      <div class="bullet-label">👟&nbsp;<span class="label-bold">Sneaker</span></div>
+      <p class="bullet-text">
+        Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod.
+        Curabitur blandit tempus porttitor.
+      </p>
+    </div>
+
+    <div class="bullet-item reveal" data-delay="3">
+      <div class="bullet-label">⛳️&nbsp;<span class="label-bold">Golf</span></div>
+      <p class="bullet-text">
+        Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.
+        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod.
+        Curabitur blandit tempus porttitor.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- ── Footer ─────────────────────────────────────────── -->
+  <footer class="footer reveal">
+    <p>© 2026 Tobias Penne</p>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CASE DETAIL OVERLAYS
+     ═══════════════════════════════════════════════════════════ -->
+
+<!-- Case 1: VHV Versicherungen -->
+<div class="case-overlay" id="case-1" role="dialog" aria-modal="true" aria-label="Case: VHV Versicherungen">
+  <div class="case-overlay-inner">
+    <button class="case-back-btn" onclick="closeCase('case-1')">
+      <span class="case-back-arrow">←</span> Zurück
+    </button>
+    <div class="case-hero-area case-card--1">
+      <div class="case-hero-placeholder">Visuals / Mockups kommen hier rein</div>
+      <h2 class="case-hero-title">VHV Versicherungen</h2>
+    </div>
+    <div class="case-meta">
+      <div class="case-meta-item"><label>Kunde</label><span>VHV Gruppe</span></div>
+      <div class="case-meta-item"><label>Jahr</label><span>2022 – 2023</span></div>
+      <div class="case-meta-item"><label>Rolle</label><span>Lead Designer</span></div>
+      <div class="case-meta-item"><label>Bereich</label><span>Brand & Digital</span></div>
+    </div>
+    <div class="case-body">
+      <div class="case-body-section">
+        <label>Aufgabe</label>
+        <p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Lösung</label>
+        <p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Ergebnis</label>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Tools & Methoden</label>
+        <p>Figma, Design System, Nutzerforschung, Prototyping, Stakeholder-Workshops</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Case 2: Hannoversche -->
+<div class="case-overlay" id="case-2" role="dialog" aria-modal="true" aria-label="Case: Hannoversche Lebensversicherung">
+  <div class="case-overlay-inner">
+    <button class="case-back-btn" onclick="closeCase('case-2')">
+      <span class="case-back-arrow">←</span> Zurück
+    </button>
+    <div class="case-hero-area case-card--2">
+      <div class="case-hero-placeholder">Visuals / Mockups kommen hier rein</div>
+      <h2 class="case-hero-title">Hannoversche Lebensversicherung</h2>
+    </div>
+    <div class="case-meta">
+      <div class="case-meta-item"><label>Kunde</label><span>Hannoversche</span></div>
+      <div class="case-meta-item"><label>Jahr</label><span>2021</span></div>
+      <div class="case-meta-item"><label>Rolle</label><span>UX Lead</span></div>
+      <div class="case-meta-item"><label>Bereich</label><span>UX / UI Design</span></div>
+    </div>
+    <div class="case-body">
+      <div class="case-body-section">
+        <label>Aufgabe</label>
+        <p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Lösung</label>
+        <p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Ergebnis</label>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Tools & Methoden</label>
+        <p>Figma, Usability Testing, Journey Mapping, Atomic Design</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Case 3: enercity -->
+<div class="case-overlay" id="case-3" role="dialog" aria-modal="true" aria-label="Case: enercity">
+  <div class="case-overlay-inner">
+    <button class="case-back-btn" onclick="closeCase('case-3')">
+      <span class="case-back-arrow">←</span> Zurück
+    </button>
+    <div class="case-hero-area case-card--3">
+      <div class="case-hero-placeholder">Visuals / Mockups kommen hier rein</div>
+      <h2 class="case-hero-title">enercity</h2>
+    </div>
+    <div class="case-meta">
+      <div class="case-meta-item"><label>Kunde</label><span>enercity AG</span></div>
+      <div class="case-meta-item"><label>Jahr</label><span>2020 – 2021</span></div>
+      <div class="case-meta-item"><label>Rolle</label><span>Senior Designer</span></div>
+      <div class="case-meta-item"><label>Bereich</label><span>Product Design</span></div>
+    </div>
+    <div class="case-body">
+      <div class="case-body-section">
+        <label>Aufgabe</label>
+        <p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Lösung</label>
+        <p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Ergebnis</label>
+        <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      </div>
+      <div class="case-body-section">
+        <label>Tools & Methoden</label>
+        <p>Figma, Design Thinking, Agile / Scrum, Komponentenbibliothek</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── Scroll Reveal via IntersectionObserver ──────────────
+  const revealEls = document.querySelectorAll('.reveal');
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // Only fire once per element
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.12,       // trigger when 12% is visible
+      rootMargin: '0px 0px -40px 0px'  // slight bottom offset for natural feel
+    }
+  );
+
+  revealEls.forEach((el) => observer.observe(el));
+
+  // ── Case Overlay: Open / Close ──────────────────────────
+  let savedScrollY = 0;
+
+  function openCase(id) {
+    savedScrollY = window.scrollY;
+    const overlay = document.getElementById(id);
+    overlay.classList.add('is-open');
+    overlay.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCase(id) {
+    const overlay = document.getElementById(id);
+    overlay.classList.remove('is-open');
+    document.body.style.overflow = '';
+    window.scrollTo({ top: savedScrollY, behavior: 'instant' });
+  }
+
+  // Close overlay on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.case-overlay.is-open').forEach((el) => {
+        closeCase(el.id);
+      });
+    }
+  });
+
+  // Keyboard accessibility for cards
+  document.querySelectorAll('.case-card[tabindex]').forEach((card) => {
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        card.click();
+      }
+    });
+  });
+
+  // ── Drag-to-Scroll on Cases ─────────────────────────────
+  const scroller = document.getElementById('casesScroll');
+  let isDown = false;
+  let startX, scrollLeft;
+
+  scroller.addEventListener('mousedown', (e) => {
+    isDown = true;
+    scroller.classList.add('is-grabbing');
+    startX = e.pageX - scroller.offsetLeft;
+    scrollLeft = scroller.scrollLeft;
+  });
+
+  scroller.addEventListener('mouseleave', () => {
+    isDown = false;
+    scroller.classList.remove('is-grabbing');
+  });
+
+  scroller.addEventListener('mouseup', () => {
+    isDown = false;
+    scroller.classList.remove('is-grabbing');
+  });
+
+  scroller.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - scroller.offsetLeft;
+    const walk = (x - startX) * 1.4;
+    scroller.scrollLeft = scrollLeft - walk;
+  });
+</script>
+
+</body>
+</html>
