@@ -42,7 +42,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
+      /* Break out to 1440px, independent of the 1232px content grid */
+      width: min(1440px, 100vw);
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0 72px;
+      box-sizing: border-box;
     }
 
     .header-name {
@@ -214,7 +220,8 @@
     .cases-track {
       display: flex;
       gap: 20px;
-      padding: 0 72px 4px;
+      /* Left padding aligns with 1440px header content; falls back to 72px on smaller viewports */
+      padding: 0 max(72px, calc((100vw - 1440px) / 2 + 72px)) 4px;
       width: max-content;
     }
 
