@@ -32,23 +32,25 @@
       flex-direction: column;
       align-items: center;
       gap: 100px;
-      padding: 48px 72px;
+      padding: 100px 72px 48px;
       max-width: 1232px;
       margin: 0 auto;
     }
 
     /* ─── Header ─────────────────────────────────────────── */
+    .header-outer {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 48px 72px 0;
+      box-sizing: border-box;
+    }
+
     .header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      /* Break out to 1440px, independent of the 1232px content grid */
-      width: min(1440px, 100vw);
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 0 72px;
-      box-sizing: border-box;
+      width: 100%;
     }
 
     .header-name {
@@ -482,7 +484,7 @@
     .hero-text p:nth-child(3) { animation-delay: 0.61s; }
 
     /* Header fades in together with first hero line */
-    .header {
+    .header-outer {
       opacity: 0;
       animation: heroLineIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s forwards;
     }
@@ -608,6 +610,10 @@
         line-height: 46px;
       }
 
+      .header-outer {
+        padding: 32px 24px 0;
+      }
+
       .header-name {
         font-size: 24px;
       }
@@ -616,9 +622,7 @@
 </head>
 <body>
 
-<div class="portfolio">
-
-  <!-- ── Header ────────────────────────────────────────── -->
+<div class="header-outer">
   <header class="header">
     <p class="header-name">Tobias Penne</p>
     <a
@@ -634,6 +638,9 @@
       />
     </a>
   </header>
+</div>
+
+<div class="portfolio">
 
   <!-- ── Hero Text ─────────────────────────────────────── -->
   <section class="hero-text" aria-label="Einleitung">
