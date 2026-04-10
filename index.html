@@ -197,7 +197,11 @@
     }
 
     .cases-scroll-wrapper {
-      width: 100%;
+      /* Break out of the portfolio container and span full viewport width */
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
@@ -210,14 +214,14 @@
     .cases-track {
       display: flex;
       gap: 20px;
-      padding-bottom: 4px;
+      padding: 0 72px 4px;
       width: max-content;
     }
 
     /* ── Card ── */
     .case-card {
-      width: 360px;
-      height: 360px;
+      width: 420px;
+      height: 420px;
       border-radius: 24px;
       flex-shrink: 0;
       position: relative;
@@ -426,7 +430,8 @@
     .case-overlay.is-open .case-body      { opacity: 1; transform: none; transition-delay: 0.55s; }
 
     @media (max-width: 680px) {
-      .case-card { width: 280px; height: 280px; }
+      .cases-track { padding: 0 24px 4px; }
+      .case-card { width: 300px; height: 300px; }
       .case-hero-area { height: 320px; }
       .case-hero-title { font-size: 36px; }
       .case-meta { flex-wrap: wrap; gap: 28px; }
