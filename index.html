@@ -302,12 +302,93 @@
       letter-spacing: 0.01em;
     }
 
-    /* Card gradient backgrounds */
-    .case-card--1 { background: linear-gradient(145deg, #d4cfe8 0%, #c2bcd8 100%); }
-    .case-card--2 { background: linear-gradient(145deg, #c0dced 0%, #a8cfe0 100%); }
-    .case-card--3 { background: linear-gradient(145deg, #cce5d8 0%, #b0d4c4 100%); }
-    .case-card--4 { background: linear-gradient(145deg, #e8dcc8 0%, #d4c8a8 100%); }
-    .case-card--5 { background: linear-gradient(145deg, #e0c8d4 0%, #ccb0c0 100%); }
+    /* Card brand backgrounds */
+    .case-card--1 { background: #FAA61A; }
+    .case-card--2 { background: linear-gradient(135deg, #921FBF 0%, #E5001B 100%); }
+    .case-card--3 { background: #B5BA22; }
+    .case-card--4 { background: #e0ddd8; }
+    .case-card--5 { background: #c8d5e5; }
+
+    /* Centered logo layout */
+    .case-card-logo {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    /* VHV Versicherungen logo */
+    .vhv-logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .vhv-logo-top {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      line-height: 1;
+    }
+    .vhv-logo-wordmark {
+      font-family: Arial Black, Arial, sans-serif;
+      font-size: 58px;
+      font-weight: 900;
+      color: #000;
+      letter-spacing: -1px;
+    }
+    .vhv-logo-stripes {
+      background: #000;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 9px;
+      margin-left: 5px;
+      height: 52px;
+    }
+    .vhv-logo-stripes span {
+      display: block;
+      width: 4px;
+      height: 34px;
+      background: #fff;
+      transform: skewX(-18deg);
+    }
+    .vhv-logo-sub {
+      font-family: Arial, sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #000;
+      letter-spacing: 0.18em;
+    }
+
+    /* enercity logo */
+    .enercity-logo {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 52px;
+      font-weight: 400;
+      font-style: italic;
+      color: #fff;
+      letter-spacing: -0.5px;
+    }
+
+    /* VHV Gruppe logo */
+    .vhv-gruppe-logo {
+      font-family: Arial Black, Arial, sans-serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: #2D3661;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .vhv-gruppe-slash {
+      color: #fff;
+      margin-left: 2px;
+    }
 
     /* ── Detail Overlay ── */
     .case-overlay {
@@ -713,48 +794,50 @@
     <div class="cases-scroll-wrapper" id="casesScroll">
       <div class="cases-track">
 
-        <!-- Card 1 -->
+        <!-- Card 1: VHV Versicherungen -->
         <article class="case-card case-card--1" onclick="openCase('case-1')" role="button" tabindex="0" aria-label="Case öffnen: VHV Versicherungen">
-          <span class="case-card-number">01</span>
-          <div class="case-card-content">
-            <p class="case-card-tag">Brand & Digital</p>
-            <p class="case-card-title">VHV Versicherungen</p>
+          <div class="case-card-logo">
+            <div class="vhv-logo">
+              <div class="vhv-logo-top">
+                <span class="vhv-logo-wordmark">VHV</span>
+                <div class="vhv-logo-stripes">
+                  <span></span><span></span><span></span>
+                </div>
+              </div>
+              <div class="vhv-logo-sub">VERSICHERUNGEN</div>
+            </div>
           </div>
           <div class="case-card-hover">
             <span class="case-card-hover-label">Case ansehen →</span>
           </div>
         </article>
 
-        <!-- Card 2 -->
-        <article class="case-card case-card--2" onclick="openCase('case-2')" role="button" tabindex="0" aria-label="Case öffnen: Hannoversche">
-          <span class="case-card-number">02</span>
-          <div class="case-card-content">
-            <p class="case-card-tag">UX / UI Design</p>
-            <p class="case-card-title">Hannoversche Lebens&shy;versicherung</p>
+        <!-- Card 2: enercity -->
+        <article class="case-card case-card--2" onclick="openCase('case-2')" role="button" tabindex="0" aria-label="Case öffnen: enercity">
+          <div class="case-card-logo">
+            <span class="enercity-logo">enercity</span>
           </div>
           <div class="case-card-hover">
             <span class="case-card-hover-label">Case ansehen →</span>
           </div>
         </article>
 
-        <!-- Card 3 -->
-        <article class="case-card case-card--3" onclick="openCase('case-3')" role="button" tabindex="0" aria-label="Case öffnen: enercity">
-          <span class="case-card-number">03</span>
-          <div class="case-card-content">
-            <p class="case-card-tag">Product Design</p>
-            <p class="case-card-title">enercity</p>
+        <!-- Card 3: VHV Gruppe -->
+        <article class="case-card case-card--3" onclick="openCase('case-3')" role="button" tabindex="0" aria-label="Case öffnen: VHV Gruppe">
+          <div class="case-card-logo">
+            <div class="vhv-gruppe-logo">
+              VHV GRUPPE<span class="vhv-gruppe-slash">/</span>
+            </div>
           </div>
           <div class="case-card-hover">
             <span class="case-card-hover-label">Case ansehen →</span>
           </div>
         </article>
 
-        <!-- Placeholder Card 4 (kommt noch) -->
-        <article class="case-card case-card--4" style="opacity:0.4; pointer-events:none;">
-          <span class="case-card-number">04</span>
-          <div class="case-card-content">
-            <p class="case-card-tag">Demnächst</p>
-            <p class="case-card-title">Coming soon</p>
+        <!-- Card 4: Placeholder -->
+        <article class="case-card case-card--4" style="opacity:0.35; pointer-events:none;">
+          <div class="case-card-logo">
+            <span style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:#999;">Demnächst</span>
           </div>
         </article>
 
