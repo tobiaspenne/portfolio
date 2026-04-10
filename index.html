@@ -320,75 +320,7 @@
       padding: 40px;
     }
 
-    /* VHV Versicherungen logo */
-    .vhv-logo {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .vhv-logo-top {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      line-height: 1;
-    }
-    .vhv-logo-wordmark {
-      font-family: Arial Black, Arial, sans-serif;
-      font-size: 58px;
-      font-weight: 900;
-      color: #000;
-      letter-spacing: -1px;
-    }
-    .vhv-logo-stripes {
-      background: #000;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 9px;
-      margin-left: 5px;
-      height: 52px;
-    }
-    .vhv-logo-stripes span {
-      display: block;
-      width: 4px;
-      height: 34px;
-      background: #fff;
-      transform: skewX(-18deg);
-    }
-    .vhv-logo-sub {
-      font-family: Arial, sans-serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #000;
-      letter-spacing: 0.18em;
-    }
-
-    /* enercity logo */
-    .enercity-logo {
-      font-family: 'Lora', Georgia, serif;
-      font-size: 52px;
-      font-weight: 400;
-      font-style: italic;
-      color: #fff;
-      letter-spacing: -0.5px;
-    }
-
-    /* VHV Gruppe logo */
-    .vhv-gruppe-logo {
-      font-family: Arial Black, Arial, sans-serif;
-      font-size: 36px;
-      font-weight: 900;
-      color: #2D3661;
-      letter-spacing: 0.04em;
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-    .vhv-gruppe-slash {
-      color: #fff;
-      margin-left: 2px;
-    }
+    /* Logo SVGs are inline – no extra classes needed */
 
     /* ── Detail Overlay ── */
     .case-overlay {
@@ -789,23 +721,25 @@
   <!-- ── Cases Section ────────────────────────────────────── -->
   <section class="cases-section reveal" aria-label="Arbeitsbeispiele">
 
-    <h2 class="cases-heading">Ausgewählte Cases.</h2>
-
     <div class="cases-scroll-wrapper" id="casesScroll">
       <div class="cases-track">
 
         <!-- Card 1: VHV Versicherungen -->
         <article class="case-card case-card--1" onclick="openCase('case-1')" role="button" tabindex="0" aria-label="Case öffnen: VHV Versicherungen">
           <div class="case-card-logo">
-            <div class="vhv-logo">
-              <div class="vhv-logo-top">
-                <span class="vhv-logo-wordmark">VHV</span>
-                <div class="vhv-logo-stripes">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-              <div class="vhv-logo-sub">VERSICHERUNGEN</div>
-            </div>
+            <!-- VHV: wordmark + three diagonal stripes mark -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 72" width="220" height="61">
+              <!-- VHV text -->
+              <text x="0" y="58" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="64" fill="#000" letter-spacing="-2">VHV</text>
+              <!-- Black block with 3 white stripes -->
+              <rect x="172" y="4" width="88" height="64" fill="#000"/>
+              <polygon points="188,10 196,10 208,62 200,62" fill="#fff"/>
+              <polygon points="204,10 212,10 224,62 216,62" fill="#fff"/>
+              <polygon points="220,10 228,10 240,62 232,62" fill="#fff"/>
+              <!-- VERSICHERUNGEN -->
+              <text x="0" y="72" font-family="Arial, sans-serif" font-weight="700" font-size="0" fill="#000" letter-spacing="2"></text>
+            </svg>
+            <div style="font-family: Arial, sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.18em; color: #000; margin-top: 6px;">VERSICHERUNGEN</div>
           </div>
           <div class="case-card-hover">
             <span class="case-card-hover-label">Case ansehen →</span>
@@ -815,7 +749,10 @@
         <!-- Card 2: enercity -->
         <article class="case-card case-card--2" onclick="openCase('case-2')" role="button" tabindex="0" aria-label="Case öffnen: enercity">
           <div class="case-card-logo">
-            <span class="enercity-logo">enercity</span>
+            <!-- enercity wordmark: clean rounded sans-serif, white -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" width="240" height="51">
+              <text x="0" y="52" font-family="Arial Rounded MT Bold, Arial, Helvetica, sans-serif" font-weight="400" font-size="56" fill="#fff" letter-spacing="-1">enercity</text>
+            </svg>
           </div>
           <div class="case-card-hover">
             <span class="case-card-hover-label">Case ansehen →</span>
@@ -825,9 +762,11 @@
         <!-- Card 3: VHV Gruppe -->
         <article class="case-card case-card--3" onclick="openCase('case-3')" role="button" tabindex="0" aria-label="Case öffnen: VHV Gruppe">
           <div class="case-card-logo">
-            <div class="vhv-gruppe-logo">
-              VHV GRUPPE<span class="vhv-gruppe-slash">/</span>
-            </div>
+            <!-- VHV GRUPPE/ in dark navy -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 52" width="260" height="42">
+              <text x="0" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="42" fill="#2D3661" letter-spacing="1">VHV GRUPPE</text>
+              <text x="288" y="42" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="42" fill="#fff">/</text>
+            </svg>
           </div>
           <div class="case-card-hover">
             <span class="case-card-hover-label">Case ansehen →</span>
