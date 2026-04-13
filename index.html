@@ -148,7 +148,10 @@
       left: -40.13%;
       top: -14.93%;
       max-width: none;
+      opacity: 0;
+      transition: opacity 0.9s ease 0.3s;
     }
+    .portrait-section.is-visible .portrait-img { opacity: 1; }
 
     .portrait-note {
       position: absolute;
@@ -170,6 +173,17 @@
       font-weight: 500;
       font-size: 26px;
       white-space: nowrap;
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .portrait-note-block:nth-child(1) { transition-delay: 0.1s; }
+    .portrait-note-block:nth-child(2) { transition-delay: 0.28s; }
+    .portrait-note-block:nth-child(3) { transition-delay: 0.46s; }
+    .portrait-section.is-visible .portrait-note-block {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     /* ─── Work Section ───────────────────────────────────── */
@@ -185,6 +199,7 @@
       width: 100%;
       font-size: 48px;
       line-height: 62px;
+      font-style: italic;
     }
     .work-subheadline .bold-italic { font-weight: 700; font-style: italic; }
 
@@ -309,6 +324,7 @@
     .section-subheadline {
       font-size: 48px;
       line-height: 62px;
+      font-style: italic;
     }
     .section-subheadline .bold-italic { font-weight: 700; font-style: italic; }
     .section-subheadline .italic { font-style: italic; font-weight: 400; }
@@ -562,17 +578,17 @@
     <p class="header-name">Tobias Penne</p>
     <div class="header-contact">
       <a href="mailto:hallo@tobiaspenne.de" aria-label="E-Mail">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="7" width="22" height="14" rx="2" stroke="#000" stroke-width="1.6" fill="none"/>
-          <path d="M3 9l11 7 11-7" stroke="#000" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="9" width="28" height="18" rx="2.5" stroke="#0b22d6" stroke-width="1.8" fill="none"/>
+          <path d="M4 12l14 9 14-9" stroke="#0b22d6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
       <a href="https://www.linkedin.com/in/tobias-penne" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="3" width="22" height="22" rx="4" fill="#000"/>
-          <rect x="8" y="12" width="2.8" height="8.5" rx="0.4" fill="#fff"/>
-          <circle cx="9.4" cy="9.4" r="1.6" fill="#fff"/>
-          <path d="M13.5 12h2.6v1.2c.5-.8 1.5-1.4 2.8-1.4 2.2 0 3.1 1.5 3.1 3.5v5.2h-2.8v-4.6c0-1-.4-1.7-1.4-1.7s-1.5.7-1.5 1.8v4.5h-2.8V12z" fill="#fff"/>
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="30" height="30" rx="5" fill="#0b22d6"/>
+          <rect x="10" y="15" width="3.5" height="11" rx="0.5" fill="#fff"/>
+          <circle cx="11.75" cy="11.75" r="2" fill="#fff"/>
+          <path d="M17 15h3.3v1.5c.6-1 1.9-1.7 3.5-1.7 2.8 0 4 1.9 4 4.5v6.7h-3.5v-5.9c0-1.3-.5-2.2-1.8-2.2s-2 .9-2 2.3v5.8H17V15z" fill="#fff"/>
         </svg>
       </a>
     </div>
@@ -599,7 +615,7 @@
           src="https://www.figma.com/api/mcp/asset/e2a410e4-95bd-4ab5-a135-4e82a8f1853d"
           alt="Tobias Penne" />
       </div>
-      <div class="portrait-note reveal" data-delay="2">
+      <div class="portrait-note">
         <div class="portrait-note-block">Mit mehr als 20 Jahren Projekterfahrung im</div>
         <div class="portrait-note-block">digitalen Raum, bewege ich mich an der Schnittstelle</div>
         <div class="portrait-note-block">zwischen Marke, Strategie und Nutzerführung.</div>
@@ -713,7 +729,7 @@
 
   <!-- Und sonst so? -->
   <section class="bullet-section reveal" aria-label="Persönliches">
-    <h2 class="section-subheadline">Und sonst so?</h2>
+    <h2 class="section-subheadline"><span class="bold-italic">Und sonst</span> so?</h2>
     <div class="bullets">
       <div class="bullet-item reveal" data-delay="1">
         <div class="bullet-label">🎤&nbsp;<span class="bold">Podcast</span></div>
