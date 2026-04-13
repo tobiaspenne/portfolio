@@ -211,10 +211,14 @@
       left: 50%;
       transform: translateX(-50%);
       overflow-x: auto;
+      overflow-y: visible;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       cursor: grab;
       user-select: none;
+      /* Vertical padding so the uplift shadow isn't clipped */
+      padding: 20px 0 40px;
+      margin: -20px 0 -40px;
     }
     .cases-scroll-wrapper::-webkit-scrollbar { display: none; }
     .cases-scroll-wrapper.is-grabbing { cursor: grabbing; }
@@ -223,7 +227,7 @@
       display: flex;
       gap: 40px;
       /* Left padding aligns with 1440px header content; falls back to 72px on smaller viewports */
-      padding: 0 max(72px, calc((100vw - 1440px) / 2 + 72px)) 4px;
+      padding: 0 max(72px, calc((100vw - 1440px) / 2 + 72px));
       width: max-content;
     }
 
