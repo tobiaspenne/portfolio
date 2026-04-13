@@ -367,14 +367,19 @@
       position: absolute;
       bottom: 34px;
       left: 36px;
-      font-size: 26px;
-      color: #4F72F5;
-      line-height: 1;
-      transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+      width: 32px;
+      height: 32px;
+      transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
     .case-card:hover .case-card-editorial-arrow {
-      transform: translateX(5px);
+      transform: translateX(6px);
+    }
+
+    /* SVG gradient fill via CSS filter is unreliable – use inline SVG with linearGradient */
+    .case-card-editorial-arrow svg {
+      width: 100%;
+      height: 100%;
     }
 
     /* Logo SVGs are inline – no extra classes needed */
@@ -787,9 +792,19 @@
             <p class="case-card-editorial-category">Website</p>
             <h3 class="case-card-editorial-title">VHV Versicherungen</h3>
             <div class="case-card-editorial-preview">
-              <div class="case-card-editorial-preview-placeholder">Preview</div>
+              <img src="vhv-mockup.png" alt="VHV Website Mockup" />
             </div>
-            <span class="case-card-editorial-arrow">→</span>
+            <div class="case-card-editorial-arrow">
+              <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="arrowGrad" x1="0" y1="0" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#4F72F5"/>
+                    <stop offset="100%" stop-color="#9B5CF6"/>
+                  </linearGradient>
+                </defs>
+                <path d="M14.9873 0.732178C15.9636 -0.244133 17.5462 -0.244133 18.5225 0.732178L32.7773 14.9871C32.8351 15.0448 32.8895 15.1056 32.9414 15.1687C32.9623 15.1941 32.9812 15.2208 33.001 15.2468C33.0317 15.2873 33.0626 15.3275 33.0908 15.3699C33.1122 15.402 33.1306 15.4357 33.1504 15.4685C33.1713 15.5033 33.1936 15.5372 33.2129 15.573C33.2302 15.6052 33.244 15.6389 33.2598 15.6716C33.2814 15.7166 33.3042 15.761 33.3232 15.8074C33.3298 15.8234 33.3346 15.8401 33.3408 15.8562C33.3633 15.9146 33.3851 15.9735 33.4033 16.0339C33.4108 16.0587 33.4152 16.0842 33.4219 16.1091C33.4358 16.1614 33.4503 16.2137 33.4609 16.2673C33.4673 16.2994 33.4705 16.3318 33.4756 16.364C33.4956 16.4914 33.5098 16.6216 33.5098 16.7546C33.5098 16.8891 33.496 17.0205 33.4756 17.1492C33.4707 17.1798 33.467 17.2105 33.4609 17.241C33.4504 17.2946 33.4358 17.3469 33.4219 17.3992C33.4152 17.4241 33.4107 17.4496 33.4033 17.4744C33.3867 17.5296 33.3659 17.583 33.3457 17.6365C33.3373 17.6588 33.3304 17.6817 33.3213 17.7039C33.3023 17.7501 33.2804 17.7948 33.2588 17.8396C33.2442 17.8698 33.2307 17.9007 33.2148 17.9304C33.191 17.975 33.1641 18.0174 33.1377 18.0603C33.122 18.0859 33.1076 18.1123 33.0908 18.1375C33.0626 18.1798 33.0316 18.22 33.001 18.2605C32.9811 18.2867 32.9625 18.314 32.9414 18.3396C32.8894 18.4029 32.8352 18.4643 32.7773 18.5222L18.5225 32.7771C17.5462 33.7533 15.9636 33.7533 14.9873 32.7771C14.0111 31.8008 14.0111 30.2182 14.9873 29.2419L24.9746 19.2546H2.5C1.11938 19.2546 0.000105134 18.1352 0 16.7546C0 15.3739 1.11931 14.2547 2.5 14.2546H24.9746L14.9873 4.26733C14.011 3.29105 14.0111 1.7085 14.9873 0.732178Z" fill="url(#arrowGrad)"/>
+              </svg>
+            </div>
           </div>
         </article>
 
