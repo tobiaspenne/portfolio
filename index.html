@@ -287,13 +287,13 @@
     .case-card-hover { display: none; }
 
     /* Card brand backgrounds */
-    .case-card--1 { background: #FAA61A; }
+    .case-card--1 { background: #ffffff; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
     .case-card--2 { background: linear-gradient(135deg, #921FBF 0%, #E5001B 100%); }
     .case-card--3 { background: #B5BA22; }
     .case-card--4 { background: #e0ddd8; }
     .case-card--5 { background: #c8d5e5; }
 
-    /* Centered logo layout */
+    /* Centered logo layout (cards 2+) */
     .case-card-logo {
       position: absolute;
       inset: 0;
@@ -302,6 +302,79 @@
       align-items: center;
       justify-content: center;
       padding: 40px;
+    }
+
+    /* ── Editorial card layout (card 1) ── */
+    .case-card-editorial {
+      position: absolute;
+      inset: 0;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .case-card-editorial-category {
+      font-family: 'Lora', serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 14px;
+    }
+
+    .case-card-editorial-title {
+      font-family: 'Lora', serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #000;
+      max-width: 58%;
+    }
+
+    .case-card-editorial-preview {
+      position: absolute;
+      right: -16px;
+      bottom: 56px;
+      width: 68%;
+      /* placeholder */
+    }
+
+    .case-card-editorial-preview img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+    }
+
+    .case-card-editorial-preview-placeholder {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: #f0f0ee;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #bbb;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+    }
+
+    .case-card-editorial-arrow {
+      position: absolute;
+      bottom: 34px;
+      left: 36px;
+      font-size: 26px;
+      color: #4F72F5;
+      line-height: 1;
+      transition: transform 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .case-card:hover .case-card-editorial-arrow {
+      transform: translateX(5px);
     }
 
     /* Logo SVGs are inline – no extra classes needed */
@@ -710,11 +783,13 @@
 
         <!-- Card 1: VHV Versicherungen -->
         <article class="case-card case-card--1" onclick="openCase('case-1')" role="button" tabindex="0" aria-label="Case öffnen: VHV Versicherungen">
-          <div class="case-card-logo">
-            <img src="vhv-logo.png" alt="VHV Versicherungen" style="width: 52%; height: auto;" />
-          </div>
-          <div class="case-card-hover">
-            <span class="case-card-hover-label">Case ansehen →</span>
+          <div class="case-card-editorial">
+            <p class="case-card-editorial-category">Website</p>
+            <h3 class="case-card-editorial-title">VHV Versicherungen</h3>
+            <div class="case-card-editorial-preview">
+              <div class="case-card-editorial-preview-placeholder">Preview</div>
+            </div>
+            <span class="case-card-editorial-arrow">→</span>
           </div>
         </article>
 
