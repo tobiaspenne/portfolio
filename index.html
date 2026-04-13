@@ -6,35 +6,54 @@
   <title>Tobias Penne – Senior Digital Designer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Lora', Georgia, serif;
-      background: #ffffff;
-      color: #000000;
+      background: #fff;
+      color: #000;
       -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ─── Layout ─────────────────────────────────────────── */
-    .portfolio {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 100px;
-      padding: 100px 72px 48px;
-      max-width: 1232px;
-      margin: 0 auto;
+    /* ─── Animations: Hero ───────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .header-outer {
+      opacity: 0;
+      animation: fadeUp 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s forwards;
+    }
+
+    .hero-text p {
+      opacity: 0;
+      animation: fadeUp 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    }
+    .hero-text p:nth-child(1) { animation-delay: 0.15s; }
+    .hero-text p:nth-child(2) { animation-delay: 0.38s; }
+    .hero-text p:nth-child(3) { animation-delay: 0.61s; }
+
+    /* ─── Scroll Reveal ──────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal[data-delay="1"] { transition-delay: 0.10s; }
+    .reveal[data-delay="2"] { transition-delay: 0.22s; }
+    .reveal[data-delay="3"] { transition-delay: 0.34s; }
+    .reveal[data-delay="4"] { transition-delay: 0.46s; }
+    .reveal[data-delay="5"] { transition-delay: 0.58s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-text p, .header-outer { opacity: 1; animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
     }
 
     /* ─── Header ─────────────────────────────────────────── */
@@ -55,104 +74,250 @@
 
     .header-name {
       font-size: 32px;
-      font-weight: 700;
+      font-weight: 900;
+      font-family: 'Lora', serif;
       line-height: normal;
+      text-transform: capitalize;
     }
 
-    .header-linkedin {
+    .header-contact {
       display: flex;
       align-items: center;
-      opacity: 0.85;
+      gap: 40px;
+    }
+
+    .header-contact a {
+      display: flex;
+      align-items: center;
+      opacity: 0.8;
       transition: opacity 0.2s;
     }
-    .header-linkedin:hover {
-      opacity: 1;
-    }
-    .header-linkedin img {
-      width: 40px;
-      height: 40px;
+    .header-contact a:hover { opacity: 1; }
+    .header-contact img { width: 28px; height: auto; }
+    .header-contact .linkedin-icon { width: 40px; }
+
+    /* ─── Portfolio Container ────────────────────────────── */
+    .portfolio {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 192px;
+      padding: 80px 72px 0;
+      max-width: 1344px;
+      margin: 0 auto;
     }
 
-    /* ─── Hero Text ───────────────────────────────────────── */
+    /* ─── Stage Section ──────────────────────────────────── */
+    .stage-section {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    /* ─── Hero Text ──────────────────────────────────────── */
     .hero-text {
       width: 100%;
-      font-size: 44px;
-      line-height: 62px;
+      font-size: 54px;
+      line-height: 1.4;
       font-weight: 400;
     }
+    .hero-text .bold-italic { font-weight: 700; font-style: italic; }
 
-    .hero-text .bold-italic {
-      font-weight: 700;
-      font-style: italic;
-    }
-
-    /* ─── Portrait ────────────────────────────────────────── */
+    /* ─── Portrait ───────────────────────────────────────── */
     .portrait-section {
       position: relative;
       width: 100%;
-      height: 641px;
-      display: flex;
-      align-items: center;
+      height: 582px;
     }
 
-    .portrait-container {
+    .portrait-img-container {
       position: relative;
-      width: 641px;
-      height: 641px;
-      border-radius: 24px;
-      flex-shrink: 0;
-    }
-
-    .portrait-bg {
-      position: absolute;
-      inset: 0;
-      border-radius: 24px;
-      background: linear-gradient(to bottom, #ccc8e5 0%, #cae0e9 64.942%, #c8e2ef 100%);
-    }
-
-    .portrait-img-wrapper {
-      position: absolute;
-      inset: 0;
-      border-radius: 24px;
+      width: 582px;
+      height: 582px;
+      border-radius: 16px;
       overflow: hidden;
+      flex-shrink: 0;
+      background: #f1f1f1;
     }
 
     .portrait-img {
       position: absolute;
-      width: 173.15%;
-      height: 260.27%;
-      left: -38.91%;
-      top: -15.86%;
+      width: 171.04%;
+      height: 257.09%;
+      left: -40.13%;
+      top: -14.93%;
       max-width: none;
     }
 
     .portrait-note {
       position: absolute;
-      left: 529px;
-      top: 186px;
-      width: 595px;
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 20px 24px 24px;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+      left: 511px;
+      top: 197.5px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    .portrait-note p {
-      font-size: 28px;
-      line-height: 46px;
-      font-style: italic;
-      font-weight: 400;
+    .portrait-note-block {
+      background: #0b22d6;
+      color: #fff;
+      height: 57px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px 3px;
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 500;
+      font-size: 26px;
+      white-space: nowrap;
     }
 
-    .portrait-note .bold {
-      font-weight: 700;
+    /* ─── Work Section ───────────────────────────────────── */
+    .work-section {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      align-items: center;
+      width: 100%;
     }
 
-    /* ─── Bullet Sections ─────────────────────────────────── */
+    .work-subheadline {
+      width: 100%;
+      font-size: 48px;
+      line-height: 62px;
+    }
+    .work-subheadline .bold-italic { font-weight: 700; font-style: italic; }
+
+    /* ─── Cases Grid ─────────────────────────────────────── */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      width: 100%;
+    }
+
+    .case-card {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      cursor: pointer;
+    }
+
+    .case-thumb {
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .case-card:hover .case-thumb {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.14);
+    }
+
+    .case-thumb img {
+      position: absolute;
+      max-width: none;
+      pointer-events: none;
+    }
+
+    /* Card 1: VHV laptop */
+    .case-thumb--1 { background: #f0f1f6; }
+    .case-thumb--1 img {
+      width: 138.7%;
+      height: 92.4%;
+      left: 50%;
+      top: -5.85%;
+      transform: translateX(-50%);
+    }
+
+    /* Card 2: enercity gradient */
+    .case-thumb--2 { background: linear-gradient(90deg, #909 0%, red 100%); }
+    .case-thumb--2 img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Card 3: VHV Gruppe phone */
+    .case-thumb--3 { background: #e5e6df; }
+    .case-thumb--3 img {
+      width: 140.6%;
+      height: 93.8%;
+      left: -18.36%;
+      top: 5.05%;
+      object-fit: contain;
+    }
+
+    /* Card 4: Hannoversche phone */
+    .case-thumb--4 { background: #e0f2fa; }
+    .case-thumb--4 img {
+      width: 71.7%;
+      height: 155.6%;
+      left: 50%;
+      top: 12.97%;
+      transform: translateX(-50%);
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 0 80px 0 #b6d7e6;
+    }
+
+    /* Card 5: Neoskop fashion */
+    .case-thumb--5 { background: #f0f1f6; }
+    .case-thumb--5 img {
+      width: 102.32%;
+      height: 127.9%;
+      left: -1.16%;
+      top: -16.06%;
+      object-fit: cover;
+    }
+
+    /* Card 6: Neoskop voxel */
+    .case-thumb--6 { background: #f0f1f6; }
+    .case-thumb--6 img {
+      width: 185.37%;
+      height: 185.37%;
+      left: -42.69%;
+      top: -48.51%;
+      object-fit: cover;
+    }
+
+    .case-caption { display: flex; flex-direction: column; gap: 8px; }
+
+    .case-caption-title {
+      font-family: 'Noto Sans', sans-serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: normal;
+      color: #000;
+    }
+
+    .case-caption-client {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+    }
+
+    /* ─── Bullet Section ─────────────────────────────────── */
     .bullet-section {
       display: flex;
       flex-direction: column;
-      gap: 72px;
+      gap: 48px;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    .section-subheadline {
+      font-size: 48px;
+      line-height: 62px;
+    }
+    .section-subheadline .bold-italic { font-weight: 700; font-style: italic; }
+    .section-subheadline .italic { font-style: italic; font-weight: 400; }
+
+    .bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
       width: 100%;
     }
 
@@ -161,7 +326,6 @@
       align-items: center;
       justify-content: space-between;
       width: 100%;
-      gap: 40px;
     }
 
     .bullet-label {
@@ -171,10 +335,7 @@
       flex-shrink: 0;
       min-width: 260px;
     }
-
-    .bullet-label .label-bold {
-      font-weight: 700;
-    }
+    .bullet-label .bold { font-weight: 700; }
 
     .bullet-text {
       font-size: 18px;
@@ -183,898 +344,596 @@
       flex: 1;
     }
 
-    /* ─── Subheadline ─────────────────────────────────────── */
-    .subheadline {
-      font-size: 44px;
-      font-weight: 700;
-      line-height: 62px;
-      text-align: center;
+    /* ─── Quote Section ──────────────────────────────────── */
+    .quote-section {
       width: 100%;
-    }
-
-    /* ─── Cases Section ──────────────────────────────────── */
-    .cases-section {
-      width: 100%;
-    }
-
-    .cases-heading {
-      font-size: 44px;
-      font-weight: 700;
-      line-height: 62px;
-      margin-bottom: 48px;
-    }
-
-    .cases-scroll-wrapper {
-      /* Break out of the portfolio container and span full viewport width */
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      overflow-x: auto;
-      overflow-y: visible;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      cursor: grab;
-      user-select: none;
-      /* Vertical padding so the uplift shadow isn't clipped */
-      padding: 20px 0 40px;
-      margin: -20px 0 -40px;
-    }
-    .cases-scroll-wrapper::-webkit-scrollbar { display: none; }
-    .cases-scroll-wrapper.is-grabbing { cursor: grabbing; }
-
-    .cases-track {
       display: flex;
-      gap: 40px;
-      /* Left padding aligns with 1440px header content; falls back to 72px on smaller viewports */
-      padding: 0 max(72px, calc((100vw - 1440px) / 2 + 72px));
-      width: max-content;
+      justify-content: flex-start;
     }
 
-    /* ── Card ── */
-    .case-card {
-      width: 392px;
-      height: 420px;
-      border-radius: 24px;
-      flex-shrink: 0;
-      position: relative;
-      cursor: pointer;
-      overflow: hidden;
-      transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
-                  box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    .quote-text {
+      font-size: 48px;
+      font-style: italic;
+      line-height: 62px;
+      max-width: 1088px;
+      text-align: left;
     }
-    .case-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 56px rgba(0,0,0,0.18);
+    .quote-text .bold-italic { font-weight: 700; font-style: italic; }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    .footer {
+      width: 100%;
+      background: #0b22d6;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 48px 72px;
+      margin-top: 192px;
     }
 
-    .case-card-number {
-      position: absolute;
-      top: 20px;
-      left: 26px;
-      font-size: 80px;
-      font-weight: 700;
-      line-height: 1;
-      color: rgba(0,0,0,0.07);
-      pointer-events: none;
+    .footer-left {
+      font-family: 'Lora', serif;
+      font-size: 24px;
+      font-weight: 900;
+      color: #fff;
+      text-transform: capitalize;
     }
 
-    .case-card-content {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 28px;
-    }
-
-    .case-card-tag {
-      font-size: 11px;
+    .footer-right {
+      font-family: 'Lora', serif;
+      font-size: 24px;
       font-weight: 400;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.45);
-      margin-bottom: 10px;
+      color: #fff;
     }
 
-    .case-card-title {
-      font-size: 26px;
-      font-weight: 700;
-      line-height: 1.25;
-      color: #000;
-    }
-
-    /* Hover CTA overlay – removed, uplift shadow only */
-    .case-card-hover { display: none; }
-
-    /* Card brand backgrounds */
-    .case-card--1 { background: #ffffff; box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
-    .case-card--2 { background: linear-gradient(135deg, #921FBF 0%, #E5001B 100%); }
-    .case-card--3 { background: #B5BA22; }
-    .case-card--4 { background: #e0ddd8; }
-    .case-card--5 { background: #c8d5e5; }
-
-    /* Centered logo layout (cards 2+) */
-    .case-card-logo {
-      position: absolute;
+    /* ─── Modal ──────────────────────────────────────────── */
+    .modal-backdrop {
+      position: fixed;
       inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 500;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 40px;
-    }
-
-    /* ── Editorial card layout (card 1) ── */
-    .case-card-editorial {
-      position: absolute;
-      inset: 0;
-    }
-
-    .case-card-editorial-category {
-      position: absolute;
-      left: 32px;
-      top: 48px;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.96px;
-      text-transform: uppercase;
-      color: #000;
-    }
-
-    .case-card-editorial-title {
-      position: absolute;
-      left: 32px;
-      top: 70.1px;
-      font-family: 'Lora', serif;
-      font-size: 27px;
-      font-weight: 700;
-      line-height: normal;
-      color: #000;
-      white-space: nowrap;
-    }
-
-    .case-card-editorial-preview {
-      position: absolute;
-      left: -32.38px;
-      top: 48px;
-      width: 594.332px;
-      height: 396.27px;
+      opacity: 0;
       pointer-events: none;
+      transition: opacity 0.35s ease;
     }
 
-    .case-card-editorial-preview img {
-      width: 594.332px;
-      height: 396.27px;
-      display: block;
+    .modal-backdrop.is-open {
+      opacity: 1;
+      pointer-events: all;
     }
 
-    .case-card-editorial-arrow {
-      position: absolute;
-      left: 32px;
-      bottom: 34.566px;
-      width: 33px;
-      height: 33px;
-      transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-
-    .case-card:hover .case-card-editorial-arrow {
-      transform: translateX(6px);
-    }
-
-    .case-card-editorial-arrow svg {
+    .modal {
+      background: #fff;
+      border-radius: 24px;
       width: 100%;
-      height: 100%;
-    }
-
-    /* Logo SVGs are inline – no extra classes needed */
-
-    /* ── Detail Overlay ── */
-    .case-overlay {
-      position: fixed;
-      inset: 0;
-      background: #ffffff;
-      z-index: 200;
-      transform: translateX(100%);
-      transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+      max-width: 960px;
+      max-height: 90vh;
       overflow-y: auto;
-      overflow-x: hidden;
+      position: relative;
+      transform: scale(0.95) translateY(16px);
+      transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      scrollbar-width: none;
     }
-    .case-overlay.is-open {
-      transform: translateX(0);
+    .modal::-webkit-scrollbar { display: none; }
+
+    .modal-backdrop.is-open .modal {
+      transform: scale(1) translateY(0);
     }
 
-    .case-overlay-inner {
-      max-width: 1232px;
-      margin: 0 auto;
-      padding: 48px 72px 96px;
-    }
-
-    .case-back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 16px;
-      font-family: 'Lora', serif;
-      font-weight: 400;
-      color: #000;
-      background: none;
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      margin: 24px 24px 0 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.9);
       border: none;
       cursor: pointer;
-      padding: 0;
-      margin-bottom: 56px;
-      opacity: 0.5;
-      transition: opacity 0.2s;
-    }
-    .case-back-btn:hover { opacity: 1; }
-    .case-back-arrow { font-size: 22px; line-height: 1; }
-
-    .case-hero-area {
-      width: 100%;
-      height: 480px;
-      border-radius: 24px;
-      margin-bottom: 56px;
-      display: flex;
-      align-items: flex-end;
-      padding: 40px 44px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .case-hero-placeholder {
-      position: absolute;
-      inset: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(0,0,0,0.25);
-    }
-
-    .case-hero-title {
-      font-size: 56px;
-      font-weight: 700;
-      line-height: 1.1;
+      font-size: 20px;
+      font-family: sans-serif;
       color: #000;
-      position: relative;
-      z-index: 1;
+      transition: background 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    .modal-close:hover { background: #f0f0f0; }
+
+    .modal-content {
+      padding: 0 48px 56px;
+      clear: both;
     }
 
-    .case-meta {
+    .modal-hero {
+      width: calc(100% + 96px);
+      margin-left: -48px;
+      height: 360px;
+      border-radius: 24px 24px 0 0;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 40px;
+    }
+
+    .modal-hero-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-category {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-family: 'Lora', serif;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 32px;
+    }
+
+    .modal-meta {
       display: flex;
       gap: 48px;
-      padding-bottom: 40px;
-      margin-bottom: 56px;
+      padding-bottom: 32px;
+      margin-bottom: 40px;
       border-bottom: 1px solid #e8e8e8;
     }
 
-    .case-meta-item label {
+    .modal-meta-item label {
       display: block;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #999;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-    .case-meta-item span {
-      font-size: 18px;
+
+    .modal-meta-item span {
+      font-size: 16px;
       font-weight: 700;
     }
 
-    .case-body {
+    .modal-body {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 64px;
+      gap: 48px;
     }
 
-    .case-body-section label {
+    .modal-body-section label {
       display: block;
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: #999;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
-    .case-body-section p {
-      font-size: 18px;
-      line-height: 32px;
+    .modal-body-section p {
+      font-size: 17px;
+      line-height: 30px;
     }
 
-    /* Overlay enter animations */
-    .case-overlay .case-back-btn,
-    .case-overlay .case-hero-area,
-    .case-overlay .case-meta,
-    .case-overlay .case-body {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .case-overlay.is-open .case-back-btn  { opacity: 0.5; transform: none; transition-delay: 0.25s; }
-    .case-overlay.is-open .case-back-btn:hover { opacity: 1; }
-    .case-overlay.is-open .case-hero-area { opacity: 1; transform: none; transition-delay: 0.35s; }
-    .case-overlay.is-open .case-meta      { opacity: 1; transform: none; transition-delay: 0.45s; }
-    .case-overlay.is-open .case-body      { opacity: 1; transform: none; transition-delay: 0.55s; }
-
-    @media (max-width: 680px) {
-      .cases-track { padding: 0 24px 4px; }
-      .case-card { width: 300px; height: 300px; }
-      .case-hero-area { height: 320px; }
-      .case-hero-title { font-size: 36px; }
-      .case-meta { flex-wrap: wrap; gap: 28px; }
-      .case-body { grid-template-columns: 1fr; gap: 40px; }
-      .case-overlay-inner { padding: 32px 24px 72px; }
-    }
-
-    /* ─── Footer ──────────────────────────────────────────── */
-    .footer {
-      width: 100%;
-      padding-top: 40px;
-      border-top: 1px solid #e5e5e5;
-      display: flex;
-      justify-content: center;
-      padding-bottom: 48px;
-    }
-
-    .footer p {
-      font-size: 14px;
-      color: #888;
-    }
-
-    /* ─── Animations: Hero ───────────────────────────────── */
-    @keyframes heroLineIn {
-      from {
-        opacity: 0;
-        transform: translateY(22px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-text p {
-      opacity: 0;
-      animation: heroLineIn 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-    }
-    .hero-text p:nth-child(1) { animation-delay: 0.15s; }
-    .hero-text p:nth-child(2) { animation-delay: 0.38s; }
-    .hero-text p:nth-child(3) { animation-delay: 0.61s; }
-
-    /* Header fades in together with first hero line */
-    .header-outer {
-      opacity: 0;
-      animation: heroLineIn 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.05s forwards;
-    }
-
-    /* ─── Animations: Scroll Reveal ──────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition:
-        opacity 0.65s cubic-bezier(0.22, 0.61, 0.36, 1),
-        transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-
-    .reveal.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Stagger delays for children with data-delay */
-    .reveal[data-delay="1"] { transition-delay: 0.10s; }
-    .reveal[data-delay="2"] { transition-delay: 0.22s; }
-    .reveal[data-delay="3"] { transition-delay: 0.34s; }
-    .reveal[data-delay="4"] { transition-delay: 0.46s; }
-    .reveal[data-delay="5"] { transition-delay: 0.58s; }
-
-    /* Portrait note slides in from right */
-    .portrait-note.reveal {
-      transform: translateX(20px) translateY(0px);
-    }
-    .portrait-note.reveal.is-visible {
-      transform: translateX(0) translateY(0);
-    }
-
-    /* Respect reduced-motion preference */
-    @media (prefers-reduced-motion: reduce) {
-      .hero-text p,
-      .header {
-        opacity: 1;
-        animation: none;
-      }
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-    }
-
-    /* ─── Responsive ──────────────────────────────────────── */
+    /* ─── Responsive ─────────────────────────────────────── */
     @media (max-width: 1100px) {
-      .portfolio {
-        padding: 48px 40px;
-        gap: 72px;
-      }
-
-      .portrait-section {
-        flex-direction: column;
-        height: auto;
-        gap: 24px;
-      }
-
-      .portrait-container {
-        width: 100%;
-        max-width: 480px;
-        height: 480px;
-        margin: 0 auto;
-      }
-
-      .portrait-note {
-        position: relative;
-        left: auto;
-        top: auto;
-        width: 100%;
-        max-width: 480px;
-        margin: 0 auto;
-      }
-
-      .bullet-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-
-      .bullet-label {
-        min-width: auto;
-      }
-
-      .bullet-text {
-        max-width: 100%;
-      }
+      .portfolio { padding: 80px 40px 0; gap: 120px; }
+      .portrait-section { height: auto; display: flex; flex-direction: column; gap: 24px; }
+      .portrait-img-container { width: 100%; height: 400px; }
+      .portrait-note { position: relative; left: auto; top: auto; }
+      .portrait-note-block { white-space: normal; height: auto; padding: 10px 16px; }
+      .cases-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    @media (max-width: 680px) {
-      .portfolio {
-        padding: 32px 24px;
-        gap: 56px;
-      }
-
-      .hero-text {
-        font-size: 28px;
-        line-height: 42px;
-      }
-
-      .portrait-container {
-        height: 360px;
-      }
-
-      .portrait-note p {
-        font-size: 20px;
-        line-height: 34px;
-      }
-
-      .bullet-label {
-        font-size: 26px;
-      }
-
-      .bullet-text {
-        font-size: 16px;
-        line-height: 28px;
-      }
-
-      .subheadline {
-        font-size: 32px;
-        line-height: 46px;
-      }
-
-      .header-outer {
-        padding: 32px 24px 0;
-      }
-
-      .header-name {
-        font-size: 24px;
-      }
+    @media (max-width: 720px) {
+      .portfolio { padding: 56px 24px 0; gap: 80px; }
+      .header-outer { padding: 32px 24px 0; }
+      .hero-text { font-size: 32px; }
+      .cases-grid { grid-template-columns: 1fr; }
+      .bullet-item { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .bullet-text { max-width: 100%; }
+      .quote-text { font-size: 32px; }
+      .footer { padding: 40px 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
+      .modal-content { padding: 0 24px 40px; }
+      .modal-body { grid-template-columns: 1fr; }
+      .modal-meta { flex-wrap: wrap; gap: 24px; }
     }
   </style>
 </head>
 <body>
 
+<!-- ── Header (1440px) ───────────────────────────────────── -->
 <div class="header-outer">
   <header class="header">
     <p class="header-name">Tobias Penne</p>
-    <a
-      href="https://www.linkedin.com/in/tobias-penne"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="header-linkedin"
-      aria-label="LinkedIn Profil"
-    >
-      <img
-        src="https://www.figma.com/api/mcp/asset/eaabf9e0-4817-4402-84d0-cc4c83be6c5b"
-        alt="LinkedIn"
-      />
-    </a>
+    <div class="header-contact">
+      <a href="mailto:hallo@tobiaspenne.de" aria-label="E-Mail">
+        <img src="https://www.figma.com/api/mcp/asset/56c788e5-7a36-451b-bec7-393d8a9b93c0" alt="E-Mail" />
+      </a>
+      <a href="https://www.linkedin.com/in/tobias-penne" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <img class="linkedin-icon" src="https://www.figma.com/api/mcp/asset/4238c8f5-fd78-4275-9906-541ea6c9cb71" alt="LinkedIn" />
+      </a>
+    </div>
   </header>
 </div>
 
-<div class="portfolio">
+<!-- ── Main Portfolio ────────────────────────────────────── -->
+<main class="portfolio">
 
-  <!-- ── Hero Text ─────────────────────────────────────── -->
-  <section class="hero-text" aria-label="Einleitung">
-    <p>Hallo, mein Name ist Tobias Penne.</p>
-    <p>Ich bin <span class="bold-italic">Senior Digital Designer</span> aus Hannover</p>
-    <p>und schaffe digitale Erlebnisse, die wirken.</p>
-  </section>
+  <!-- Stage: Hero + Portrait -->
+  <section class="stage-section">
 
-  <!-- ── Portrait ──────────────────────────────────────── -->
-  <section class="portrait-section reveal" aria-label="Portrait">
-    <div class="portrait-container">
-      <div class="portrait-bg"></div>
-      <div class="portrait-img-wrapper">
-        <img
-          class="portrait-img"
-          src="https://www.figma.com/api/mcp/asset/3e4fea01-8173-44fe-8a37-c5a4f030a738"
-          alt="Tobias Penne"
-        />
+    <!-- Hero Text -->
+    <div class="hero-text" aria-label="Einleitung">
+      <p>Hallo, mein Name ist Tobias Penne.</p>
+      <p>Ich bin <span class="bold-italic">Senior Digital Designer</span> aus Hannover</p>
+      <p>und schaffe digitale Erlebnisse, die wirken.</p>
+    </div>
+
+    <!-- Portrait -->
+    <div class="portrait-section reveal">
+      <div class="portrait-img-container">
+        <img class="portrait-img"
+          src="https://www.figma.com/api/mcp/asset/e2a410e4-95bd-4ab5-a135-4e82a8f1853d"
+          alt="Tobias Penne" />
       </div>
-    </div>
-    <div class="portrait-note reveal" data-delay="2">
-      <p>
-        Als studierter <span class="bold">Kommunikationsdesigner</span>
-        habe ich mehr als <span class="bold">20 Jahre Projekterfahrung</span>
-        im digitalen Raum und bewege mich an der Schnittstelle zwischen
-        <span class="bold">Marke, Strategie und Nutzerführung</span>.
-      </p>
-    </div>
-  </section>
-
-  <!-- ── Berufliches ────────────────────────────────────── -->
-  <section class="bullet-section" aria-label="Professionelles">
-
-    <div class="bullet-item reveal" data-delay="1">
-      <div class="bullet-label">🤓&nbsp;<span class="label-bold">Expertise</span></div>
-      <p class="bullet-text">
-        Ich konzipiere und gestalte digitale Produkte und Anwendungen. Nulla vitae elit libero,
-        a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus
-        et magnis dis parturient montes, nascetur ridiculus mus.
-      </p>
-    </div>
-
-    <div class="bullet-item reveal" data-delay="2">
-      <div class="bullet-label">📂&nbsp;<span class="label-bold">Projekte</span></div>
-      <p class="bullet-text">
-        Im Laufe der Jahre durfte ich an einer Vielzahl spannender Projekte für renommierte
-        Kunden mitwirken, darunter: VHV Versicherungen, VHV Gruppe, Hannoversche
-        Lebensversicherung, Mecklenburgische, enercity, Toto-Lotto Niedersachsen, Talanx,
-        Vaillant, Stebel Eltron, Rossmann.
-      </p>
-    </div>
-
-    <div class="bullet-item reveal" data-delay="3">
-      <div class="bullet-label">🧠&nbsp;<span class="label-bold">Arbeitsweise</span></div>
-      <p class="bullet-text">
-        Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod.
-        Curabitur blandit tempus porttitor.
-      </p>
-    </div>
-
-  </section>
-
-  <!-- ── Cases Section ────────────────────────────────────── -->
-  <section class="cases-section reveal" aria-label="Arbeitsbeispiele">
-
-    <div class="cases-scroll-wrapper" id="casesScroll">
-      <div class="cases-track">
-
-        <!-- Card 1: VHV Versicherungen -->
-        <article class="case-card case-card--1" onclick="openCase('case-1')" role="button" tabindex="0" aria-label="Case öffnen: VHV Versicherungen">
-          <!-- Mockup: direct child of card so x/y are from card origin -->
-          <div class="case-card-editorial-preview">
-            <img src="vhv-mockup.png" alt="VHV Website Mockup" />
-          </div>
-          <div class="case-card-editorial">
-            <p class="case-card-editorial-category">WEBSITE</p>
-            <h3 class="case-card-editorial-title">VHV Versicherungen</h3>
-            <div class="case-card-editorial-arrow">
-              <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="arrowGrad" x1="0" y1="17" x2="34" y2="17" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#4F72F5"/>
-                    <stop offset="100%" stop-color="#6B9BFF"/>
-                  </linearGradient>
-                </defs>
-                <path d="M14.9873 0.732178C15.9636 -0.244133 17.5462 -0.244133 18.5225 0.732178L32.7773 14.9871C32.8351 15.0448 32.8895 15.1056 32.9414 15.1687C32.9623 15.1941 32.9812 15.2208 33.001 15.2468C33.0317 15.2873 33.0626 15.3275 33.0908 15.3699C33.1122 15.402 33.1306 15.4357 33.1504 15.4685C33.1713 15.5033 33.1936 15.5372 33.2129 15.573C33.2302 15.6052 33.244 15.6389 33.2598 15.6716C33.2814 15.7166 33.3042 15.761 33.3232 15.8074C33.3298 15.8234 33.3346 15.8401 33.3408 15.8562C33.3633 15.9146 33.3851 15.9735 33.4033 16.0339C33.4108 16.0587 33.4152 16.0842 33.4219 16.1091C33.4358 16.1614 33.4503 16.2137 33.4609 16.2673C33.4673 16.2994 33.4705 16.3318 33.4756 16.364C33.4956 16.4914 33.5098 16.6216 33.5098 16.7546C33.5098 16.8891 33.496 17.0205 33.4756 17.1492C33.4707 17.1798 33.467 17.2105 33.4609 17.241C33.4504 17.2946 33.4358 17.3469 33.4219 17.3992C33.4152 17.4241 33.4107 17.4496 33.4033 17.4744C33.3867 17.5296 33.3659 17.583 33.3457 17.6365C33.3373 17.6588 33.3304 17.6817 33.3213 17.7039C33.3023 17.7501 33.2804 17.7948 33.2588 17.8396C33.2442 17.8698 33.2307 17.9007 33.2148 17.9304C33.191 17.975 33.1641 18.0174 33.1377 18.0603C33.122 18.0859 33.1076 18.1123 33.0908 18.1375C33.0626 18.1798 33.0316 18.22 33.001 18.2605C32.9811 18.2867 32.9625 18.314 32.9414 18.3396C32.8894 18.4029 32.8352 18.4643 32.7773 18.5222L18.5225 32.7771C17.5462 33.7533 15.9636 33.7533 14.9873 32.7771C14.0111 31.8008 14.0111 30.2182 14.9873 29.2419L24.9746 19.2546H2.5C1.11938 19.2546 0.000105134 18.1352 0 16.7546C0 15.3739 1.11931 14.2547 2.5 14.2546H24.9746L14.9873 4.26733C14.011 3.29105 14.0111 1.7085 14.9873 0.732178Z" fill="url(#arrowGrad)"/>
-              </svg>
-            </div>
-          </div>
-        </article>
-
-        <!-- Card 2: enercity -->
-        <article class="case-card case-card--2" onclick="openCase('case-2')" role="button" tabindex="0" aria-label="Case öffnen: enercity">
-          <div class="case-card-logo">
-            <img src="enercity-logo.png" alt="enercity" style="width: 52%; height: auto;" />
-          </div>
-          <div class="case-card-hover">
-            <span class="case-card-hover-label">Case ansehen →</span>
-          </div>
-        </article>
-
-        <!-- Card 3: VHV Gruppe -->
-        <article class="case-card case-card--3" onclick="openCase('case-3')" role="button" tabindex="0" aria-label="Case öffnen: VHV Gruppe">
-          <div class="case-card-logo">
-            <img src="vhvgruppe-logo.png" alt="VHV Gruppe" style="width: 55%; height: auto;" />
-          </div>
-          <div class="case-card-hover">
-            <span class="case-card-hover-label">Case ansehen →</span>
-          </div>
-        </article>
-
-        <!-- Card 4: Placeholder -->
-        <article class="case-card case-card--4" style="opacity:0.35; pointer-events:none;">
-          <div class="case-card-logo">
-            <span style="font-size:13px; letter-spacing:0.12em; text-transform:uppercase; color:#999;">Demnächst</span>
-          </div>
-        </article>
-
+      <div class="portrait-note reveal" data-delay="2">
+        <div class="portrait-note-block">Mit mehr als 20 Jahren Projekterfahrung im</div>
+        <div class="portrait-note-block">digitalen Raum, bewege ich mich an der Schnittstelle</div>
+        <div class="portrait-note-block">zwischen Marke, Strategie und Nutzerführung.</div>
       </div>
     </div>
 
   </section>
 
-  <!-- ── Subheadline ────────────────────────────────────── -->
-  <h2 class="subheadline reveal">Und sonst so?</h2>
+  <!-- Work Section -->
+  <section class="work-section reveal" aria-label="Arbeiten">
+    <h2 class="work-subheadline">
+      <span class="bold-italic">What you see</span> is what you get
+    </h2>
 
-  <!-- ── Persönliches ───────────────────────────────────── -->
-  <section class="bullet-section" aria-label="Persönliches">
+    <div class="cases-grid">
 
-    <div class="bullet-item reveal" data-delay="1">
-      <div class="bullet-label">🎤&nbsp;<span class="label-bold">Podcast</span></div>
-      <p class="bullet-text">
-        Im Laufe der Jahre durfte ich an einer Vielzahl spannender Projekte für renommierte
-        Kunden mitwirken, darunter: VHV Versicherungen, VHV Gruppe, Hannoversche
-        Lebensversicherung, Mecklenburgische, enercity, Toto-Lotto Niedersachsen, Talanx,
-        Vaillant, Stebel Eltron, Rossmann.
-      </p>
+      <!-- Card 1: VHV Versicherungen -->
+      <div class="case-card reveal" data-delay="1" onclick="openModal('modal-1')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--1">
+          <img src="vhv-mockup.png" alt="VHV Versicherungen" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">B2C / B2B Portal</p>
+          <p class="case-caption-client">VHV Versicherungen</p>
+        </div>
+      </div>
+
+      <!-- Card 2: enercity -->
+      <div class="case-card reveal" data-delay="2" onclick="openModal('modal-2')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--2">
+          <img src="https://www.figma.com/api/mcp/asset/6ca9f64a-d303-4aef-95d6-e7cced787dd9" alt="enercity" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Brand Identity Workshop</p>
+          <p class="case-caption-client">enercity</p>
+        </div>
+      </div>
+
+      <!-- Card 3: VHV Gruppe -->
+      <div class="case-card reveal" data-delay="3" onclick="openModal('modal-3')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--3">
+          <img src="https://www.figma.com/api/mcp/asset/331f0cb7-580d-413b-8d95-ecf040eaa3f5" alt="VHV Gruppe" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Website</p>
+          <p class="case-caption-client">VHV Gruppe</p>
+        </div>
+      </div>
+
+      <!-- Card 4: Hannoversche -->
+      <div class="case-card reveal" data-delay="1" onclick="openModal('modal-4')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--4">
+          <img src="https://www.figma.com/api/mcp/asset/670916e0-9a6c-4222-8a2f-4e516760bba9" alt="Hannoversche" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Online Tarifrechner</p>
+          <p class="case-caption-client">Hannoversche Lebensversicherung</p>
+        </div>
+      </div>
+
+      <!-- Card 5: Neoskop Fashion -->
+      <div class="case-card reveal" data-delay="2" onclick="openModal('modal-5')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--5">
+          <img src="https://www.figma.com/api/mcp/asset/3798fcab-c0d7-4238-af89-e7e72ba067a3" alt="Neoskop Fashion" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Charity Fashion-Drop</p>
+          <p class="case-caption-client">Neoskop</p>
+        </div>
+      </div>
+
+      <!-- Card 6: Neoskop Voxel -->
+      <div class="case-card reveal" data-delay="3" onclick="openModal('modal-6')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--6">
+          <img src="https://www.figma.com/api/mcp/asset/0ffa4e4b-f25a-4ca2-9492-1fc90777192a" alt="Neoskop Voxel" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Voxel Studies</p>
+          <p class="case-caption-client">Neoskop</p>
+        </div>
+      </div>
+
     </div>
-
-    <div class="bullet-item reveal" data-delay="2">
-      <div class="bullet-label">👟&nbsp;<span class="label-bold">Sneaker</span></div>
-      <p class="bullet-text">
-        Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod.
-        Curabitur blandit tempus porttitor.
-      </p>
-    </div>
-
-    <div class="bullet-item reveal" data-delay="3">
-      <div class="bullet-label">⛳️&nbsp;<span class="label-bold">Golf</span></div>
-      <p class="bullet-text">
-        Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue.
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-        Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod.
-        Curabitur blandit tempus porttitor.
-      </p>
-    </div>
-
   </section>
 
-  <!-- ── Footer ─────────────────────────────────────────── -->
-  <footer class="footer reveal">
-    <p>© 2026 Tobias Penne</p>
-  </footer>
-
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════
-     CASE DETAIL OVERLAYS
-     ═══════════════════════════════════════════════════════════ -->
-
-<!-- Case 1: VHV Versicherungen -->
-<div class="case-overlay" id="case-1" role="dialog" aria-modal="true" aria-label="Case: VHV Versicherungen">
-  <div class="case-overlay-inner">
-    <button class="case-back-btn" onclick="closeCase('case-1')">
-      <span class="case-back-arrow">←</span> Zurück
-    </button>
-    <div class="case-hero-area case-card--1">
-      <div class="case-hero-placeholder">Visuals / Mockups kommen hier rein</div>
-      <h2 class="case-hero-title">VHV Versicherungen</h2>
+  <!-- Bullet Section: Studiert, Erfahren & digital. -->
+  <section class="bullet-section reveal" aria-label="Profil">
+    <h2 class="section-subheadline">
+      <span class="bold-italic">Studiert, Erfahren</span><span class="italic"> &amp; digital.</span>
+    </h2>
+    <div class="bullets">
+      <div class="bullet-item reveal" data-delay="1">
+        <div class="bullet-label">🤓&nbsp;<span class="bold">Expertise</span></div>
+        <p class="bullet-text">Ich konzipiere und gestalte digitale Produkte und Anwendungen. Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <div class="bullet-item reveal" data-delay="2">
+        <div class="bullet-label">📂&nbsp;<span class="bold">Projekte</span></div>
+        <p class="bullet-text">Im Laufe der Jahre durfte ich an einer Vielzahl spannender Projekte für renommierte Kunden mitwirken, darunter: VHV Versicherungen, VHV Gruppe, Hannoversche Lebensversicherung, Mecklenburgische, enercity, Toto-Lotto Niedersachsen, Talanx, Vaillant, Stebel Eltron, Rossmann.</p>
+      </div>
+      <div class="bullet-item reveal" data-delay="3">
+        <div class="bullet-label">🧠&nbsp;<span class="bold">Arbeitsweise</span></div>
+        <p class="bullet-text">Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p>
+      </div>
     </div>
-    <div class="case-meta">
-      <div class="case-meta-item"><label>Kunde</label><span>VHV Gruppe</span></div>
-      <div class="case-meta-item"><label>Jahr</label><span>2022 – 2023</span></div>
-      <div class="case-meta-item"><label>Rolle</label><span>Lead Designer</span></div>
-      <div class="case-meta-item"><label>Bereich</label><span>Brand & Digital</span></div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote-section reveal" aria-label="Zitat">
+    <p class="quote-text">Dank über 15 Jahren Agenturerfahrung weiß ich: Gute Kommunikation braucht <span class="bold-italic">kein Gebrüll</span>, sondern den <span class="bold-italic">richtigen Ton</span>.</p>
+  </section>
+
+  <!-- Und sonst so? -->
+  <section class="bullet-section reveal" aria-label="Persönliches">
+    <h2 class="section-subheadline">Und sonst so?</h2>
+    <div class="bullets">
+      <div class="bullet-item reveal" data-delay="1">
+        <div class="bullet-label">🎤&nbsp;<span class="bold">Podcast</span></div>
+        <p class="bullet-text">Im Laufe der Jahre durfte ich an einer Vielzahl spannender Projekte für renommierte Kunden mitwirken, darunter: VHV Versicherungen, VHV Gruppe, Hannoversche Lebensversicherung, Mecklenburgische, enercity, Toto-Lotto Niedersachsen, Talanx, Vaillant, Stebel Eltron, Rossmann.</p>
+      </div>
+      <div class="bullet-item reveal" data-delay="2">
+        <div class="bullet-label">👟&nbsp;<span class="bold">Sneaker</span></div>
+        <p class="bullet-text">Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p>
+      </div>
+      <div class="bullet-item reveal" data-delay="3">
+        <div class="bullet-label">⛳️&nbsp;<span class="bold">Golf</span></div>
+        <p class="bullet-text">Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p>
+      </div>
     </div>
-    <div class="case-body">
-      <div class="case-body-section">
-        <label>Aufgabe</label>
-        <p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+  </section>
+
+</main>
+
+<!-- ── Footer ─────────────────────────────────────────────── -->
+<footer class="footer">
+  <p class="footer-left">Open for Work!</p>
+  <p class="footer-right">hallo@tobiaspenne.de</p>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════
+     CASE MODALS
+     ════════════════════════════════════════════════════════ -->
+
+<!-- Modal 1: VHV Versicherungen -->
+<div class="modal-backdrop" id="modal-1" role="dialog" aria-modal="true" aria-label="Case: VHV Versicherungen" onclick="handleBackdropClick(event, 'modal-1')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-1')" aria-label="Schließen">✕</button>
+    <div class="modal-content">
+      <div class="modal-hero case-thumb--1" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
+        <img src="vhv-mockup.png" alt="" style="width:130%; position:absolute; left:50%; top:-5%; transform:translateX(-50%); max-width:none;" />
       </div>
-      <div class="case-body-section">
-        <label>Lösung</label>
-        <p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p>
+      <p class="modal-category">Website</p>
+      <h2 class="modal-title">VHV Versicherungen</h2>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><label>Kunde</label><span>VHV Gruppe</span></div>
+        <div class="modal-meta-item"><label>Jahr</label><span>2022–2023</span></div>
+        <div class="modal-meta-item"><label>Rolle</label><span>Lead Designer</span></div>
+        <div class="modal-meta-item"><label>Bereich</label><span>B2C / B2B Portal</span></div>
       </div>
-      <div class="case-body-section">
-        <label>Ergebnis</label>
-        <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-      </div>
-      <div class="case-body-section">
-        <label>Tools & Methoden</label>
-        <p>Figma, Design System, Nutzerforschung, Prototyping, Stakeholder-Workshops</p>
+      <div class="modal-body">
+        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
+        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p></div>
+        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula.</p></div>
+        <div class="modal-body-section"><label>Tools</label><p>Figma, Design System, Nutzerforschung, Prototyping, Stakeholder-Workshops</p></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Case 2: Hannoversche -->
-<div class="case-overlay" id="case-2" role="dialog" aria-modal="true" aria-label="Case: Hannoversche Lebensversicherung">
-  <div class="case-overlay-inner">
-    <button class="case-back-btn" onclick="closeCase('case-2')">
-      <span class="case-back-arrow">←</span> Zurück
-    </button>
-    <div class="case-hero-area case-card--2">
-      <div class="case-hero-placeholder">Visuals / Mockups kommen hier rein</div>
-      <h2 class="case-hero-title">Hannoversche Lebensversicherung</h2>
-    </div>
-    <div class="case-meta">
-      <div class="case-meta-item"><label>Kunde</label><span>Hannoversche</span></div>
-      <div class="case-meta-item"><label>Jahr</label><span>2021</span></div>
-      <div class="case-meta-item"><label>Rolle</label><span>UX Lead</span></div>
-      <div class="case-meta-item"><label>Bereich</label><span>UX / UI Design</span></div>
-    </div>
-    <div class="case-body">
-      <div class="case-body-section">
-        <label>Aufgabe</label>
-        <p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+<!-- Modal 2: enercity -->
+<div class="modal-backdrop" id="modal-2" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-2')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-2')" aria-label="Schließen">✕</button>
+    <div class="modal-content">
+      <div class="modal-hero case-thumb--2" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
+        <img src="https://www.figma.com/api/mcp/asset/6ca9f64a-d303-4aef-95d6-e7cced787dd9" alt="" style="width:100%;height:100%;object-fit:cover;position:absolute;" />
       </div>
-      <div class="case-body-section">
-        <label>Lösung</label>
-        <p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p>
+      <p class="modal-category">Brand Identity</p>
+      <h2 class="modal-title">enercity</h2>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><label>Kunde</label><span>enercity AG</span></div>
+        <div class="modal-meta-item"><label>Jahr</label><span>2021</span></div>
+        <div class="modal-meta-item"><label>Rolle</label><span>Creative Lead</span></div>
+        <div class="modal-meta-item"><label>Bereich</label><span>Brand Identity Workshop</span></div>
       </div>
-      <div class="case-body-section">
-        <label>Ergebnis</label>
-        <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-      </div>
-      <div class="case-body-section">
-        <label>Tools & Methoden</label>
-        <p>Figma, Usability Testing, Journey Mapping, Atomic Design</p>
+      <div class="modal-body">
+        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
+        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
+        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
+        <div class="modal-body-section"><label>Tools</label><p>Figma, Miro, Workshop-Moderation, Brand Sprint</p></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Case 3: enercity -->
-<div class="case-overlay" id="case-3" role="dialog" aria-modal="true" aria-label="Case: enercity">
-  <div class="case-overlay-inner">
-    <button class="case-back-btn" onclick="closeCase('case-3')">
-      <span class="case-back-arrow">←</span> Zurück
-    </button>
-    <div class="case-hero-area case-card--3">
-      <div class="case-hero-placeholder">Visuals / Mockups kommen hier rein</div>
-      <h2 class="case-hero-title">enercity</h2>
+<!-- Modal 3: VHV Gruppe -->
+<div class="modal-backdrop" id="modal-3" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-3')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-3')" aria-label="Schließen">✕</button>
+    <div class="modal-content">
+      <div class="modal-hero case-thumb--3" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
+        <img src="https://www.figma.com/api/mcp/asset/331f0cb7-580d-413b-8d95-ecf040eaa3f5" alt="" style="position:absolute;width:140%;left:-20%;top:5%;object-fit:contain;max-width:none;" />
+      </div>
+      <p class="modal-category">Website</p>
+      <h2 class="modal-title">VHV Gruppe</h2>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><label>Kunde</label><span>VHV Gruppe</span></div>
+        <div class="modal-meta-item"><label>Jahr</label><span>2020</span></div>
+        <div class="modal-meta-item"><label>Rolle</label><span>UX Lead</span></div>
+        <div class="modal-meta-item"><label>Bereich</label><span>Website</span></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
+        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
+        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
+        <div class="modal-body-section"><label>Tools</label><p>Figma, Atomic Design, Stakeholder-Workshops</p></div>
+      </div>
     </div>
-    <div class="case-meta">
-      <div class="case-meta-item"><label>Kunde</label><span>enercity AG</span></div>
-      <div class="case-meta-item"><label>Jahr</label><span>2020 – 2021</span></div>
-      <div class="case-meta-item"><label>Rolle</label><span>Senior Designer</span></div>
-      <div class="case-meta-item"><label>Bereich</label><span>Product Design</span></div>
+  </div>
+</div>
+
+<!-- Modal 4: Hannoversche -->
+<div class="modal-backdrop" id="modal-4" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-4')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-4')" aria-label="Schließen">✕</button>
+    <div class="modal-content">
+      <div class="modal-hero case-thumb--4" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
+        <img src="https://www.figma.com/api/mcp/asset/670916e0-9a6c-4222-8a2f-4e516760bba9" alt="" style="position:absolute;width:40%;left:50%;transform:translateX(-50%);top:5%;border-radius:8px;box-shadow:0 0 60px #b6d7e6;object-fit:cover;max-width:none;" />
+      </div>
+      <p class="modal-category">Digital Product</p>
+      <h2 class="modal-title">Hannoversche Lebensversicherung</h2>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><label>Kunde</label><span>Hannoversche</span></div>
+        <div class="modal-meta-item"><label>Jahr</label><span>2021–2022</span></div>
+        <div class="modal-meta-item"><label>Rolle</label><span>Senior Designer</span></div>
+        <div class="modal-meta-item"><label>Bereich</label><span>Online Tarifrechner</span></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
+        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
+        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
+        <div class="modal-body-section"><label>Tools</label><p>Figma, Usability Testing, Journey Mapping</p></div>
+      </div>
     </div>
-    <div class="case-body">
-      <div class="case-body-section">
-        <label>Aufgabe</label>
-        <p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+  </div>
+</div>
+
+<!-- Modal 5: Neoskop Fashion -->
+<div class="modal-backdrop" id="modal-5" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-5')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-5')" aria-label="Schließen">✕</button>
+    <div class="modal-content">
+      <div class="modal-hero case-thumb--5" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
+        <img src="https://www.figma.com/api/mcp/asset/3798fcab-c0d7-4238-af89-e7e72ba067a3" alt="" style="position:absolute;width:102%;left:-1%;top:-10%;object-fit:cover;max-width:none;" />
       </div>
-      <div class="case-body-section">
-        <label>Lösung</label>
-        <p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p>
+      <p class="modal-category">Campaign</p>
+      <h2 class="modal-title">Charity Fashion-Drop</h2>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><label>Kunde</label><span>Neoskop</span></div>
+        <div class="modal-meta-item"><label>Jahr</label><span>2023</span></div>
+        <div class="modal-meta-item"><label>Rolle</label><span>Art Direction</span></div>
+        <div class="modal-meta-item"><label>Bereich</label><span>Campaign &amp; Social</span></div>
       </div>
-      <div class="case-body-section">
-        <label>Ergebnis</label>
-        <p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+      <div class="modal-body">
+        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
+        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
+        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
+        <div class="modal-body-section"><label>Tools</label><p>Figma, Adobe CC, Social Media Strategy</p></div>
       </div>
-      <div class="case-body-section">
-        <label>Tools & Methoden</label>
-        <p>Figma, Design Thinking, Agile / Scrum, Komponentenbibliothek</p>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 6: Neoskop Voxel -->
+<div class="modal-backdrop" id="modal-6" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-6')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-6')" aria-label="Schließen">✕</button>
+    <div class="modal-content">
+      <div class="modal-hero case-thumb--6" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
+        <img src="https://www.figma.com/api/mcp/asset/0ffa4e4b-f25a-4ca2-9492-1fc90777192a" alt="" style="position:absolute;width:185%;left:-42%;top:-48%;object-fit:cover;max-width:none;" />
+      </div>
+      <p class="modal-category">3D / Motion</p>
+      <h2 class="modal-title">Voxel Studies</h2>
+      <div class="modal-meta">
+        <div class="modal-meta-item"><label>Kunde</label><span>Neoskop</span></div>
+        <div class="modal-meta-item"><label>Jahr</label><span>2023</span></div>
+        <div class="modal-meta-item"><label>Rolle</label><span>Creative Direction</span></div>
+        <div class="modal-meta-item"><label>Bereich</label><span>Exploration / R&amp;D</span></div>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
+        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
+        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
+        <div class="modal-body-section"><label>Tools</label><p>Blender, After Effects, Figma</p></div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // ── Scroll Reveal via IntersectionObserver ──────────────
-  const revealEls = document.querySelectorAll('.reveal');
-
+  // ── Scroll Reveal ───────────────────────────────────────
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          // Only fire once per element
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.12,       // trigger when 12% is visible
-      rootMargin: '0px 0px -40px 0px'  // slight bottom offset for natural feel
-    }
+    (entries) => entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+    }),
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 
-  revealEls.forEach((el) => observer.observe(el));
+  // ── Keyboard: case cards ────────────────────────────────
+  document.querySelectorAll('.case-card[tabindex]').forEach((card) => {
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
 
-  // ── Case Overlay: Open / Close ──────────────────────────
+  // ── Modal ───────────────────────────────────────────────
   let savedScrollY = 0;
 
-  function openCase(id) {
+  function openModal(id) {
     savedScrollY = window.scrollY;
-    const overlay = document.getElementById(id);
-    overlay.classList.add('is-open');
-    overlay.scrollTop = 0;
+    const el = document.getElementById(id);
+    el.classList.add('is-open');
+    el.querySelector('.modal').scrollTop = 0;
     document.body.style.overflow = 'hidden';
   }
 
-  function closeCase(id) {
-    const overlay = document.getElementById(id);
-    overlay.classList.remove('is-open');
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('is-open');
     document.body.style.overflow = '';
     window.scrollTo({ top: savedScrollY, behavior: 'instant' });
   }
 
-  // Close overlay on Escape key
+  function handleBackdropClick(e, id) {
+    if (e.target === document.getElementById(id)) closeModal(id);
+  }
+
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      document.querySelectorAll('.case-overlay.is-open').forEach((el) => {
-        closeCase(el.id);
-      });
+      document.querySelectorAll('.modal-backdrop.is-open').forEach((el) => closeModal(el.id));
     }
   });
-
-  // Keyboard accessibility for cards
-  document.querySelectorAll('.case-card[tabindex]').forEach((card) => {
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        card.click();
-      }
-    });
-  });
-
-  // ── Drag-to-Scroll on Cases ─────────────────────────────
-  const scroller = document.getElementById('casesScroll');
-  let isDown = false;
-  let startX, scrollLeft;
-
-  scroller.addEventListener('mousedown', (e) => {
-    isDown = true;
-    scroller.classList.add('is-grabbing');
-    startX = e.pageX - scroller.offsetLeft;
-    scrollLeft = scroller.scrollLeft;
-  });
-
-  scroller.addEventListener('mouseleave', () => {
-    isDown = false;
-    scroller.classList.remove('is-grabbing');
-  });
-
-  scroller.addEventListener('mouseup', () => {
-    isDown = false;
-    scroller.classList.remove('is-grabbing');
-  });
-
-  scroller.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - scroller.offsetLeft;
-    const walk = (x - startX) * 1.4;
-    scroller.scrollLeft = scrollLeft - walk;
-  });
 </script>
-
 </body>
 </html>
