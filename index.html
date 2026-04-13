@@ -233,8 +233,8 @@
 
     /* ── Card ── */
     .case-card {
-      width: 400px;
-      height: 400px;
+      width: 392px;
+      height: 420px;
       border-radius: 24px;
       flex-shrink: 0;
       position: relative;
@@ -308,52 +308,53 @@
     .case-card-editorial {
       position: absolute;
       inset: 0;
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
     }
 
     .case-card-editorial-category {
-      font-family: 'Lora', serif;
-      font-size: 11px;
+      position: absolute;
+      left: 32px;
+      top: 48px;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.96px;
       text-transform: uppercase;
-      color: #999;
-      margin-bottom: 14px;
+      color: #000;
     }
 
     .case-card-editorial-title {
+      position: absolute;
+      left: 32px;
+      top: 70.1px;
       font-family: 'Lora', serif;
-      font-size: 30px;
+      font-size: 27px;
       font-weight: 700;
-      line-height: 1.2;
+      line-height: normal;
       color: #000;
-      max-width: 58%;
+      white-space: nowrap;
     }
 
     .case-card-editorial-preview {
       position: absolute;
       left: -32.38px;
       top: 48px;
-      width: 594.33px;
+      width: 594.332px;
       height: 396.27px;
       pointer-events: none;
     }
 
     .case-card-editorial-preview img {
-      width: 594.33px;
+      width: 594.332px;
       height: 396.27px;
       display: block;
-      object-fit: contain;
     }
 
     .case-card-editorial-arrow {
       position: absolute;
-      bottom: 34px;
-      left: 36px;
-      width: 32px;
-      height: 32px;
+      left: 32px;
+      bottom: 34.566px;
+      width: 33px;
+      height: 33px;
       transition: transform 0.25s cubic-bezier(0.22, 0.61, 0.36, 1);
     }
 
@@ -361,7 +362,6 @@
       transform: translateX(6px);
     }
 
-    /* SVG gradient fill via CSS filter is unreliable – use inline SVG with linearGradient */
     .case-card-editorial-arrow svg {
       width: 100%;
       height: 100%;
@@ -778,7 +778,7 @@
             <img src="vhv-mockup.png" alt="VHV Website Mockup" />
           </div>
           <div class="case-card-editorial">
-            <p class="case-card-editorial-category">Website</p>
+            <p class="case-card-editorial-category">WEBSITE</p>
             <h3 class="case-card-editorial-title">VHV Versicherungen</h3>
             <div class="case-card-editorial-arrow">
               <svg viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
