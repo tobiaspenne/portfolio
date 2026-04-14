@@ -358,12 +358,13 @@
     /* Card 4: Hannoversche phone */
     .case-thumb--4 { background: #e0f2fa; }
     .case-thumb--4 img {
-      width: auto;
-      height: 280px;
+      width: auto !important;
+      max-width: none;
+      height: 280px !important;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
-      object-fit: contain;
+      object-fit: unset;
       border-radius: 8px;
       box-shadow: 0 0 80px 0 #b6d7e6;
     }
