@@ -527,7 +527,7 @@
       background: var(--modal-bg);
       border-radius: 24px;
       width: 100%;
-      max-width: 960px;
+      max-width: 1200px;
       max-height: 90vh;
       overflow-y: auto;
       position: relative;
@@ -545,24 +545,99 @@
       position: sticky;
       top: 0;
       float: right;
-      margin: 24px 24px 0 0;
+      margin: 32px 32px 0 0;
       z-index: 10;
-      background: var(--modal-bg);
+      background: none;
       border: none;
       cursor: pointer;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
+      font-size: 24px;
       font-family: sans-serif;
-      color: var(--text);
-      transition: background 0.2s;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      color: var(--text-muted);
+      transition: color 0.2s;
+      padding: 4px;
+      line-height: 1;
     }
-    .modal-close:hover { background: var(--bg-subtle); }
+    .modal-close:hover { color: var(--text); }
+
+    /* ─── Case Modal Layout ──────────────────────────────── */
+    .case-modal-header {
+      padding: 48px 80px 40px;
+    }
+    .case-modal-client {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 22px;
+      color: #a1a1a1;
+      margin-bottom: 12px;
+    }
+    .case-modal-title {
+      font-family: 'Literata', serif;
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 62px;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .case-modal-text {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 18px;
+      line-height: 32px;
+      color: var(--text);
+      max-width: 900px;
+    }
+    .case-modal-text strong { font-weight: 600; }
+
+    .case-showcase {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      padding: 0 80px 80px;
+    }
+    .showcase-block {
+      background: #f0f5f7;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .showcase-block img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      display: block;
+    }
+    .showcase-row {
+      display: flex;
+      gap: 40px;
+      width: 100%;
+    }
+    .showcase-row .showcase-block {
+      flex: 1;
+      overflow: hidden;
+      align-items: flex-start;
+      padding: 80px 80px 0;
+    }
+    .showcase-row .showcase-block img {
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+    }
+    .showcase-awards .showcase-block {
+      height: 480px;
+      padding: 80px;
+      align-items: center;
+    }
+    .showcase-awards .showcase-block img {
+      width: auto;
+      max-width: 100%;
+      max-height: 260px;
+      border-radius: 0;
+    }
 
     .modal-content {
       padding: 0 48px 56px;
@@ -908,23 +983,46 @@
 <div class="modal-backdrop" id="modal-1" role="dialog" aria-modal="true" aria-label="Case: VHV Versicherungen" onclick="handleBackdropClick(event, 'modal-1')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-1')" aria-label="Schließen">✕</button>
-    <div class="modal-content">
-      <div class="modal-hero case-thumb--1" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
-        <img src="vhv-mockup.png" alt="" style="width:130%; position:absolute; left:50%; top:-5%; transform:translateX(-50%); max-width:none;" />
+
+    <div class="case-modal-header">
+      <p class="case-modal-client">VHV Versicherungen</p>
+      <h2 class="case-modal-title">B2B / B2C Portal &amp; Tarifrechner</h2>
+      <p class="case-modal-text">
+        Viele Jahre lang habe ich das digitale Ökosystem der VHV Versicherungen begleitet – ob B2B Plattform, Online-Tarifrechner-Strecken oder Anpassungen im Kontext der Barrierefreiheitsstärkungsgesetze (BFSG). Das ursprüngliche Designkonzept des Relaunches von 2016 wurde mit einem Red Dot Award sowie dem German Design Award ausgezeichnet.<br><br>
+        <strong>Meine Rolle in diesem Projekt:</strong> Art Direction &amp; UX/UI Design
+      </p>
+    </div>
+
+    <div class="case-showcase">
+      <!-- Bild 1: Hero Desktop -->
+      <div class="showcase-block">
+        <img src="https://www.figma.com/api/mcp/asset/6412ff60-fec3-47ca-86e4-1949ac44830e" alt="VHV Desktop Ansicht 1" />
       </div>
-      <p class="modal-category">Website</p>
-      <h2 class="modal-title">VHV Versicherungen</h2>
-      <div class="modal-meta">
-        <div class="modal-meta-item"><label>Kunde</label><span>VHV Gruppe</span></div>
-        <div class="modal-meta-item"><label>Jahr</label><span>2022–2023</span></div>
-        <div class="modal-meta-item"><label>Rolle</label><span>Lead Designer</span></div>
-        <div class="modal-meta-item"><label>Bereich</label><span>B2C / B2B Portal</span></div>
+      <!-- Bild 2: Desktop -->
+      <div class="showcase-block">
+        <img src="https://www.figma.com/api/mcp/asset/db96fb34-7397-481f-9b2d-58fbfa9b1a5e" alt="VHV Desktop Ansicht 2" />
       </div>
-      <div class="modal-body">
-        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
-        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor. Donec sed odio dui.</p></div>
-        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum. Nullam id dolor id nibh ultricies vehicula.</p></div>
-        <div class="modal-body-section"><label>Tools</label><p>Figma, Design System, Nutzerforschung, Prototyping, Stakeholder-Workshops</p></div>
+      <!-- Bild 3+4: Zwei Phones nebeneinander -->
+      <div class="showcase-row">
+        <div class="showcase-block">
+          <img src="https://www.figma.com/api/mcp/asset/311d1ead-67c9-459f-a8db-8dd385560b06" alt="VHV Mobile Ansicht 1" />
+        </div>
+        <div class="showcase-block">
+          <img src="https://www.figma.com/api/mcp/asset/3ae134eb-6b77-4b13-b277-144cddea0656" alt="VHV Mobile Ansicht 2" />
+        </div>
+      </div>
+      <!-- Bild 5: Desktop dunkel -->
+      <div class="showcase-block">
+        <img src="https://www.figma.com/api/mcp/asset/08edb236-8a53-473c-8e0e-13be2bf92c09" alt="VHV Desktop Ansicht 3" />
+      </div>
+      <!-- Awards -->
+      <div class="showcase-row showcase-awards">
+        <div class="showcase-block" style="height:420px;">
+          <img src="https://www.figma.com/api/mcp/asset/6768fcdf-662f-4ce6-9969-eeaf0bba29a6" alt="Red Dot Award 2016" style="width:auto;max-height:220px;border-radius:0;" />
+        </div>
+        <div class="showcase-block" style="height:420px;">
+          <img src="https://www.figma.com/api/mcp/asset/3518c2c5-92af-47c4-8e57-aea134c274c6" alt="German Design Award 2017" style="width:auto;max-height:220px;border-radius:0;" />
+        </div>
       </div>
     </div>
   </div>
