@@ -624,6 +624,29 @@
       height: auto;
       border-radius: 0;
     }
+    /* Phone row: exact Figma crop */
+    .showcase-phones {
+      height: 616px;
+    }
+    .showcase-phones .showcase-block {
+      height: 616px;
+      padding: 80px 80px 0;
+      position: relative;
+    }
+    .showcase-phones .phone-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 536px;
+      overflow: hidden;
+    }
+    .showcase-phones .phone-img-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: auto;
+      border-radius: 0;
+    }
     .showcase-awards .showcase-block {
       height: 480px;
       padding: 80px;
@@ -999,13 +1022,17 @@
       <div class="showcase-block">
         <img src="https://www.figma.com/api/mcp/asset/db96fb34-7397-481f-9b2d-58fbfa9b1a5e" alt="VHV Desktop Ansicht 2" />
       </div>
-      <!-- Bild 3+4: Zwei Phones nebeneinander -->
-      <div class="showcase-row">
+      <!-- Bild 3+4: Zwei Phones nebeneinander, Figma-Crop -->
+      <div class="showcase-row showcase-phones">
         <div class="showcase-block">
-          <img src="https://www.figma.com/api/mcp/asset/311d1ead-67c9-459f-a8db-8dd385560b06" alt="VHV Mobile Ansicht 1" />
+          <div class="phone-img-wrap">
+            <img src="https://www.figma.com/api/mcp/asset/e8249455-ff89-4aed-b4d2-bc5a0edb02c9" alt="VHV Mobile Ansicht 1" style="height: 197.99%;" />
+          </div>
         </div>
         <div class="showcase-block">
-          <img src="https://www.figma.com/api/mcp/asset/3ae134eb-6b77-4b13-b277-144cddea0656" alt="VHV Mobile Ansicht 2" />
+          <div class="phone-img-wrap">
+            <img src="https://www.figma.com/api/mcp/asset/ed962a15-8400-4c1b-9b10-bf01886e0939" alt="VHV Mobile Ansicht 2" style="height: 167.8%;" />
+          </div>
         </div>
       </div>
       <!-- Bild 5: Desktop dunkel -->
