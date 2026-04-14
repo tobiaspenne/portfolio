@@ -668,9 +668,59 @@
       .modal-body { grid-template-columns: 1fr; }
       .modal-meta { flex-wrap: wrap; gap: 24px; }
     }
+
+    /* ─── Custom Cursor ──────────────────────────────────── */
+    @media (pointer: fine) {
+      * { cursor: none !important; }
+
+      .cursor-dot {
+        position: fixed;
+        width: 6px;
+        height: 6px;
+        background: #0b22d6;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 10000;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease, opacity 0.3s ease;
+        opacity: 0;
+      }
+
+      .cursor-ring {
+        position: fixed;
+        width: 56px;
+        height: 56px;
+        background: rgba(11, 34, 214, 0.10);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.25s ease, height 0.25s ease,
+                    background 0.25s ease, opacity 0.3s ease;
+        opacity: 0;
+      }
+
+      .cursor-dot.is-visible  { opacity: 1; }
+      .cursor-ring.is-visible { opacity: 1; }
+
+      .cursor-ring.is-hover {
+        width: 80px;
+        height: 80px;
+        background: rgba(11, 34, 214, 0.07);
+      }
+
+      .cursor-dot.is-hover {
+        width: 4px;
+        height: 4px;
+      }
+    }
   </style>
 </head>
 <body>
+
+<!-- Custom cursor -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot"  id="cursorDot"></div>
 
 <!-- ── Header (1440px) ───────────────────────────────────── -->
 <div class="header-outer">
@@ -1033,6 +1083,57 @@
 </div>
 
 <script>
+  // ── Custom Cursor ───────────────────────────────────────
+  (function () {
+    const dot  = document.getElementById('cursorDot');
+    const ring = document.getElementById('cursorRing');
+    if (!dot || !ring) return;
+
+    let mouseX = 0, mouseY = 0;
+    let ringX  = 0, ringY  = 0;
+    let visible = false;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.left = mouseX + 'px';
+      dot.style.top  = mouseY + 'px';
+      if (!visible) {
+        visible = true;
+        dot.classList.add('is-visible');
+        ring.classList.add('is-visible');
+        ringX = mouseX; ringY = mouseY;
+      }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      dot.classList.remove('is-visible');
+      ring.classList.remove('is-visible');
+      visible = false;
+    });
+
+    const hoverEls = 'a, button, [role="button"], .case-card, label';
+    document.querySelectorAll(hoverEls).forEach((el) => {
+      el.addEventListener('mouseenter', () => {
+        dot.classList.add('is-hover');
+        ring.classList.add('is-hover');
+      });
+      el.addEventListener('mouseleave', () => {
+        dot.classList.remove('is-hover');
+        ring.classList.remove('is-hover');
+      });
+    });
+
+    function tick() {
+      ringX += (mouseX - ringX) * 0.10;
+      ringY += (mouseY - ringY) * 0.10;
+      ring.style.left = ringX + 'px';
+      ring.style.top  = ringY + 'px';
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+
   // ── Dark Mode ───────────────────────────────────────────
   (function () {
     const stored = localStorage.getItem('theme');
