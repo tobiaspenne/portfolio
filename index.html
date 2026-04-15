@@ -1024,35 +1024,51 @@
     </div>
 
     <div class="case-showcase">
-      <!-- Bild 1: Hero Desktop -->
+
+      <!-- Block 1: Hero-Screenshot volle Breite -->
       <div class="showcase-block">
-        <img src="https://www.figma.com/api/mcp/asset/69ab8a41-642d-4a0c-9c59-db7456c93e2b" alt="VHV Desktop Ansicht 1" />
+        <div style="width:100%; border-radius:8px; overflow:hidden; aspect-ratio:1040/621.83; position:relative;">
+          <img src="https://www.figma.com/api/mcp/asset/4141c55d-4d91-4346-9695-65677b99f42b" alt="VHV Privathaftpflicht" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;" />
+        </div>
       </div>
-      <!-- Bild 2: Desktop -->
+
+      <!-- Block 2: zweiter Desktop-Screenshot volle Breite -->
       <div class="showcase-block">
-        <img src="https://www.figma.com/api/mcp/asset/ed621b8a-a5fa-4942-8491-d0173a9c4ebf" alt="VHV Desktop Ansicht 2" />
+        <div style="width:100%; border-radius:8px; overflow:hidden; aspect-ratio:1040/621.83; position:relative;">
+          <img src="https://www.figma.com/api/mcp/asset/64e1c9ac-0c51-400e-8773-ff1f0542e8b1" alt="VHV Autoversicherung" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;" />
+        </div>
       </div>
-      <!-- Bild 3+4: Zwei Phones nebeneinander, Figma-Crop -->
-      <div class="showcase-row showcase-phones">
-        <div class="showcase-block">
-          <div class="phone-img-wrap">
-            <img src="https://www.figma.com/api/mcp/asset/ad37d0bf-c147-4ced-b9d3-4bc4651b3f9d" alt="VHV Mobile Ansicht 1" />
+
+      <!-- Block 3: Phone links, UI rechts -->
+      <div class="showcase-row" style="align-items:stretch;">
+
+        <!-- Links: KFZ-Tarifrechner Phone -->
+        <div style="background:#f0f5f7; border-radius:16px; flex:1; padding:80px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+          <img src="https://www.figma.com/api/mcp/asset/5edb9f44-ce69-4201-bc52-639b0fdd2284" alt="VHV KFZ Tarifrechner Mobile" style="max-width:375px; width:100%; height:auto; display:block;" />
+        </div>
+
+        <!-- Rechts: vhv-items.png -->
+        <div style="background:#f0f5f7; border-radius:16px; flex:0 0 580px; padding:80px; display:flex; align-items:center; justify-content:center;">
+          <img src="vhv-items.png" alt="VHV Tarifrechner UI" style="max-width:100%; height:auto; display:block;" />
+        </div>
+
+      </div>
+
+      <!-- Block 4: Kampagnen-Screenshot + Awards -->
+      <div class="showcase-block">
+        <div style="width:100%; display:flex; gap:32px; align-items:flex-start;">
+          <!-- Screenshot -->
+          <div style="flex:1; border-radius:8px; overflow:hidden; aspect-ratio:1040/621.83; position:relative; min-width:0;">
+            <img src="https://www.figma.com/api/mcp/asset/1e23c076-4aa8-4b57-a692-bccc5616956a" alt="VHV Kampagne" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;" />
+          </div>
+          <!-- Awards -->
+          <div style="display:flex; flex-direction:column; gap:40px; align-items:center; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/cb71919a-d5db-4abd-be44-3f8bd82c981d" alt="Red Dot Award 2016" style="width:128px; height:auto; border-radius:0; display:block;" />
+            <img src="https://www.figma.com/api/mcp/asset/787b5a89-ae5b-4d97-b787-eb7ca46674f8" alt="German Design Award 2017" style="width:128px; height:auto; border-radius:0; display:block;" />
           </div>
         </div>
-        <div class="showcase-block">
-          <div class="phone-img-wrap">
-            <img src="https://www.figma.com/api/mcp/asset/f99c8487-6175-4067-9c83-c9fb258e3ade" alt="VHV Mobile Ansicht 2" />
-          </div>
-        </div>
       </div>
-      <!-- Bild 5: Desktop dunkel + Awards darunter -->
-      <div class="showcase-block" style="flex-direction: column; gap: 32px; align-items: flex-start;">
-        <img src="https://www.figma.com/api/mcp/asset/de2a3e75-f180-40f5-a8c9-bcc458e58d53" alt="VHV Desktop Ansicht 3" />
-        <div style="display:flex; gap:40px; align-items:center;">
-          <img src="https://www.figma.com/api/mcp/asset/1fa82f40-5ff8-4d0b-85b3-5fe3074ac2c5" alt="Red Dot Award 2016" style="width:176px; height:auto; border-radius:0;" />
-          <img src="https://www.figma.com/api/mcp/asset/b1d59255-e932-4237-8af5-329093be4344" alt="German Design Award 2017" style="width:176px; height:auto; border-radius:0;" />
-        </div>
-      </div>
+
     </div>
   </div>
 </div>
