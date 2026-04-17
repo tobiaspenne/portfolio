@@ -361,31 +361,32 @@
     /* Card 4: LOTTO */
     .case-thumb--4 { background: #f5f0e8; }
     .case-thumb--4 img {
-      width: auto;
-      height: 88%;
+      width: 260px;
+      height: auto;
       left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      object-fit: contain;
+      top: 80px;
+      transform: translateX(-50%);
+      border-radius: 16px;
+      box-shadow: 0 0 80px 0 #DAD5BA;
     }
 
-    /* Card 5: Neoskop fashion */
-    .case-thumb--5 { background: #f0f1f6; }
+    /* Card 5: Charity Fashion Drop */
+    .case-thumb--5 { background: #f4f4f4; }
     .case-thumb--5 img {
-      width: 102.32%;
-      height: 127.9%;
-      left: -1.16%;
-      top: -16.06%;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
       object-fit: cover;
     }
 
-    /* Card 6: Neoskop voxel */
-    .case-thumb--6 { background: #f0f1f6; }
+    /* Card 6: Voxel Studies */
+    .case-thumb--6 { background: #f4f4f4; }
     .case-thumb--6 img {
-      width: 185.37%;
-      height: 185.37%;
-      left: -42.69%;
-      top: -48.51%;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
       object-fit: cover;
     }
 
@@ -928,7 +929,7 @@
       <!-- Card 5: Neoskop Fashion -->
       <div class="case-card reveal" data-delay="2" onclick="openModal('modal-5')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--5">
-          <img src="https://www.figma.com/api/mcp/asset/3798fcab-c0d7-4238-af89-e7e72ba067a3" alt="Neoskop Fashion" />
+          <img src="https://www.figma.com/api/mcp/asset/c90afd66-7a7c-4123-85fe-950392504e83" alt="Charity Fashion Drop" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Charity Fashion-Drop</p>
@@ -939,7 +940,7 @@
       <!-- Card 6: Neoskop Voxel -->
       <div class="case-card reveal" data-delay="3" onclick="openModal('modal-6')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--6">
-          <img src="https://www.figma.com/api/mcp/asset/0ffa4e4b-f25a-4ca2-9492-1fc90777192a" alt="Neoskop Voxel" />
+          <img src="https://www.figma.com/api/mcp/asset/33722fee-7024-47db-9f92-399368a5199a" alt="Voxel Studies" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Voxel Studies</p>
@@ -1202,24 +1203,24 @@
       <!-- Block 1: Hero -->
       <div class="showcase-block" style="background:#f4f4f4;">
         <div style="width:100%; border-radius:16px; overflow:hidden;">
-          <img src="lotto-start.png" alt="LOTTO App Start" style="width:100%; height:auto; display:block;" />
+          <img src="lotto-start.png" alt="LOTTO App Start" style="width:100%; height:auto; display:block; border-radius:16px;" />
         </div>
       </div>
 
       <!-- Block 2: Menü links, App rechts -->
       <div class="showcase-row" style="align-items:stretch;">
         <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:center; justify-content:center;">
-          <img src="lotto-menu.jpg" alt="LOTTO App Menü" style="max-width:100%; height:auto; display:block;" />
+          <img src="lotto-menu.jpg" alt="LOTTO App Menü" style="max-width:100%; height:auto; display:block; border-radius:16px;" />
         </div>
         <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:center; justify-content:center;">
-          <img src="lotto-app.jpg" alt="LOTTO App" style="max-width:100%; height:auto; display:block;" />
+          <img src="lotto-app.jpg" alt="LOTTO App" style="max-width:100%; height:auto; display:block; border-radius:16px;" />
         </div>
       </div>
 
       <!-- Block 3: Content -->
       <div class="showcase-block" style="background:#f4f4f4;">
         <div style="width:100%; border-radius:16px; overflow:hidden;">
-          <img src="lotto-content.png" alt="LOTTO App Content" style="width:100%; height:auto; display:block;" />
+          <img src="lotto-content.png" alt="LOTTO App Content" style="width:100%; height:auto; display:block; border-radius:16px;" />
         </div>
       </div>
 
@@ -1227,54 +1228,129 @@
   </div>
 </div>
 
-<!-- Modal 5: Neoskop Fashion -->
-<div class="modal-backdrop" id="modal-5" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-5')">
+<!-- Modal 5: Charity Fashion Drop -->
+<div class="modal-backdrop" id="modal-5" role="dialog" aria-modal="true" aria-label="Case: Charity Fashion Drop" onclick="handleBackdropClick(event, 'modal-5')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-5')" aria-label="Schließen">✕</button>
-    <div class="modal-content">
-      <div class="modal-hero case-thumb--5" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
-        <img src="https://www.figma.com/api/mcp/asset/3798fcab-c0d7-4238-af89-e7e72ba067a3" alt="" style="position:absolute;width:102%;left:-1%;top:-10%;object-fit:cover;max-width:none;" />
+
+    <div class="case-modal-header">
+      <p class="case-modal-client">Neoskop</p>
+      <h2 class="case-modal-title">Charity Fashion Drop</h2>
+      <p class="case-modal-text">
+        Bei Neoskop ist der Charity Drop eine regelmäßige Spendenaktion, die einmal im Jahr stattfindet. Dabei entwirft das inhouse Designkollektiv <em>neoneo</em> eine limitierte Fashion-Kollektion, die für einen limitierten Zeitraum erhältlich ist. Die Spenden gehen 1:1 an eine gemeinnützige, regionale Organisation.<br><br>
+        <em>Grafik Design, Copywriting, Strategie</em> &nbsp;·&nbsp; <a href="#" target="_blank" rel="noopener noreferrer" class="case-modal-link">Zur Website</a>
+      </p>
+    </div>
+
+    <div class="case-showcase">
+
+      <!-- Block 1: 3×2 Produkt-Grid -->
+      <div class="showcase-block" style="background:#f4f4f4;">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-content:space-between; height:660px; border-radius:8px; overflow:hidden; width:100%;">
+          <div style="width:calc(33.33% - 1px); aspect-ratio:1; background:white; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/d5317e26-af9b-48b6-bd07-e25a94ef3b4b" alt="" style="position:absolute; left:17.59%; top:17.59%; width:64.82%; height:64.82%; max-width:none; display:block;" />
+          </div>
+          <div style="width:calc(33.33% - 1px); aspect-ratio:1; background:white; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/06c1b990-5bd8-4310-b2c7-6c2005d4086e" alt="" style="position:absolute; left:9.04%; top:37.47%; width:85.49%; height:25.06%; max-width:none; display:block;" />
+          </div>
+          <div style="width:calc(33.33% - 1px); aspect-ratio:1; background:white; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/bf990af1-b9cb-439a-9d13-840a9fc04601" alt="" style="position:absolute; left:22.58%; top:22.58%; width:54.84%; height:54.84%; max-width:none; display:block;" />
+          </div>
+          <div style="width:calc(33.33% - 1px); aspect-ratio:1; background:white; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/fadf9e3b-e9eb-47d0-875a-e5f2995b66ff" alt="" style="position:absolute; left:13.79%; top:40.61%; width:72.42%; height:18.78%; max-width:none; display:block;" />
+          </div>
+          <div style="width:calc(33.33% - 1px); aspect-ratio:1; background:white; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/41429397-ec18-451d-a9b1-9fc6f8a6d09f" alt="" style="position:absolute; left:20.86%; top:23.55%; width:58.29%; height:52.89%; max-width:none; display:block;" />
+          </div>
+          <div style="width:calc(33.33% - 1px); aspect-ratio:1; background:white; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/b5f524f3-de23-41d6-aeef-8df350069e1b" alt="" style="position:absolute; left:19.24%; top:17.5%; width:61.52%; height:64.99%; max-width:none; display:block;" />
+          </div>
+        </div>
       </div>
-      <p class="modal-category">Campaign</p>
-      <h2 class="modal-title">Charity Fashion-Drop</h2>
-      <div class="modal-meta">
-        <div class="modal-meta-item"><label>Kunde</label><span>Neoskop</span></div>
-        <div class="modal-meta-item"><label>Jahr</label><span>2023</span></div>
-        <div class="modal-meta-item"><label>Rolle</label><span>Art Direction</span></div>
-        <div class="modal-meta-item"><label>Bereich</label><span>Campaign &amp; Social</span></div>
+
+      <!-- Block 2: Tote Bag links, Sweater rechts -->
+      <div class="showcase-row" style="align-items:stretch;">
+        <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
+          <div style="width:399px; height:617px; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/2cf9b809-8bbe-4b91-a37f-50bf43ad2181" alt="Charity Fashion Drop Tote Bag" style="position:absolute; height:88.03%; left:-47.91%; top:5.99%; width:195.82%; max-width:none; display:block;" />
+          </div>
+        </div>
+        <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
+          <div style="width:399px; height:617px; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/9714159f-0e9f-44a8-9f28-d0bf7fa65944" alt="Charity Fashion Drop Sweater" style="position:absolute; height:126.12%; left:-27.92%; top:-20.16%; width:155.84%; max-width:none; display:block;" />
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
-        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
-        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
-        <div class="modal-body-section"><label>Tools</label><p>Figma, Adobe CC, Social Media Strategy</p></div>
+
+      <!-- Block 3: Full-width T-Shirt -->
+      <div class="showcase-block" style="background:#f4f4f4;">
+        <div style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:973/628; position:relative;">
+          <img src="https://www.figma.com/api/mcp/asset/c90afd66-7a7c-4123-85fe-950392504e83" alt="Charity Fashion Drop T-Shirt" style="position:absolute; height:193.73%; left:0; top:-49.01%; width:100%; max-width:none; display:block;" />
+        </div>
       </div>
+
+      <!-- Block 4: Sweater links, Cap rechts -->
+      <div class="showcase-row" style="align-items:stretch;">
+        <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
+          <div style="width:399px; height:617px; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/e2279ef6-31a4-4aa4-bd21-cc613b9f0e20" alt="Charity Fashion Drop Sweater" style="position:absolute; height:101.31%; left:-12.59%; top:-1.09%; width:125.19%; max-width:none; display:block;" />
+          </div>
+        </div>
+        <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
+          <div style="width:399px; height:617px; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/7a8cefb6-48b4-4161-8acb-8d5e044dccc0" alt="Charity Fashion Drop Cap" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; max-width:none; display:block;" />
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<!-- Modal 6: Neoskop Voxel -->
-<div class="modal-backdrop" id="modal-6" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-6')">
+<!-- Modal 6: Voxel Studies -->
+<div class="modal-backdrop" id="modal-6" role="dialog" aria-modal="true" aria-label="Case: Voxel Studies" onclick="handleBackdropClick(event, 'modal-6')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-6')" aria-label="Schließen">✕</button>
-    <div class="modal-content">
-      <div class="modal-hero case-thumb--6" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
-        <img src="https://www.figma.com/api/mcp/asset/0ffa4e4b-f25a-4ca2-9492-1fc90777192a" alt="" style="position:absolute;width:185%;left:-42%;top:-48%;object-fit:cover;max-width:none;" />
+
+    <div class="case-modal-header">
+      <p class="case-modal-client">Neoskop</p>
+      <h2 class="case-modal-title">Voxel Studies</h2>
+      <p class="case-modal-text">
+        Voxel – so nennt man Pixel im dreidimensionalen Raum. Dadurch erhält die Retroästhetik, die man aus alten Videospielen kennt, eine ganz neue moderne Anmutung. Die entstandenen Assets wurden bei Neoskop u.a. genutzt um redaktionelle Blogartikel oder Social-Media Postings zu illustrieren.<br><br>
+        <em>Idee, Konzeption &amp; Umsetzung</em> &nbsp;·&nbsp; <a href="#" target="_blank" rel="noopener noreferrer" class="case-modal-link">Zur Website</a>
+      </p>
+    </div>
+
+    <div class="case-showcase">
+
+      <!-- Block 1: Full-width Voxel Render -->
+      <div class="showcase-block" style="background:#f4f4f4;">
+        <div style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:973/628; position:relative;">
+          <img src="https://www.figma.com/api/mcp/asset/33722fee-7024-47db-9f92-399368a5199a" alt="Voxel Studies" style="position:absolute; width:109.7%; left:-4.85%; top:0; height:100%; max-width:none; display:block;" />
+        </div>
       </div>
-      <p class="modal-category">3D / Motion</p>
-      <h2 class="modal-title">Voxel Studies</h2>
-      <div class="modal-meta">
-        <div class="modal-meta-item"><label>Kunde</label><span>Neoskop</span></div>
-        <div class="modal-meta-item"><label>Jahr</label><span>2023</span></div>
-        <div class="modal-meta-item"><label>Rolle</label><span>Creative Direction</span></div>
-        <div class="modal-meta-item"><label>Bereich</label><span>Exploration / R&amp;D</span></div>
+
+      <!-- Block 2: Full-width CXI -->
+      <div class="showcase-block" style="background:#f4f4f4;">
+        <div style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:973/628; position:relative;">
+          <img src="https://www.figma.com/api/mcp/asset/4e6ef414-d5e7-4e80-9881-173d1fc54f34" alt="Voxel Studies CXI" style="position:absolute; width:109.7%; left:-4.85%; top:0; height:100%; max-width:none; display:block;" />
+        </div>
       </div>
-      <div class="modal-body">
-        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
-        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
-        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
-        <div class="modal-body-section"><label>Tools</label><p>Blender, After Effects, Figma</p></div>
+
+      <!-- Block 3: Lieferwagen links, Raum rechts -->
+      <div class="showcase-row" style="align-items:stretch;">
+        <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
+          <div style="width:399px; height:617px; position:relative; overflow:hidden; flex-shrink:0;">
+            <img src="https://www.figma.com/api/mcp/asset/43983183-9358-4d50-a256-ba3afd33ad63" alt="Voxel Lieferwagen" style="position:absolute; height:135.55%; left:-54.69%; top:-17.78%; width:209.38%; max-width:none; display:block;" />
+          </div>
+        </div>
+        <div style="background:radial-gradient(circle at center, #822FC6 0%, #5A1E8C 50%, #46156E 75%, #320D51 100%); border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
+          <div style="width:399px; height:617px; position:relative; overflow:hidden; flex-shrink:0; box-shadow:0 4px 20px rgba(0,0,0,0.85);">
+            <img src="https://www.figma.com/api/mcp/asset/232c77a7-c324-4b5c-a54c-4ee51a895ecc" alt="Voxel Raum" style="position:absolute; height:82.53%; left:-26.51%; top:8.74%; width:153.03%; max-width:none; display:block;" />
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>
