@@ -358,18 +358,9 @@
       box-shadow: none;
     }
 
-    /* Card 4: Hannoversche – Online Tarifrechner */
-    .case-thumb--4 { background: #e0f2fa; }
-    .case-thumb--4 img {
-      width: 71.7%;
-      height: 155.6%;
-      left: 50%;
-      top: 12.97%;
-      transform: translateX(-50%);
-      object-fit: cover;
-      border-radius: 8px;
-      box-shadow: 0 0 80px 0 #b6d7e6;
-    }
+    /* Card 4: LOTTO */
+    .case-thumb--4 { background: #1c0606; }
+    .case-thumb--4 img { width: 100%; height: 100%; object-fit: cover; }
 
     /* Card 5: Neoskop fashion */
     .case-thumb--5 { background: #f0f1f6; }
@@ -916,14 +907,14 @@
         </div>
       </div>
 
-      <!-- Card 4: Hannoversche -->
+      <!-- Card 4: LOTTO -->
       <div class="case-card reveal" data-delay="1" onclick="openModal('modal-4')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--4">
-          <img src="https://www.figma.com/api/mcp/asset/670916e0-9a6c-4222-8a2f-4e516760bba9" alt="Hannoversche" />
+          <img src="lotto-start.png" alt="LOTTO" />
         </div>
         <div class="case-caption">
-          <p class="case-caption-title">Online Tarifrechner</p>
-          <p class="case-caption-client">Hannoversche Lebensversicherung</p>
+          <p class="case-caption-title">Lotto.de App</p>
+          <p class="case-caption-client">LOTTO</p>
         </div>
       </div>
 
@@ -1126,7 +1117,7 @@
       <!-- Block 4: Workshop-Foto (beschnitten) -->
       <div class="showcase-block" style="background:#f7f1f3;">
         <div style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:1040/621.83; position:relative;">
-          <img src="https://www.figma.com/api/mcp/asset/e3405c87-0a95-4de1-8e02-f5bbd46d50d2" alt="enercity Workshop Foto" style="position:absolute; width:148.45%; height:auto; top:2.94%; left:-29.46%; max-width:none; display:block;" />
+          <img src="https://www.figma.com/api/mcp/asset/e3405c87-0a95-4de1-8e02-f5bbd46d50d2" alt="enercity Workshop Foto" style="position:absolute; width:148.45%; height:auto; top:0; left:-29.46%; max-width:none; display:block;" />
         </div>
       </div>
 
@@ -1185,28 +1176,46 @@
   </div>
 </div>
 
-<!-- Modal 4: Hannoversche -->
-<div class="modal-backdrop" id="modal-4" role="dialog" aria-modal="true" onclick="handleBackdropClick(event, 'modal-4')">
+<!-- Modal 4: LOTTO -->
+<div class="modal-backdrop" id="modal-4" role="dialog" aria-modal="true" aria-label="Case: LOTTO" onclick="handleBackdropClick(event, 'modal-4')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-4')" aria-label="Schließen">✕</button>
-    <div class="modal-content">
-      <div class="modal-hero case-thumb--4" style="border-radius:24px 24px 0 0; margin-left:-48px; margin-bottom:40px; width:calc(100% + 96px); height:320px;">
-        <img src="https://www.figma.com/api/mcp/asset/670916e0-9a6c-4222-8a2f-4e516760bba9" alt="" style="position:absolute;width:40%;left:50%;transform:translateX(-50%);top:5%;border-radius:16px;box-shadow:0 0 60px #b6d7e6;object-fit:cover;max-width:none;" />
+
+    <div class="case-modal-header">
+      <p class="case-modal-client">LOTTO</p>
+      <h2 class="case-modal-title">Lotto.de App</h2>
+      <p class="case-modal-text">
+        [Beschreibungstext folgt aus Figma]<br><br>
+        <em>[Rolle]</em> &nbsp;·&nbsp; <a href="https://www.lotto.de" target="_blank" rel="noopener noreferrer" class="case-modal-link">Zum Projekt</a>
+      </p>
+    </div>
+
+    <div class="case-showcase">
+
+      <!-- Block 1: Hero -->
+      <div class="showcase-block" style="background:#f4f4f4;">
+        <div style="width:100%; border-radius:16px; overflow:hidden;">
+          <img src="lotto-start.png" alt="LOTTO App Start" style="width:100%; height:auto; display:block;" />
+        </div>
       </div>
-      <p class="modal-category">Digital Product</p>
-      <h2 class="modal-title">Hannoversche Lebensversicherung</h2>
-      <div class="modal-meta">
-        <div class="modal-meta-item"><label>Kunde</label><span>Hannoversche</span></div>
-        <div class="modal-meta-item"><label>Jahr</label><span>2021–2022</span></div>
-        <div class="modal-meta-item"><label>Rolle</label><span>Senior Designer</span></div>
-        <div class="modal-meta-item"><label>Bereich</label><span>Online Tarifrechner</span></div>
+
+      <!-- Block 2: Menü links, App rechts -->
+      <div class="showcase-row" style="align-items:stretch;">
+        <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:center; justify-content:center;">
+          <img src="lotto-menu.jpg" alt="LOTTO App Menü" style="max-width:100%; height:auto; display:block;" />
+        </div>
+        <div style="background:#f4f4f4; border-radius:16px; flex:1; padding:80px; display:flex; align-items:center; justify-content:center;">
+          <img src="lotto-app.jpg" alt="LOTTO App" style="max-width:100%; height:auto; display:block;" />
+        </div>
       </div>
-      <div class="modal-body">
-        <div class="modal-body-section"><label>Aufgabe</label><p>Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p></div>
-        <div class="modal-body-section"><label>Lösung</label><p>Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p></div>
-        <div class="modal-body-section"><label>Ergebnis</label><p>Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.</p></div>
-        <div class="modal-body-section"><label>Tools</label><p>Figma, Usability Testing, Journey Mapping</p></div>
+
+      <!-- Block 3: Content -->
+      <div class="showcase-block" style="background:#f4f4f4;">
+        <div style="width:100%; border-radius:16px; overflow:hidden;">
+          <img src="lotto-content.png" alt="LOTTO App Content" style="width:100%; height:auto; display:block;" />
+        </div>
       </div>
+
     </div>
   </div>
 </div>
