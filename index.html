@@ -330,62 +330,26 @@
       pointer-events: none;
     }
 
-    /* Card 1: VHV laptop */
+    /* Card 1–6: lokale Thumbnails, object-fit:cover */
     .case-thumb--1 { background: #f0f1f6; }
-    .case-thumb--1 img {
-      width: 138.7%;
-      height: 92.4%;
-      left: 50%;
-      top: -5.85%;
-      transform: translateX(-50%);
-    }
-
-    /* Card 2: enercity gradient */
-    .case-thumb--2 { background: linear-gradient(90deg, #909 0%, red 100%); }
-    .case-thumb--2 img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* Card 3: VHV Gruppe – Corporate Website (iPhone mockup) */
+    .case-thumb--2 { background: #f0f1f6; }
     .case-thumb--3 { background: #e6e4dd; }
-    .case-thumb--3 img {
-      width: auto;
-      height: 280px;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      object-fit: unset;
-      max-width: none;
-      border-radius: 0;
-      box-shadow: none;
-    }
-
-    /* Card 4: LOTTO */
     .case-thumb--4 { background: #f5f0e8; }
-    .case-thumb--4 img {
-      width: 260px;
-      height: auto;
-      left: 50%;
-      top: 80px;
-      transform: translateX(-50%);
-      border-radius: 16px;
-      box-shadow: 0 0 80px 0 #DAD5BA;
-    }
-
-    /* Card 5: Charity Fashion Drop */
     .case-thumb--5 { background: #f0f1f6; }
-    .case-thumb--5 img {
-      width: 102.32%;
-      height: 127.9%;
-      left: -1.16%;
-      top: -16.06%;
-    }
-
-    /* Card 6: Voxel Studies */
     .case-thumb--6 { background: #f0f1f6; }
+
+    .case-thumb--1 img,
+    .case-thumb--2 img,
+    .case-thumb--3 img,
+    .case-thumb--4 img,
+    .case-thumb--5 img,
     .case-thumb--6 img {
-      width: 185.37%;
-      height: 185.37%;
-      left: -42.69%;
-      top: -48.51%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      left: 0;
+      top: 0;
+      transform: none;
     }
 
     .case-caption { display: flex; flex-direction: column; gap: 8px; }
@@ -860,7 +824,7 @@
     <div class="portrait-section reveal">
       <div class="portrait-img-container">
         <img class="portrait-img"
-          src="https://www.figma.com/api/mcp/asset/e2a410e4-95bd-4ab5-a135-4e82a8f1853d"
+          src="tp_profil.jpg"
           alt="Tobias Penne" />
       </div>
       <div class="portrait-note">
@@ -883,7 +847,7 @@
       <!-- Card 1: VHV Versicherungen -->
       <div class="case-card reveal" data-delay="1" onclick="openModal('modal-1')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--1">
-          <img src="vhv-mockup.png" alt="VHV Versicherungen" />
+          <img src="tp_case_vhv.jpg" alt="VHV Versicherungen" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">B2C / B2B Portal</p>
@@ -894,7 +858,7 @@
       <!-- Card 2: enercity -->
       <div class="case-card reveal" data-delay="2" onclick="openModal('modal-2')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--2">
-          <img src="https://www.figma.com/api/mcp/asset/6ca9f64a-d303-4aef-95d6-e7cced787dd9" alt="enercity" />
+          <img src="tp_case_enercity.jpg" alt="enercity" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Brand Identity Workshop</p>
@@ -905,7 +869,7 @@
       <!-- Card 3: VHV Gruppe -->
       <div class="case-card reveal" data-delay="3" onclick="openModal('modal-3')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--3">
-          <img src="https://www.figma.com/api/mcp/asset/331f0cb7-580d-413b-8d95-ecf040eaa3f5" alt="VHV Gruppe" />
+          <img src="tp_case_gruppe.jpg" alt="VHV Gruppe" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Corporate Website</p>
@@ -916,7 +880,7 @@
       <!-- Card 4: LOTTO -->
       <div class="case-card reveal" data-delay="1" onclick="openModal('modal-4')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--4">
-          <img src="lotto-app.jpg" alt="LOTTO" />
+          <img src="tp_case_lotto.jpg" alt="LOTTO" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Lotto.de App</p>
@@ -927,7 +891,7 @@
       <!-- Card 5: Neoskop Fashion -->
       <div class="case-card reveal" data-delay="2" onclick="openModal('modal-5')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--5">
-          <img src="https://www.figma.com/api/mcp/asset/deee0704-4ec0-4879-82a4-1cd38b83bef3" alt="Charity Fashion Drop" />
+          <img src="tp_case_drop.jpg" alt="Charity Fashion Drop" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Charity Fashion-Drop</p>
@@ -938,7 +902,7 @@
       <!-- Card 6: Neoskop Voxel -->
       <div class="case-card reveal" data-delay="3" onclick="openModal('modal-6')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--6">
-          <img src="https://www.figma.com/api/mcp/asset/799ec72a-103a-4ea2-9724-565d56c7a9ac" alt="Voxel Studies" />
+          <img src="tp_case_voxel.jpg" alt="Voxel Studies" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Voxel Studies</p>
