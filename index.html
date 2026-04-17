@@ -416,6 +416,33 @@
       flex: 1;
     }
 
+    /* ─── Awards Strip ───────────────────────────────────── */
+    .awards-strip {
+      width: 100%;
+      background: var(--bg-subtle);
+      border-radius: 16px;
+      padding: 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .award-logo {
+      height: 120px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ─── CV bullet variant (years) ─────────────────────── */
+    .bullet-label--cv {
+      font-size: 26px;
+      font-weight: 700;
+      font-family: 'Literata', serif;
+      font-style: normal;
+    }
+
     /* ─── Quote Section ──────────────────────────────────── */
     .quote-section {
       width: 100%;
@@ -930,6 +957,33 @@
       <div class="bullet-item reveal" data-delay="3">
         <div class="bullet-label">🧠&nbsp;<span class="bold">Arbeitsweise</span></div>
         <p class="bullet-text">Nulla vitae elit libero, a pharetra augue. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed posuere consectetur est at lobortis. Etiam porta sem malesuada magna mollis euismod. Curabitur blandit tempus porttitor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Awards Strip -->
+  <section class="awards-strip reveal" aria-label="Auszeichnungen">
+    <img src="reddot.jpg" alt="Red Dot Award 2016" class="award-logo" />
+    <img src="german-design-award.png" alt="German Design Award 2017" class="award-logo" />
+    <img src="reddot.jpg" alt="Red Dot Award 2016" class="award-logo" />
+    <img src="german-design-award.png" alt="German Design Award 2017" class="award-logo" />
+  </section>
+
+  <!-- Lebenslauf: Ausbildung & Stationen -->
+  <section class="bullet-section reveal" aria-label="Ausbildung und Stationen">
+    <h2 class="section-subheadline"><span class="bold-italic">Ausbildung &amp; Stationen.</span></h2>
+    <div class="bullets">
+      <div class="bullet-item reveal" data-delay="1">
+        <div class="bullet-label bullet-label--cv">seit 2010</div>
+        <p class="bullet-text">Senior UX/UI Designer &amp; Art Director Digital<br>Neoskop GmbH, Hannover</p>
+      </div>
+      <div class="bullet-item reveal" data-delay="2">
+        <div class="bullet-label bullet-label--cv">2005 – 2010</div>
+        <p class="bullet-text">Studium Kommunikationsdesign (Fachrichtung Multimedia), Bachelor of Arts<br>Fachhochschule Hannover</p>
+      </div>
+      <div class="bullet-item reveal" data-delay="3">
+        <div class="bullet-label bullet-label--cv">2000 – 2003</div>
+        <p class="bullet-text">Ausbildung zum Mediengestalter Digital &amp; Print<br>RpunktDESIGN Werbeagentur GmbH, Hannover</p>
       </div>
     </div>
   </section>
