@@ -359,8 +359,15 @@
     }
 
     /* Card 4: LOTTO */
-    .case-thumb--4 { background: #1c0606; }
-    .case-thumb--4 img { width: 100%; height: 100%; object-fit: cover; }
+    .case-thumb--4 { background: #f5f0e8; }
+    .case-thumb--4 img {
+      width: auto;
+      height: 88%;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: contain;
+    }
 
     /* Card 5: Neoskop fashion */
     .case-thumb--5 { background: #f0f1f6; }
@@ -910,7 +917,7 @@
       <!-- Card 4: LOTTO -->
       <div class="case-card reveal" data-delay="1" onclick="openModal('modal-4')" role="button" tabindex="0">
         <div class="case-thumb case-thumb--4">
-          <img src="lotto-start.png" alt="LOTTO" />
+          <img src="lotto-app.jpg" alt="LOTTO" />
         </div>
         <div class="case-caption">
           <p class="case-caption-title">Lotto.de App</p>
