@@ -951,24 +951,40 @@
       .modal-body { grid-template-columns: 1fr; gap: 24px; }
       .modal-meta { flex-wrap: wrap; gap: 16px; padding-bottom: 24px; margin-bottom: 24px; }
 
-      /* ── VHV Case: Banderole-Layout ───────────────────────── */
-      #modal-1 .case-showcase { padding: 0 0 64px; gap: 64px; }
-      #modal-1 .showcase-block { border-radius: 0; padding: 24px; }
+      /* ── VHV Case: grauer Gesamtcontainer ─────────────────── */
+      #modal-1 .case-showcase {
+        background: #f1f5f7;
+        padding: 24px;
+        gap: 64px;
+      }
+      /* Einzelne Blöcke: transparent, kein Padding */
+      #modal-1 .showcase-block {
+        background: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+      }
+      /* Bild-Wrapper: 4px Radius */
       #modal-1 .vhv-img-wrap { border-radius: 4px !important; }
 
+      /* Showcase-Row: übereinander, 64px Abstand */
       #modal-1 .showcase-row { flex-direction: column; gap: 64px; }
       #modal-1 .vhv-side {
+        background: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
         flex: none !important;
         width: 100%;
-        border-radius: 0 !important;
-        padding: 24px !important;
+        overflow: visible !important;
         justify-content: flex-start !important;
-        overflow: hidden;
       }
-      #modal-1 .vhv-phone-inner { width: 100% !important; }
+      /* Hochformatige Grafiken: 2/3 Breite */
+      #modal-1 .vhv-phone-inner { width: 66% !important; }
+      #modal-1 .vhv-side:not(.vhv-phone) > img { width: 66% !important; }
 
-      #modal-1 .vhv-till-inner { flex-direction: column; gap: 24px; }
+      /* Till-Block: vertikal stapeln */
+      #modal-1 .vhv-till-inner { flex-direction: column; gap: 32px; }
       #modal-1 .vhv-till-img { border-radius: 4px !important; flex: none !important; }
+      /* Awards: nebeneinander */
       #modal-1 .vhv-awards {
         flex-direction: row !important;
         justify-content: center;
@@ -976,7 +992,7 @@
         gap: 32px;
         flex-shrink: unset !important;
       }
-      #modal-1 .vhv-awards img { width: 96px !important; }
+      #modal-1 .vhv-awards img { width: 80px !important; }
     }
 
     /* ─── Custom Cursor ──────────────────────────────────── */
