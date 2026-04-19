@@ -164,8 +164,8 @@
       text-transform: uppercase;
     }
     @keyframes logo-ring-nudge {
-      0%   { transform: rotate(0deg); }
-      55%  { transform: rotate(45deg); }
+      0%   { transform: rotate(0deg); animation-timing-function: ease-in; }
+      55%  { transform: rotate(45deg); animation-timing-function: ease-out; }
       100% { transform: rotate(0deg); }
     }
     @keyframes logo-ring-spin {
@@ -174,7 +174,7 @@
       100% { transform: rotate(360deg); }
     }
     .logo-ring {
-      animation: logo-ring-nudge 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+      animation: logo-ring-nudge 2.5s linear forwards,
                  logo-ring-spin 10s 5s infinite;
       /* nudge: 2.5s, then 2.5s pause, then spin every 10s */
       transform-origin: center center;
