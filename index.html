@@ -164,17 +164,16 @@
       text-transform: uppercase;
     }
     @keyframes logo-ring-nudge {
-      0%   { transform: rotate(0deg); animation-timing-function: ease-in; }
-      55%  { transform: rotate(45deg); animation-timing-function: ease-out; }
-      100% { transform: rotate(0deg); }
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(45deg); }
     }
     @keyframes logo-ring-spin {
-      0%   { transform: rotate(0deg); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
-      65%  { transform: rotate(360deg); animation-timing-function: linear; }
-      100% { transform: rotate(360deg); }
+      0%   { transform: rotate(45deg); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+      65%  { transform: rotate(405deg); animation-timing-function: linear; }
+      100% { transform: rotate(405deg); }
     }
     .logo-ring {
-      animation: logo-ring-nudge 2.5s linear forwards,
+      animation: logo-ring-nudge 1.8s ease-in-out forwards,
                  logo-ring-spin 10s 5s infinite;
       /* nudge: 2.5s, then 2.5s pause, then spin every 10s */
       transform-origin: center center;
