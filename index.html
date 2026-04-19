@@ -950,7 +950,7 @@
         justify-content: center;
         align-items: center;
       }
-      .showcase-row > div > img { max-width: 100%; height: auto; border-radius: 4px; }
+      .showcase-row > div > img { max-width: 100%; height: auto; border-radius: 4px !important; }
       /* Hochformat-Container (Drop, Voxel) */
       .portrait-wrap {
         width: 66% !important;
@@ -975,11 +975,16 @@
       #modal-4 .case-showcase,
       #modal-5 .case-showcase,
       #modal-6 .case-showcase { background: #f1f1f1; }
-      /* enercity: whiteboard-Wrapper entsperren */
-      #modal-2 .showcase-row > div > div { height: auto !important; }
+      /* enercity: Whiteboard + Schaubild auf 2/3 */
+      #modal-2 .showcase-row > div > div { height: auto !important; width: 66% !important; }
       #modal-2 .showcase-row > div > div > img { height: auto !important; position: relative !important; object-fit: contain; }
+      #modal-2 .showcase-row > div > img { width: 66% !important; }
+      /* gruppe: UI-Items + Screenshot auf 2/3 */
+      #modal-3 .showcase-row > div > img { width: 66% !important; border-radius: 4px !important; }
       /* lotto: Hochformat-Screenshots */
       #modal-4 .showcase-row > div > img { width: 66%; }
+      /* drop: Grid-Gap verkleinern */
+      #modal-5 .showcase-block > div { gap: 8px !important; }
       .modal-content { padding: 0 24px 32px; clear: both; }
       .modal-body { grid-template-columns: 1fr; gap: 24px; }
       .modal-meta { flex-wrap: wrap; gap: 16px; padding-bottom: 24px; margin-bottom: 24px; }
