@@ -950,6 +950,33 @@
       .modal-content { padding: 0 24px 32px; clear: both; }
       .modal-body { grid-template-columns: 1fr; gap: 24px; }
       .modal-meta { flex-wrap: wrap; gap: 16px; padding-bottom: 24px; margin-bottom: 24px; }
+
+      /* ── VHV Case: Banderole-Layout ───────────────────────── */
+      #modal-1 .case-showcase { padding: 0 0 64px; gap: 64px; }
+      #modal-1 .showcase-block { border-radius: 0; padding: 24px; }
+      #modal-1 .vhv-img-wrap { border-radius: 4px !important; }
+
+      #modal-1 .showcase-row { flex-direction: column; gap: 64px; }
+      #modal-1 .vhv-side {
+        flex: none !important;
+        width: 100%;
+        border-radius: 0 !important;
+        padding: 24px !important;
+        justify-content: flex-start !important;
+        overflow: hidden;
+      }
+      #modal-1 .vhv-phone-inner { width: 100% !important; }
+
+      #modal-1 .vhv-till-inner { flex-direction: column; gap: 24px; }
+      #modal-1 .vhv-till-img { border-radius: 4px !important; flex: none !important; }
+      #modal-1 .vhv-awards {
+        flex-direction: row !important;
+        justify-content: center;
+        align-items: center !important;
+        gap: 32px;
+        flex-shrink: unset !important;
+      }
+      #modal-1 .vhv-awards img { width: 96px !important; }
     }
 
     /* ─── Custom Cursor ──────────────────────────────────── */
@@ -1235,14 +1262,14 @@
 
       <!-- Block 1: Hero-Screenshot volle Breite -->
       <div class="showcase-block">
-        <div style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:1040/621.83; position:relative;">
+        <div class="vhv-img-wrap" style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:1040/621.83; position:relative;">
           <img src="cases/vhv/vhv-startseite.jpg" alt="VHV Startseite" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;" />
         </div>
       </div>
 
       <!-- Block 2: zweiter Desktop-Screenshot volle Breite -->
       <div class="showcase-block">
-        <div style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:1040/621.83; position:relative;">
+        <div class="vhv-img-wrap" style="width:100%; border-radius:16px; overflow:hidden; aspect-ratio:1040/621.83; position:relative;">
           <img src="cases/vhv/vhv-vorteile.jpg" alt="VHV Vorteile" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;" />
         </div>
       </div>
@@ -1251,28 +1278,28 @@
       <div class="showcase-row" style="align-items:stretch;">
 
         <!-- Links: rechner-moped Phone, oberer Teil sichtbar -->
-        <div style="background:#f0f5f7; border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
-          <div style="width:375px; flex-shrink:0;">
-            <img src="cases/vhv/rechner-moped.jpg" alt="VHV Fahrzeug auswählen" style="width:100%; height:auto; display:block;" />
+        <div class="vhv-side vhv-phone" style="background:#f0f5f7; border-radius:16px; flex:1; padding:80px; display:flex; align-items:flex-start; justify-content:center; overflow:hidden;">
+          <div class="vhv-phone-inner" style="width:375px; flex-shrink:0;">
+            <img src="cases/vhv/rechner-moped.jpg" alt="VHV Fahrzeug auswählen" style="width:100%; height:auto; display:block; border-radius:4px;" />
           </div>
         </div>
 
         <!-- Rechts: vhv-items.png -->
-        <div style="background:#f0f5f7; border-radius:16px; flex:1; padding:80px; display:flex; align-items:center; justify-content:center;">
+        <div class="vhv-side" style="background:#f0f5f7; border-radius:16px; flex:1; padding:80px; display:flex; align-items:center; justify-content:center;">
           <img src="cases/vhv/vhv-items.png" alt="VHV Tarifrechner UI" style="max-width:100%; height:auto; display:block;" />
         </div>
 
       </div>
 
       <!-- Block 4: Kampagnen-Screenshot + Awards -->
-      <div class="showcase-block">
-        <div style="width:100%; display:flex; gap:32px; align-items:flex-start;">
+      <div class="showcase-block vhv-till-block">
+        <div class="vhv-till-inner" style="width:100%; display:flex; gap:32px; align-items:flex-start;">
           <!-- Screenshot -->
-          <div style="flex:1; border-radius:16px; overflow:hidden; min-width:0;">
+          <div class="vhv-till-img" style="flex:1; border-radius:16px; overflow:hidden; min-width:0;">
             <img src="cases/vhv/vhv-till.jpg" alt="VHV Kampagne" style="width:100%; height:auto; display:block;" />
           </div>
           <!-- Awards -->
-          <div style="display:flex; flex-direction:column; gap:40px; align-items:center; flex-shrink:0;">
+          <div class="vhv-awards" style="display:flex; flex-direction:column; gap:40px; align-items:center; flex-shrink:0;">
             <img src="reddot.jpg" alt="Red Dot Award 2016" style="width:128px; height:auto; border-radius:0; display:block;" />
             <img src="german-design-award.png" alt="German Design Award 2017" style="width:128px; height:auto; border-radius:0; display:block;" />
           </div>
