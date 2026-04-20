@@ -437,13 +437,15 @@
     .case-thumb--4 { background: #f5f0e8; }
     .case-thumb--5 { background: #f0f1f6; }
     .case-thumb--6 { background: #f0f1f6; }
+    .case-thumb--7 { background: #f4f2ee; }
 
     .case-thumb--1 img,
     .case-thumb--2 img,
     .case-thumb--3 img,
     .case-thumb--4 img,
     .case-thumb--5 img,
-    .case-thumb--6 img {
+    .case-thumb--6 img,
+    .case-thumb--7 img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -559,6 +561,169 @@
       text-align: center;
     }
     .quote-text .bold-italic { font-weight: 700; font-style: italic; }
+
+    /* ─── Blog Accordion ────────────────────────────────── */
+    .blog-teaser {
+      background: #f4f4f4;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+    }
+    .blog-teaser-header {
+      display: flex;
+      gap: 40px;
+      align-items: stretch;
+      padding: 48px;
+      cursor: pointer;
+    }
+    .blog-teaser-header:hover .blog-read-btn { opacity: 0.7; }
+    .blog-teaser-meta {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      justify-content: center;
+    }
+    .blog-teaser-title {
+      font-family: 'Literata', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .blog-teaser-desc {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 30px;
+    }
+    .blog-read-btn {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+      margin-top: 4px;
+    }
+    .blog-read-btn svg {
+      transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .blog-teaser.is-open .blog-read-btn svg {
+      transform: rotate(180deg);
+    }
+    .blog-teaser-thumb {
+      width: 320px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #e8e8e8;
+      aspect-ratio: 16/10;
+      align-self: center;
+    }
+    .blog-teaser-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .blog-article {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .blog-teaser.is-open .blog-article {
+      max-height: 9999px;
+    }
+    .blog-article-inner {
+      padding: 0 48px 48px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      padding-top: 40px;
+    }
+    .blog-article-inner h3 {
+      font-family: 'Literata', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+      margin-top: 40px;
+    }
+    .blog-article-inner h3:first-child { margin-top: 0; }
+    .blog-article-inner p {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 30px;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .blog-article-inner a {
+      color: #ec5829;
+      text-decoration: underline;
+    }
+    .blog-article-inner .blog-article-img {
+      width: 100%;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 24px 0;
+    }
+    .blog-article-inner .blog-article-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .blog-collapse-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.5;
+      padding: 0;
+      margin-top: 8px;
+      transition: opacity 0.2s;
+    }
+    .blog-collapse-btn:hover { opacity: 1; }
+
+    /* HR Snippets */
+    .hr-snippets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .hr-snippet {
+      background: #fff;
+      border-radius: 16px;
+      padding: 32px;
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 18px;
+      line-height: 30px;
+      color: var(--text);
+    }
+    .hr-snippet strong {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 12px;
+    }
+    .hr-snippet-full {
+      grid-column: 1 / -1;
+    }
+    [data-theme="dark"] .hr-snippet { background: #2a2a2a; }
+
+    @media (max-width: 768px) {
+      .blog-teaser-header { flex-direction: column; padding: 24px; }
+      .blog-teaser-thumb { width: 100%; aspect-ratio: 16/9; }
+      .blog-article-inner { padding: 0 24px 32px; padding-top: 32px; }
+      .hr-snippets-grid { grid-template-columns: 1fr; }
+    }
 
     /* ─── Footer ─────────────────────────────────────────── */
     .footer {
@@ -1331,6 +1496,17 @@
         </div>
       </div>
 
+      <!-- Card 7: Copywriting & Brandvoice -->
+      <div class="case-card reveal" data-delay="1" onclick="openModal('modal-7')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--7">
+          <img src="tp-case-copy.jpg" alt="Copywriting & Brandvoice" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Copywriting & Brandvoice</p>
+          <p class="case-caption-client">Neoskop</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1789,6 +1965,116 @@
   </div>
 </div>
 
+<!-- Modal 7: Copywriting & Brandvoice -->
+<div class="modal-backdrop" id="modal-7" role="dialog" aria-modal="true" aria-label="Case: Copywriting & Brandvoice" onclick="handleBackdropClick(event, 'modal-7')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-7')" aria-label="Schließen">✕</button>
+
+    <div class="case-modal-header">
+      <p class="case-modal-client">Neoskop</p>
+      <h2 class="case-modal-title">Copywriting &amp; Brandvoice</h2>
+      <p class="case-modal-text">
+        Sprache ist ein zentraler Bestandteil guter User Experience. Tonalität entscheidet oft darüber, wie Inhalte wahrgenommen werden – und damit über den Erfolg eines Produkts. Neben dem Schreiben für Apps und Websites beschäftige ich mich auch mit Markenkommunikation und habe in diesem Kontext die Brand Voice von Neoskop mitgeprägt.<br><br>
+        <em>Idee &amp; Text-Kreation</em>
+      </p>
+    </div>
+
+    <div class="case-showcase" style="background: #f4f2ee; flex-direction: column; gap: 48px;">
+
+      <!-- Blog-Artikel -->
+      <div>
+        <h3 style="font-family:'Literata',serif; font-size:28px; font-weight:700; color:var(--text); margin-bottom:32px;">Blog-Artikel</h3>
+
+        <!-- Accordion: Der Charity Drop -->
+        <div class="blog-teaser" id="blog-1">
+          <div class="blog-teaser-header" onclick="toggleBlog('blog-1')">
+            <div class="blog-teaser-meta">
+              <p class="blog-teaser-title">Der Charity Drop</p>
+              <p class="blog-teaser-desc">Agentur-Blogs müssen nicht als SEO-Halde enden. Gut gemacht können sie überraschend viel über Firmenkultur, Werte und Haltung erzählen.</p>
+              <div class="blog-read-btn">
+                Artikel lesen
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </div>
+            </div>
+            <div class="blog-teaser-thumb">
+              <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/IUUVaxr4nEXHj_4/charity-drop.webp" alt="Der Charity Drop" />
+            </div>
+          </div>
+          <div class="blog-article">
+            <div class="blog-article-inner">
+              <p>Impact! Was für ein Wort. Universell einsetzbar und so verdammt schneidig und klangvoll … Kein Wunder, dass es tonnenweise Filme und Games mit Impact gibt. Deep Impact, Sudden Impact, Double Impact, Impact Point, Maximum Impact, Final Impact – die Liste ist endlos. Aber wir wollen auch die Schriftart nicht vergessen, die als serifenloser Klassiker seit 1996 ihr Unwesen auf fast jedem Rechner der Welt treibt.</p>
+              <p>Zugegeben, wir kennen nicht jeden der oben genannten Filme und auch die Schriftart gehört nicht unbedingt zu unseren Favs. Trotzdem lieben wir es, auch neben unserer Arbeit, möglichst nachhaltigen Impact zu verursachen und uns gesellschaftlich zu engagieren.</p>
+
+              <h3>Good Cause. Great Look. 🤩</h3>
+              <p>Den Charity Drop gibt es seit 2022. Unsere Designer*innen aus dem Team neoneo gestalten eine kleine Fashion-Kollektion zu einem festgelegten Thema. Dabei entstehen Motive, die später auf T-Shirts und Hoodies landen und die anschließend, für einen begrenzten Zeitraum und gegen eine Spende, in unserem Shop erhältlich sind. Im eigentlichen Sinne werden die Teile also nicht verkauft, sondern gehen als Dankeschön an unsere Spender*innen.</p>
+              <p>Für uns ist der Drop immer wieder eine Möglichkeit, mal aus der digitalen Welt auszubrechen und uns mit Themen zu beschäftigen, die uns besonders am Herzen liegen und die im besten Fall ein Match mit dem Spendenziel ergeben.</p>
+
+              <h3>Wohin gehen die Spenden? 💸</h3>
+              <p>Die Rechnung ist einfach: Neoskop finanziert bei jedem Drop die gesamten Produktionskosten, sodass mit der gesamten Spendensumme ein Herzensprojekt finanziert werden kann. In den letzten vier Jahren konnten wir so fast 30.000 € sammeln und damit verschiedene regionale Einrichtungen und Projekte supporten:</p>
+              <p><strong>Lindener Tisch e.V.</strong> — Für die Unterstützung der Stadtteil-Tafel in Hannover-Linden.<br>
+              <strong>Unterstützerkreis Flüchtlingsunterkünfte Hannover e.V.</strong> — Für den Aufbau eines Klettergerüsts für die Kinder einer Flüchtlingsunterkunft.<br>
+              <strong>Freiwilligenzentrum Hannover e.V.</strong> — Für Förderung der kulturellen Teilhabe von Menschen mit geringem Einkommen.<br>
+              <strong>Clinic-Clowns-Hannover e.V.</strong> — Für den Einsatz von Clinic Clown Bert in der Kinder- und Palliativ-Station der MHH.<br>
+              <strong>Umweltzentrum Hannover e.V.</strong> — Für verschiedene Projekte rund um das Thema Nachhaltigkeit und Biodiversität.</p>
+
+              <p>Mittlerweile haben wir das Fashion-Game fast durchgespielt, wissen, worauf es beim Bestellprozess ankommt und wie man F-u-l-f-i-l-l-m-e-n-t buchstabiert. Wir kennen uns mit ringgesponnener Baumwolle aus und können blind zwischen Loose Fit und Oversized unterscheiden. Trotzdem werden wir aber wohl vorerst nicht die Branche wechseln, dafür gibt es in der digitalen Welt noch genug zu tun. Aber unter uns: Die eigenen Motive auf Klamotten zu sehen, fühlt sich schon ganz nett an …</p>
+              <p>Gedruckt werden unsere Pieces übrigens auf sehr hochwertigen und biozertifizierten Bio-Baumwollrohlingen von <a href="https://stanleystella.com/de-eu/" target="_blank" rel="noopener noreferrer">Stanley/Stella</a> – selbstverständlich in der weltbesten Siebdruckerei, <a href="https://timeless-prints.de/" target="_blank" rel="noopener noreferrer">Time/Less Prints</a>, hier in Hannover.</p>
+
+              <h3>Nach dem Drop ist vor dem Drop. 🚀</h3>
+              <p>Sagen wir, wie es ist: Am schönsten ist es, wenn sich Arbeit sinnvoll anfühlt und man zumindest einen kleinen Teil dazu beitragen kann, die Welt ein bisschen besser zu machen. Darum machen wir weiter und freuen uns jetzt schon auf den nächsten Drop in 2025.</p>
+              <p>Dankeschön an alle Supporter! An unsere Freund*innen von <a href="https://timeless-prints.de/" target="_blank" rel="noopener noreferrer">Time/Less</a>, an die Kolleg*innen vom Team neoneo und natürlich an alle Spender*innen, die uns bisher unterstützt haben – ihr seid die Besten! 🙏</p>
+
+              <button class="blog-collapse-btn" onclick="toggleBlog('blog-1')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+                Schließen
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HR Text-Assets -->
+      <div>
+        <div style="margin-bottom:32px;">
+          <h3 style="font-family:'Literata',serif; font-size:28px; font-weight:700; color:var(--text); margin-bottom:12px;">HR Text-Assets</h3>
+          <p style="font-family:'Noto Sans',sans-serif; font-size:18px; font-weight:400; line-height:30px; color:var(--text);">Benefits – die Green-Flags im Bewerbungsprozess und zentrales Asset um Kultur und Werte nach Außen zu spiegeln.</p>
+        </div>
+        <div class="hr-snippets-grid">
+
+          <div class="hr-snippet">
+            <strong>⌚️ Büro vs. Homeoffice</strong>
+            Du gehst morgens gerne Laufen und startest früh ins Büro? Oder bist spät dran, weil du die Kids noch in die Schule bringen musst? Wir lieben unsere gemeinsame Office-Kultur, wissen aber auch, wie unterschiedlich Bedürfnisse sein können. Passe deinen Arbeitstag flexibel an und entscheide ob du Remote von zu Hause, oder lieber vor Ort arbeiten möchtest.
+          </div>
+
+          <div class="hr-snippet">
+            <strong>👋 Goodbye Germany?</strong>
+            Der DevOp ist schon seit Monaten in der Welt unterwegs und erledigt seine Todos aus dem Van heraus – die jungen Leute sprechen von „Workation". Andere Kollegen aktivieren für ein Jahr den Autoresponder und schieben alle ihre Tickets ins Backlog. Das ist also dieses „Sabbatical". Ok cool.
+          </div>
+
+          <div class="hr-snippet hr-snippet-full">
+            <strong>💰 VWL – WTF?!</strong>
+            Wenn man weiß, dass VWL „Vermögenswirksame Leistungen" bedeutet, ist das schon mal die halbe Miete. Und hey – vielleicht lässt sich damit mal irgendjemand beeindrucken? Wie auch immer – Neoskop zahlt dir freiwillig einen Zuschuss von 40 € für deine Vorsorge, deren Form du dir übrigens selber aussuchen kannst. Cool, oder?
+          </div>
+
+          <div class="hr-snippet">
+            <strong>🍕 Beyond Obstkorb</strong>
+            Was die Verpflegung angeht erfüllen wir sämtliche Agentur-Klischees: Obstkorb? Check. Hafer-, Soya- oder Mandelmilch? Check. Espresso aus Siebträgermaschinen? Check. Darüber hinaus kannst du dich auch gerne an unserem Müsli-Hub bedienen, dir exotische Softdrinks gönnen oder zum Feierabend ein Fläschchen Wein aus dem Regal ziehen. Cin Cin!
+          </div>
+
+          <div class="hr-snippet">
+            <strong>👵 Betriebliche Altersvorsorge</strong>
+            YOLO ist Schnee von gestern – Zeit sich mit wichtigen Themen zu beschäftigen: Neoskop beteiligt sich an deiner betrieblichen Altersvorsorge. Klingt langweilig? Okay, ist es auch – aber dafür ziemlich sinnvoll. Das ganze klingt übrigens komplizierter als es ist, hör dich mal bei den Kollegen um.
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ── Impressum Modal ────────────────────────────────────── -->
 <div class="modal-backdrop" id="modal-impressum" role="dialog" aria-modal="true" aria-label="Impressum" onclick="handleBackdropClick(event, 'modal-impressum')">
   <div class="modal" style="max-width: 860px;">
@@ -1941,6 +2227,11 @@
 
   // ── Modal ───────────────────────────────────────────────
   let savedScrollY = 0;
+
+  function toggleBlog(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('is-open');
+  }
 
   function openModal(id) {
     savedScrollY = window.scrollY;
