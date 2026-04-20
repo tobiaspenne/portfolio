@@ -624,6 +624,9 @@
       aspect-ratio: 16/10;
       align-self: center;
     }
+    .blog-teaser--reversed .blog-teaser-header {
+      flex-direction: row-reverse;
+    }
     .blog-teaser-thumb img {
       width: 100%;
       height: 100%;
@@ -718,7 +721,8 @@
     [data-theme="dark"] .hr-snippet { background: #2a2a2a; }
 
     @media (max-width: 768px) {
-      .blog-teaser-header { flex-direction: column; padding: 24px; }
+      .blog-teaser-header,
+      .blog-teaser--reversed .blog-teaser-header { flex-direction: column; padding: 24px; }
       .blog-teaser-thumb { width: 100%; aspect-ratio: 16/9; }
       .blog-article-inner { padding: 0 24px 32px; padding-top: 32px; }
       .hr-snippets-grid { grid-template-columns: 1fr; }
@@ -2028,7 +2032,7 @@
       </div>
 
       <!-- Accordion: Config 2023 -->
-      <div class="blog-teaser" id="blog-2">
+      <div class="blog-teaser blog-teaser--reversed" id="blog-2">
         <div class="blog-teaser-header" onclick="toggleBlog('blog-2')">
           <div class="blog-teaser-meta">
             <p class="blog-teaser-title">Figma auf dem Weg zur Love Brand</p>
