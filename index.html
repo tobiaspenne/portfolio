@@ -696,10 +696,12 @@
       flex-shrink: 0;
       position: relative;
     }
-    .post-expand-visual img {
+    .post-expand-visual img,
+    .post-expand-visual video {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
     }
+    .post-expand-visual video { background: #000; }
     .carousel-btn {
       position: absolute;
       top: 50%; transform: translateY(-50%);
@@ -2259,8 +2261,8 @@
         <div class="posts-grid" id="socialGrid">
 
           <!-- Row 0 -->
-          <div class="post-item" data-caption="Placeholder Caption Post 1 – hier kommt der eigentliche Instagram-Text rein. #neoskop #design" onclick="togglePost(this, 0)">
-            <img src="" alt="Post 1" />
+          <div class="post-item" data-images="social/1/zirbenstube-01.jpg,social/1/zirbenstube-02.jpg,social/1/zirbenstube-03.jpg,social/1/zirbenstube-04.jpg,social/1/zirbenstube-05.mp4" data-caption="Zirbenstube – ein Rückzugsort, der nach Zirbenholz duftet. ✨ #neoskop #interior #branding" onclick="togglePost(this, 0)">
+            <img src="social/1/zirbenstube-01.jpg" alt="Post 1" />
           </div>
           <div class="post-item" data-caption="Placeholder Caption Post 2 – hier kommt der eigentliche Instagram-Text rein. #neoskop #ux" onclick="togglePost(this, 0)">
             <img src="" alt="Post 2" />
@@ -2275,6 +2277,7 @@
               <div class="post-expand-visual">
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <img class="expand-img" src="" alt="" />
+                <video class="expand-video" autoplay muted loop playsinline style="display:none;"></video>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
               </div>
@@ -2303,6 +2306,7 @@
               <div class="post-expand-visual">
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <img class="expand-img" src="" alt="" />
+                <video class="expand-video" autoplay muted loop playsinline style="display:none;"></video>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
               </div>
@@ -2331,6 +2335,7 @@
               <div class="post-expand-visual">
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <img class="expand-img" src="" alt="" />
+                <video class="expand-video" autoplay muted loop playsinline style="display:none;"></video>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
               </div>
@@ -2531,7 +2536,11 @@
     const isActive = el.classList.contains('is-active');
 
     grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
-    grid.querySelectorAll('.post-expand').forEach(p => p.classList.remove('is-open'));
+    grid.querySelectorAll('.post-expand').forEach(p => {
+      p.classList.remove('is-open');
+      const vid = p.querySelector('.expand-video');
+      if (vid) { vid.pause(); vid.src = ''; }
+    });
     grid.classList.remove('has-active');
 
     if (!isActive) {
@@ -2566,15 +2575,31 @@
     }
   }
 
+  function isVideoSrc(src) {
+    return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
+  }
+
   function updateCarousel(panel) {
     const images = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
     const idx    = parseInt(panel.dataset.carouselIndex) || 0;
     const img    = panel.querySelector('.expand-img');
+    const vid    = panel.querySelector('.expand-video');
     const prev   = panel.querySelector('.carousel-btn--prev');
     const next   = panel.querySelector('.carousel-btn--next');
     const dots   = panel.querySelector('.carousel-dots');
+    const src    = images[idx] || '';
 
-    if (img) { img.src = images[idx] || ''; img.alt = 'Bild ' + (idx + 1); }
+    if (isVideoSrc(src)) {
+      if (img) img.style.display = 'none';
+      if (vid) {
+        vid.style.display = 'block';
+        if (vid.src !== src) { vid.src = src; vid.load(); }
+        vid.play().catch(() => {});
+      }
+    } else {
+      if (vid) { vid.pause(); vid.src = ''; vid.style.display = 'none'; }
+      if (img) { img.style.display = 'block'; img.src = src; img.alt = 'Bild ' + (idx + 1); }
+    }
 
     const multi = images.length > 1;
     if (prev) { prev.hidden = !multi; prev.disabled = idx === 0; }
@@ -2601,7 +2626,11 @@
   function closeActivePost(btn) {
     const grid = btn.closest('.posts-grid');
     grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
-    grid.querySelectorAll('.post-expand').forEach(p => p.classList.remove('is-open'));
+    grid.querySelectorAll('.post-expand').forEach(p => {
+      p.classList.remove('is-open');
+      const vid = p.querySelector('.expand-video');
+      if (vid) { vid.pause(); vid.src = ''; }
+    });
     grid.classList.remove('has-active');
   }
 
