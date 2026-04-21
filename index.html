@@ -438,6 +438,7 @@
     .case-thumb--5 { background: #f0f1f6; }
     .case-thumb--6 { background: #f0f1f6; }
     .case-thumb--7 { background: #f4f2ee; }
+    .case-thumb--8 { background: #1a1a1a; }
 
     .case-thumb--1 img,
     .case-thumb--2 img,
@@ -445,7 +446,8 @@
     .case-thumb--4 img,
     .case-thumb--5 img,
     .case-thumb--6 img,
-    .case-thumb--7 img {
+    .case-thumb--7 img,
+    .case-thumb--8 img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -895,7 +897,7 @@
     }
     .case-modal-title {
       font-family: 'Literata', serif;
-      font-size: 42px;
+      font-size: 40px;
       font-weight: 700;
       line-height: 56px;
       color: var(--text);
@@ -1493,6 +1495,17 @@
         </div>
       </div>
 
+      <!-- Card 8: Motion Graphics -->
+      <div class="case-card reveal" data-delay="2" onclick="openModal('modal-8')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--8">
+          <img src="tp-thumb-motion.jpg" alt="Motion Graphics" />
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Motion Design</p>
+          <p class="case-caption-client">Verschiedenes</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1973,7 +1986,7 @@
         <!-- Karte 1: Config 2023 -->
         <div class="blog-card">
           <div class="blog-card-thumb">
-            <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/mCySvpaaQ4wybZ3/config2023.webp" alt="Figma Config 2023" />
+            <img src="tp_thumb-config.jpg" alt="Figma Config 2023" />
           </div>
           <div class="blog-card-body">
             <p class="blog-card-title">Recap: Figma auf dem Weg zur Love Brand</p>
@@ -2011,7 +2024,7 @@
 
         <div>
           <h3 style="font-family:'Noto Sans',sans-serif; font-size:18px; font-weight:700; color:#000; line-height:normal; margin-bottom:16px;">HR Text-Snippets</h3>
-          <p style="font-family:'Noto Sans',sans-serif; font-size:18px; font-weight:400; line-height:30px; color:#000;">Benefits – die Green-Flags im Bewerbungsprozess und zentrales Asset um Kultur und Werte nach Außen zu spiegeln. Diese Textbausteine sind Teil von Stellenangeboten im Karrierebereich.</p>
+          <p style="font-family:'Noto Sans',sans-serif; font-size:18px; font-weight:400; line-height:30px; color:#000;">Benefits – die Green-Flags im Bewerbungsprozess und zentrales Asset um Unternehmenskultur- und Werte nach Außen zu spiegeln. Die Textbausteine sind Teil der Stellenangeboten im Karrierebereich.</p>
         </div>
 
         <div class="hr-snippets-grid">
@@ -2040,6 +2053,34 @@
       </div>
 
     </div>
+  </div>
+</div>
+
+<!-- Modal 8: Motion Graphics -->
+<div class="modal-backdrop" id="modal-8" role="dialog" aria-modal="true" aria-label="Case: Motion Design" onclick="handleBackdropClick(event, 'modal-8')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-8')" aria-label="Schließen">✕</button>
+
+    <div class="case-modal-header">
+      <p class="case-modal-client">Verschiedenes</p>
+      <h2 class="case-modal-title">Motion Design</h2>
+      <p class="case-modal-text">
+        Bewegtbild als gestalterisches Mittel – ob Markenanimation, Interface-Transition oder konzeptionelles Motion-Experiment. Eine Auswahl entstandener Arbeiten, die zeigen, wie Timing, Rhythmus und visuelle Sprache zusammenwirken.<br><br>
+        <em>Konzeption &amp; Motion Design</em> &nbsp;·&nbsp; <a href="https://vimeo.com/1167199701" target="_blank" rel="noopener noreferrer" class="case-modal-link">Auf Vimeo ansehen</a>
+      </p>
+    </div>
+
+    <!-- Vimeo embed -->
+    <div style="background:#0d0d0d; border-radius:16px; overflow:hidden; width:100%; aspect-ratio:16/9; position:relative;">
+      <iframe
+        src="https://player.vimeo.com/video/1167199701?autoplay=0&title=0&byline=0&portrait=0&color=ec5829"
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        title="Motion Design Showreel">
+      </iframe>
+    </div>
+
   </div>
 </div>
 
