@@ -602,18 +602,17 @@
       font-family: 'Noto Sans', sans-serif;
       font-size: 18px;
       font-weight: 700;
-      color: var(--text);
+      color: var(--accent);
+      text-decoration: none;
       display: flex;
       align-items: center;
       gap: 8px;
       transition: opacity 0.2s;
       margin-top: 4px;
     }
+    .blog-read-btn:hover { opacity: 0.75; }
     .blog-read-btn svg {
-      transition: transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-    .blog-teaser.is-open .blog-read-btn svg {
-      transform: rotate(180deg);
+      transition: transform 0.2s ease;
     }
     .blog-teaser-thumb {
       width: 320px;
@@ -1987,91 +1986,40 @@
       <!-- Blog-Artikel Heading -->
       <h3 style="font-family:'Literata',serif; font-size:36px; font-weight:700; color:var(--text); line-height:1.2;">Blog-Artikel</h3>
 
-      <!-- Accordion: Der Charity Drop -->
-      <div class="blog-teaser" id="blog-1">
-        <div class="blog-teaser-header" onclick="toggleBlog('blog-1')">
+      <!-- Teaser: Der Charity Drop -->
+      <div class="blog-teaser">
+        <div class="blog-teaser-header">
           <div class="blog-teaser-meta">
             <p class="blog-teaser-title">Der Charity Drop</p>
             <p class="blog-teaser-desc">Agentur-Blogs müssen nicht als SEO-Halde enden. Gut gemacht können sie sogar überraschend viel über Firmenkultur und Werte und Haltung erzählen.</p>
-            <div class="blog-read-btn">
+            <a class="blog-read-btn" href="https://www.neoskop.de/blog/der-charity-drop" target="_blank" rel="noopener noreferrer">
               Artikel lesen
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"/>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
               </svg>
-            </div>
+            </a>
           </div>
           <div class="blog-teaser-thumb">
             <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/IUUVaxr4nEXHj_4/charity-drop.webp" alt="Der Charity Drop" />
           </div>
         </div>
-        <div class="blog-article">
-          <div class="blog-article-inner">
-            <p>Impact! Was für ein Wort. Universell einsetzbar und so verdammt schneidig und klangvoll … Kein Wunder, dass es tonnenweise Filme und Games mit Impact gibt. Deep Impact, Sudden Impact, Double Impact, Impact Point, Maximum Impact, Final Impact – die Liste ist endlos. Aber wir wollen auch die Schriftart nicht vergessen, die als serifenloser Klassiker seit 1996 ihr Unwesen auf fast jedem Rechner der Welt treibt.</p>
-            <p>Zugegeben, wir kennen nicht jeden der oben genannten Filme und auch die Schriftart gehört nicht unbedingt zu unseren Favs. Trotzdem lieben wir es, auch neben unserer Arbeit, möglichst nachhaltigen Impact zu verursachen und uns gesellschaftlich zu engagieren.</p>
-
-            <h3>Good Cause. Great Look. 🤩</h3>
-            <p>Den Charity Drop gibt es seit 2022. Unsere Designer*innen aus dem Team neoneo gestalten eine kleine Fashion-Kollektion zu einem festgelegten Thema. Dabei entstehen Motive, die später auf T-Shirts und Hoodies landen und die anschließend, für einen begrenzten Zeitraum und gegen eine Spende, in unserem Shop erhältlich sind. Im eigentlichen Sinne werden die Teile also nicht verkauft, sondern gehen als Dankeschön an unsere Spender*innen.</p>
-            <p>Für uns ist der Drop immer wieder eine Möglichkeit, mal aus der digitalen Welt auszubrechen und uns mit Themen zu beschäftigen, die uns besonders am Herzen liegen und die im besten Fall ein Match mit dem Spendenziel ergeben.</p>
-
-            <h3>Wohin gehen die Spenden? 💸</h3>
-            <p>Die Rechnung ist einfach: Neoskop finanziert bei jedem Drop die gesamten Produktionskosten, sodass mit der gesamten Spendensumme ein Herzensprojekt finanziert werden kann. In den letzten vier Jahren konnten wir so fast 30.000 € sammeln und damit verschiedene regionale Einrichtungen und Projekte supporten.</p>
-
-            <p>Mittlerweile haben wir das Fashion-Game fast durchgespielt, wissen, worauf es beim Bestellprozess ankommt und wie man F-u-l-f-i-l-l-m-e-n-t buchstabiert. Wir kennen uns mit ringgesponnener Baumwolle aus und können blind zwischen Loose Fit und Oversized unterscheiden. Trotzdem werden wir aber wohl vorerst nicht die Branche wechseln, dafür gibt es in der digitalen Welt noch genug zu tun. Aber unter uns: Die eigenen Motive auf Klamotten zu sehen, fühlt sich schon ganz nett an …</p>
-            <p>Gedruckt werden unsere Pieces auf sehr hochwertigen und biozertifizierten Bio-Baumwollrohlingen von <a href="https://stanleystella.com/de-eu/" target="_blank" rel="noopener noreferrer">Stanley/Stella</a> – selbstverständlich in der weltbesten Siebdruckerei, <a href="https://timeless-prints.de/" target="_blank" rel="noopener noreferrer">Time/Less Prints</a>, hier in Hannover.</p>
-
-            <h3>Nach dem Drop ist vor dem Drop. 🚀</h3>
-            <p>Sagen wir, wie es ist: Am schönsten ist es, wenn sich Arbeit sinnvoll anfühlt und man zumindest einen kleinen Teil dazu beitragen kann, die Welt ein bisschen besser zu machen. Darum machen wir weiter und freuen uns jetzt schon auf den nächsten Drop in 2025.</p>
-            <p>Dankeschön an alle Supporter! An unsere Freund*innen von <a href="https://timeless-prints.de/" target="_blank" rel="noopener noreferrer">Time/Less</a>, an die Kolleg*innen vom Team neoneo und natürlich an alle Spender*innen, die uns bisher unterstützt haben – ihr seid die Besten! 🙏</p>
-
-            <button class="blog-collapse-btn" onclick="toggleBlog('blog-1')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-              Schließen
-            </button>
-          </div>
-        </div>
       </div>
 
-      <!-- Accordion: Config 2023 -->
-      <div class="blog-teaser blog-teaser--reversed" id="blog-2">
-        <div class="blog-teaser-header" onclick="toggleBlog('blog-2')">
+      <!-- Teaser: Config 2023 -->
+      <div class="blog-teaser blog-teaser--reversed">
+        <div class="blog-teaser-header">
           <div class="blog-teaser-meta">
             <p class="blog-teaser-title">Figma auf dem Weg zur Love Brand</p>
             <p class="blog-teaser-desc">Unterwegs auf der Config 2023 in San Francisco – über Weiterbildung, Silicon Valley, Community-Vibes und warum Figma auf dem besten Weg zur Love Brand ist.</p>
-            <div class="blog-read-btn">
+            <a class="blog-read-btn" href="https://www.neoskop.de/blog/unterwegs-auf-der-config-2023" target="_blank" rel="noopener noreferrer">
               Artikel lesen
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"/>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
               </svg>
-            </div>
+            </a>
           </div>
           <div class="blog-teaser-thumb">
             <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/mCySvpaaQ4wybZ3/config2023.webp" alt="Config 2023 in San Francisco" />
-          </div>
-        </div>
-        <div class="blog-article">
-          <div class="blog-article-inner">
-            <p>Die älteren Leser/innen werden sich vielleicht noch an Diskussionen mit ihren Eltern erinnern, als sie versucht haben, ihnen den neuen Heimcomputer als ernstzunehmendes Arbeitsgerät für die Schularbeiten zu verkaufen – falls nicht, seid froh. 😂</p>
-            <p>Ganz so war es bei unserem Trip nach Kalifornien natürlich nicht und ehrlich gesagt gab es auch keine Diskussionen, immerhin war die <a href="https://config.figma.com/" target="_blank" rel="noopener noreferrer">Config 2023</a> in San Francisco eine Fachkonferenz für User Experience Design und unsere Reise somit eine lupenreine Weiterbildungsmaßnahme. Weiterbildungen sind bei Neoskop schon immer ein wichtiger Benefit gewesen, der es möglich macht, Konferenzen und Veranstaltungen auf der ganzen Welt zu besuchen. Für uns war der Trip etwas sehr besonderes, zumal wir vorher beide noch nie in den USA gewesen sind. Wir – das sind übrigens Maik und Tobi – arbeiten beide als UX Designer bei Neoskop.</p>
-
-            <h3>When in California …</h3>
-            <p>Nur kurz zur zeitlichen Einordnung: Unser Anreisetag war ein Samstag, die Konferenz startete am darauffolgenden Mittwoch. Wir hatten also ein paar Tage Zeit für ein ausgedehntes Touri-Programm, mit dem wir allerdings nicht in San Francisco, sondern im Silicon Valley, genauer gesagt im sonnigen Sunnyvale, begonnen haben.</p>
-            <p>Pro-Tipp: Wenn Ihr den Vibe der ganzen geekigen Tech-Konzerne mal so richtig fühlen wollt, plant Euren Trip durchs Valley nicht an einem Wochenende – überraschenderweise wird auch bei Apple, Google und Co. am Sonntag nicht gearbeitet. Trotzdem bekommt das Valley eine klare Empfehlung. Auf irgendeine Art ist es schon sehr magic, im Apple Visitor-Center seinen Iced Cappuccino zu trinken, vor Steve Jobs Garage rumzulungern oder auf dem Google Campus herumzulaufen.</p>
-
-            <h3>In den Straßen von San Francisco</h3>
-            <p>Es war Montag, als wir aus unserem kleinen Hotel in Sunnyvale ausgecheckt haben, um uns auf den Weg nach San Francisco zu machen. Bis zur Config waren es immer noch 2 Tage – genug Zeit, um sehr viele Fotos von ausnahmslos allen Sehenswürdigkeiten zu machen, für die San Francisco bekannt ist: Golden Gate Bridge, Chinatown, Fishermans Wharf, Cable Cars, die Painted Ladies, der Palace of Fine Arts – die Touri-Klassiker eben. ✅</p>
-            <p>Was vielen aber unbekannt ist: In San Francisco findet einmal im Jahr die besagte Config statt – eine große, zweitägige Fachkonferenz, bei der sich die Community zum Thema User Experience Design austauscht. Ausgerichtet wird das Event von <a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer">Figma</a>, einem Unternehmen, das ein Tool mit gleichem Namen entwickelt hat und das wir UX-Designer bei Neoskop für unsere tägliche Arbeit nutzen.</p>
-
-            <h3>Figma auf dem Weg zur Love Brand ❤️</h3>
-            <p>Am Mittwochmorgen haben wir uns auf den Weg zum Moscone Center gemacht – einem riesigen Congresscenter in der Innenstadt. Schon auf der Straße konnte man Leute sehen, die offensichtlich das gleiche Ziel hatten (zu erkennen an Figma Goodie Bags, Stickern, Shirts …), und so stellten sich langsam erste Community-Vibes ein.</p>
-            <p>Um Punkt 9.00 Uhr war Anpfiff und wir saßen pünktlich in der sehr gut besuchten Opening-Keynote von Figma CEO <a href="https://twitter.com/zoink" target="_blank" rel="noopener noreferrer">Dylan Field</a>. Spätestens jetzt wurde einem die Größe von Konferenz und Location so richtig deutlich: Über 8.500 Besucher, 75 Speaker und gefühlt 100 Stages – wow.</p>
-            <p>Inhaltlich hat die Config alles richtig gemacht: Unter den 75 Speakern gab es ein sehr diverses Line-Up. In vielen Sessions ging es um neu ausgerollte Features, denn die Konferenz war mit einem größeren Figma-Update verbunden – darunter der neue Dev Mode inkl. VS Code Plugin, wiederverwendbare Variables und verbesserte Auto-Layout Funktionen. Features, auf die die Community sehnsüchtig gewartet hatte und die frenetisch gefeiert wurden.</p>
-            <p>Die <a href="https://config.figma.com/" target="_blank" rel="noopener noreferrer">Config 2023</a> war großartig! Mit sehr vielen kleinen Details, die die Konferenz zu einer tollen Experience gemacht haben, hat <a href="https://www.figma.com/" target="_blank" rel="noopener noreferrer">Figma</a> wirklich alles gegeben, zur echten Love Brand zu werden. Das Line-Up der Themen und Speaker war ebenso divers wie die Community und passte somit perfekt zu einer Stadt wie San Francisco.</p>
-            <p>Mal sehen, ob wir 2024 wieder am Start sind – hoffen wir mal, dass uns bis dahin die Argumente nicht ausgehen, aber das mit dem Heimcomputer haben wir ja damals auch geschafft …</p>
-
-            <button class="blog-collapse-btn" onclick="toggleBlog('blog-2')">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-              Schließen
-            </button>
           </div>
         </div>
       </div>
