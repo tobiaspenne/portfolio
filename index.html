@@ -632,7 +632,7 @@
     .social-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.65);
+      background: rgba(0,0,0,0.85);
       z-index: 5;
       opacity: 0;
       pointer-events: none;
@@ -649,10 +649,45 @@
       overflow: hidden;
       border-radius: 0 0 16px 16px;
     }
+    /* inner dim – covers ALL grid cells (incl. active card) */
+    .grid-dim {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.78);
+      z-index: 2;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      cursor: pointer;
+    }
+    .posts-grid.has-active .grid-dim { opacity: 1; pointer-events: auto; }
+    /* sound button overlay on video */
+    .sound-btn {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.52);
+      border: none;
+      color: #fff;
+      font-size: 17px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(4px);
+      transition: background 0.15s;
+    }
+    .sound-btn:hover { background: rgba(0,0,0,0.76); }
     .posts-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2px;
+      position: relative;
+      z-index: 0;
     }
     .post-item {
       aspect-ratio: 4/5;
@@ -668,16 +703,16 @@
       transition: transform 0.35s ease;
     }
     .post-item:hover img { transform: scale(1.04); }
-    .post-item.is-active { outline: 3px solid var(--accent); outline-offset: -3px; }
-    .posts-grid.has-active .post-item:not(.is-active) { opacity: 0.45; }
-    /* expand panel */
+    /* expand panel – sits above grid-dim */
     .post-expand {
       grid-column: 1 / -1;
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+      transition: max-height 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+      position: relative;
+      z-index: 3;
     }
-    .post-expand.is-open { max-height: 900px; }
+    .post-expand.is-open { max-height: 1400px; }
     .post-expand-inner {
       display: flex;
       gap: 2px;
@@ -687,9 +722,10 @@
       flex: 1;
       aspect-ratio: 1/1;
       overflow: hidden;
-      background: #c8c8c8;
+      background: #111;
       flex-shrink: 0;
       position: relative;
+      transition: aspect-ratio 0.25s ease;
     }
     /* two-slot slide system */
     .expand-slides-wrapper {
@@ -2270,6 +2306,7 @@
 
         <!-- 3×3 Posts Grid -->
         <div class="posts-grid" id="socialGrid">
+          <div class="grid-dim" onclick="closeSocialOverlay()"></div>
 
           <!-- Row 0 -->
           <div class="post-item" data-images="social/1/zirbenstube-01.jpg,social/1/zirbenstube-02.jpg,social/1/zirbenstube-03.jpg,social/1/zirbenstube-04.jpg,social/1/zirbenstube-05.mp4" data-caption="Zirbenstube – ein Rückzugsort, der nach Zirbenholz duftet. ✨ #neoskop #interior #branding" onclick="togglePost(this, 0)">
@@ -2299,6 +2336,7 @@
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
+                <button class="sound-btn" onclick="toggleSound(this)" hidden>🔇</button>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
@@ -2336,6 +2374,7 @@
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
+                <button class="sound-btn" onclick="toggleSound(this)" hidden>🔇</button>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
@@ -2373,6 +2412,7 @@
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
+                <button class="sound-btn" onclick="toggleSound(this)" hidden>🔇</button>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
@@ -2568,20 +2608,74 @@
 
   function isVideoSrc(src) { return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src); }
 
-  function setSlideMedia(slot, src) {
+  // Set image or video content on a slide slot.
+  // visual: the .post-expand-visual element – used to adjust aspect-ratio for portrait videos.
+  function setSlideMedia(slot, src, visual) {
     const img = slot.querySelector('.slide-img');
     const vid = slot.querySelector('.slide-video');
-    if (!src) { if (img) img.style.display='none'; if (vid) vid.style.display='none'; return; }
+    if (!src) {
+      if (img) img.style.display = 'none';
+      if (vid) vid.style.display = 'none';
+      return;
+    }
     if (isVideoSrc(src)) {
       if (img) { img.style.display = 'none'; img.src = ''; }
       if (vid) {
         vid.style.display = 'block';
-        if (vid.getAttribute('src') !== src) { vid.src = src; vid.load(); }
+        if (vid.getAttribute('src') !== src) {
+          vid.src = src;   // no load() – browser handles it; keeps user-gesture context for play()
+          if (visual) {
+            vid.addEventListener('loadedmetadata', function once() {
+              vid.removeEventListener('loadedmetadata', once);
+              if (vid.videoWidth && vid.videoHeight) {
+                visual.style.aspectRatio = vid.videoWidth + '/' + vid.videoHeight;
+              }
+            });
+          }
+        } else if (visual && vid.videoWidth) {
+          visual.style.aspectRatio = vid.videoWidth + '/' + vid.videoHeight;
+        }
       }
     } else {
       if (vid) { vid.pause(); vid.removeAttribute('src'); vid.style.display = 'none'; }
       if (img) { img.src = src; img.style.display = 'block'; }
+      if (visual) visual.style.aspectRatio = '1/1';
     }
+  }
+
+  // Try playing with sound; if browser blocks it, fall back to muted and show sound-btn.
+  function playVideoWithSound(vid, panel) {
+    vid.muted = false;
+    const p = vid.play();
+    if (p !== undefined) {
+      p.catch(() => {
+        vid.muted = true;
+        vid.play().catch(() => {});
+        const btn = panel.querySelector('.sound-btn');
+        if (btn) { btn.textContent = '🔇'; btn.hidden = false; }
+      });
+    }
+    // Hide sound btn on successful unmuted play (p resolved)
+    if (p !== undefined) {
+      p.then(() => {
+        if (!vid.muted) {
+          const btn = panel.querySelector('.sound-btn');
+          if (btn) { btn.textContent = '🔊'; btn.hidden = false; }
+        }
+      }).catch(() => {});
+    }
+  }
+
+  function toggleSound(btn) {
+    const panel = btn.closest('.post-expand');
+    const slot  = panel.querySelector('.expand-slide[data-slot="' + (panel.dataset.activeSlot || 'a') + '"]');
+    const vid   = slot && slot.querySelector('.slide-video');
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    if (!vid.muted) {
+      vid.play().catch(() => { vid.muted = true; btn.textContent = '🔇'; return; });
+    }
+    btn.textContent = vid.muted ? '🔇' : '🔊';
   }
 
   function resetSlots(panel) {
@@ -2591,13 +2685,24 @@
       slot.style.cssText = '';
     });
     panel.dataset.activeSlot = 'a';
+    const visual = panel.querySelector('.post-expand-visual');
+    if (visual) visual.style.aspectRatio = '';
+    const soundBtn = panel.querySelector('.sound-btn');
+    if (soundBtn) { soundBtn.hidden = true; soundBtn.textContent = '🔇'; }
   }
 
   function updateCarousel(panel, dir) {
-    const images = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
-    const idx    = parseInt(panel.dataset.carouselIndex) || 0;
-    const src    = images[idx] || '';
-    const multi  = images.length > 1;
+    const images  = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
+    const idx     = parseInt(panel.dataset.carouselIndex) || 0;
+    const src     = images[idx] || '';
+    const multi   = images.length > 1;
+    const visual  = panel.querySelector('.post-expand-visual');
+    const soundBtn = panel.querySelector('.sound-btn');
+
+    // Reset aspect-ratio immediately when switching to an image
+    if (!isVideoSrc(src) && visual) visual.style.aspectRatio = '1/1';
+    // Hide sound btn when not on a video slide
+    if (soundBtn) soundBtn.hidden = !isVideoSrc(src);
 
     // nav buttons
     const prevBtn = panel.querySelector('.carousel-btn--prev');
@@ -2625,7 +2730,7 @@
     // slides
     const slots = panel.querySelectorAll('.expand-slide');
     if (!slots.length) return;
-    const slotA = slots[0], slotB = slots[1];
+    const slotA   = slots[0], slotB = slots[1];
     const curName = panel.dataset.activeSlot || 'a';
     const curSlot = curName === 'a' ? slotA : slotB;
     const nxtName = curName === 'a' ? 'b' : 'a';
@@ -2633,21 +2738,21 @@
 
     if (!dir) {
       // instant – no animation
-      setSlideMedia(curSlot, src);
+      setSlideMedia(curSlot, src, visual);
       curSlot.style.cssText = 'transition:none; transform:translateX(0)';
       nxtSlot.style.cssText = 'transition:none; transform:translateX(100%)';
-      if (isVideoSrc(src)) curSlot.querySelector('.slide-video').play().catch(()=>{});
+      if (isVideoSrc(src)) playVideoWithSound(curSlot.querySelector('.slide-video'), panel);
       return;
     }
 
     // Instagram-style slide
-    setSlideMedia(nxtSlot, src);
+    setSlideMedia(nxtSlot, src, visual);
     nxtSlot.style.cssText = 'transition:none; transform:translateX(' + (dir > 0 ? '100%' : '-100%') + ')';
     nxtSlot.getBoundingClientRect(); // force reflow
     const ease = 'transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94)';
     nxtSlot.style.cssText = 'transition:' + ease + '; transform:translateX(0)';
     curSlot.style.cssText = 'transition:' + ease + '; transform:translateX(' + (dir > 0 ? '-100%' : '100%') + ')';
-    if (isVideoSrc(src)) nxtSlot.querySelector('.slide-video').play().catch(()=>{});
+    if (isVideoSrc(src)) playVideoWithSound(nxtSlot.querySelector('.slide-video'), panel);
     setTimeout(() => { const ov = curSlot.querySelector('.slide-video'); if (ov) ov.pause(); }, 350);
     panel.dataset.activeSlot = nxtName;
   }
@@ -2662,25 +2767,30 @@
     updateCarousel(panel, dir);
   }
 
+  function _closeSocialGrid(grid) {
+    const overlay = document.getElementById('socialOverlay');
+    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
+    grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
+    grid.classList.remove('has-active');
+    if (overlay) overlay.classList.remove('is-active');
+  }
+
   function togglePost(el, row) {
     const grid    = el.closest('.posts-grid');
     const panel   = grid.querySelector('.post-expand[data-row="' + row + '"]');
     const overlay = document.getElementById('socialOverlay');
     const isActive = el.classList.contains('is-active');
 
-    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
-    grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
-    grid.classList.remove('has-active');
-    if (overlay) overlay.classList.remove('is-active');
+    _closeSocialGrid(grid);
 
     if (!isActive) {
       el.classList.add('is-active');
       grid.classList.add('has-active');
       if (overlay) overlay.classList.add('is-active');
 
-      const attr     = (el.dataset.images || '').trim();
-      const thumbSrc = (el.querySelector('img') || {}).src || '';
-      const images   = attr ? attr.split(',').map(s => s.trim()).filter(Boolean) : (thumbSrc ? [thumbSrc] : []);
+      const attr   = (el.dataset.images || '').trim();
+      const thumb  = (el.querySelector('img') || {}).src || '';
+      const images = attr ? attr.split(',').map(s => s.trim()).filter(Boolean) : (thumb ? [thumb] : []);
 
       panel.dataset.carouselImages = images.join(',');
       panel.dataset.carouselIndex  = '0';
@@ -2689,12 +2799,12 @@
       updateCarousel(panel, 0);
       panel.classList.add('is-open');
 
-      // Scroll expanded panel to vertical center of modal viewport
+      // Scroll expanded panel to vertical center of modal-backdrop viewport
       setTimeout(() => {
         const backdrop = panel.closest('.modal-backdrop');
         if (backdrop) {
-          const bRect = backdrop.getBoundingClientRect();
-          const pRect = panel.getBoundingClientRect();
+          const bRect  = backdrop.getBoundingClientRect();
+          const pRect  = panel.getBoundingClientRect();
           const target = backdrop.scrollTop + pRect.top - bRect.top + pRect.height / 2 - backdrop.clientHeight / 2;
           backdrop.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
         }
@@ -2703,22 +2813,12 @@
   }
 
   function closeSocialOverlay() {
-    const grid    = document.getElementById('socialGrid');
-    const overlay = document.getElementById('socialOverlay');
-    if (!grid) return;
-    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
-    grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
-    grid.classList.remove('has-active');
-    if (overlay) overlay.classList.remove('is-active');
+    const grid = document.getElementById('socialGrid');
+    if (grid) _closeSocialGrid(grid);
   }
 
   function closeActivePost(btn) {
-    const grid    = btn.closest('.posts-grid');
-    const overlay = document.getElementById('socialOverlay');
-    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
-    grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
-    grid.classList.remove('has-active');
-    if (overlay) overlay.classList.remove('is-active');
+    _closeSocialGrid(btn.closest('.posts-grid'));
   }
 
   document.addEventListener('keydown', (e) => {
