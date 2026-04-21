@@ -439,6 +439,7 @@
     .case-thumb--6 { background: #f0f1f6; }
     .case-thumb--7 { background: #f4f2ee; }
     .case-thumb--8 { background: #1a1a1a; }
+    .case-thumb--9 { background: #2a1f3d; }
 
     .case-thumb--1 img,
     .case-thumb--2 img,
@@ -447,7 +448,8 @@
     .case-thumb--5 img,
     .case-thumb--6 img,
     .case-thumb--7 img,
-    .case-thumb--8 img {
+    .case-thumb--8 img,
+    .case-thumb--9 img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -624,6 +626,119 @@
     }
     .blog-read-btn:hover { opacity: 0.75; }
     .blog-read-btn svg { transition: transform 0.2s ease; }
+
+    /* ─── Social Media Grid ───────────────────────────────── */
+    .social-container {
+      background: #f4f4f4;
+      border-radius: 16px;
+      padding: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stories-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .story-item {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #d9d9d9;
+      overflow: hidden;
+      flex-shrink: 0;
+      cursor: pointer;
+      border: 3px solid #fff;
+      transition: transform 0.2s ease;
+    }
+    .story-item:hover { transform: scale(1.06); }
+    .story-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .post-item {
+      aspect-ratio: 4/5;
+      cursor: pointer;
+      overflow: hidden;
+      background: #d9d9d9;
+      position: relative;
+      transition: opacity 0.25s ease;
+    }
+    .post-item img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: transform 0.35s ease;
+    }
+    .post-item:hover img { transform: scale(1.04); }
+    .post-item.is-active { outline: 3px solid var(--accent); outline-offset: -3px; }
+    .posts-grid.has-active .post-item:not(.is-active) { opacity: 0.45; }
+    /* expand panel */
+    .post-expand {
+      grid-column: 1 / -1;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .post-expand.is-open { max-height: 900px; }
+    .post-expand-inner {
+      display: flex;
+      gap: 2px;
+      margin-top: 2px;
+    }
+    .post-expand-visual {
+      flex: 2;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      background: #c8c8c8;
+      flex-shrink: 0;
+    }
+    .post-expand-visual img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    .post-expand-caption {
+      flex: 1;
+      background: #fff;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+    }
+    .post-expand-handle {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      color: #a1a1a1;
+      letter-spacing: 0.04em;
+      text-transform: lowercase;
+    }
+    .post-expand-text {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 16px;
+      line-height: 26px;
+      color: var(--text);
+    }
+    .post-expand-close {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      text-align: left;
+    }
+    .post-expand-close:hover { opacity: 0.75; }
+    @media (max-width: 768px) {
+      .social-container { padding: 24px; }
+      .post-expand-inner { flex-direction: column; }
+      .post-expand-caption { padding: 24px; }
+    }
     .blog-article-inner {
       padding: 0 48px 48px;
       padding-top: 40px;
@@ -1501,6 +1616,16 @@
         </div>
       </div>
 
+      <!-- Card 9: Social Media -->
+      <div class="case-card reveal" data-delay="3" onclick="openModal('modal-9')" role="button" tabindex="0">
+        <div class="case-thumb case-thumb--9">
+        </div>
+        <div class="case-caption">
+          <p class="case-caption-title">Social Media</p>
+          <p class="case-caption-client">Neoskop</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -2072,6 +2197,115 @@
   </div>
 </div>
 
+<!-- Modal 9: Social Media -->
+<div class="modal-backdrop" id="modal-9" role="dialog" aria-modal="true" aria-label="Case: Social Media" onclick="handleBackdropClick(event, 'modal-9')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-9')" aria-label="Schließen">✕</button>
+
+    <div class="case-modal-header">
+      <p class="case-modal-client">Neoskop</p>
+      <h2 class="case-modal-title">Social Media</h2>
+      <p class="case-modal-text">
+        Eine Auswahl von Beiträgen und Stories, die im Rahmen der Social-Media-Kommunikation von Neoskop entstanden sind – von Kampagnenpostings über Employer Branding bis hin zu redaktionellen Inhalten.<br><br>
+        <em>Konzeption, Design &amp; Text</em>
+      </p>
+    </div>
+
+    <div class="case-showcase" style="background: transparent; padding-top: 0;">
+      <div class="social-container">
+
+        <!-- Stories -->
+        <div class="stories-row">
+          <div class="story-item"></div>
+          <div class="story-item"></div>
+          <div class="story-item"></div>
+        </div>
+
+        <!-- 3×3 Posts Grid -->
+        <div class="posts-grid" id="socialGrid">
+
+          <!-- Row 0 -->
+          <div class="post-item" data-caption="Placeholder Caption Post 1 – hier kommt der eigentliche Instagram-Text rein. #neoskop #design" onclick="togglePost(this, 0)">
+            <img src="" alt="Post 1" />
+          </div>
+          <div class="post-item" data-caption="Placeholder Caption Post 2 – hier kommt der eigentliche Instagram-Text rein. #neoskop #ux" onclick="togglePost(this, 0)">
+            <img src="" alt="Post 2" />
+          </div>
+          <div class="post-item" data-caption="Placeholder Caption Post 3 – hier kommt der eigentliche Instagram-Text rein. #neoskop #branding" onclick="togglePost(this, 0)">
+            <img src="" alt="Post 3" />
+          </div>
+
+          <!-- Expand Row 0 -->
+          <div class="post-expand" data-row="0">
+            <div class="post-expand-inner">
+              <div class="post-expand-visual">
+                <img class="expand-img" src="" alt="" />
+              </div>
+              <div class="post-expand-caption">
+                <p class="post-expand-handle">@neoskop.de</p>
+                <p class="post-expand-text expand-caption-text"></p>
+                <button class="post-expand-close" onclick="togglePost(document.querySelector('#socialGrid .post-item.is-active'), Math.floor([...document.querySelectorAll('#socialGrid .post-item')].indexOf(document.querySelector('#socialGrid .post-item.is-active'))/3))">Schließen ↑</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 1 -->
+          <div class="post-item" data-caption="Placeholder Caption Post 4 – hier kommt der eigentliche Instagram-Text rein. #neoskop #ui" onclick="togglePost(this, 1)">
+            <img src="" alt="Post 4" />
+          </div>
+          <div class="post-item" data-caption="Placeholder Caption Post 5 – hier kommt der eigentliche Instagram-Text rein. #neoskop #agency" onclick="togglePost(this, 1)">
+            <img src="" alt="Post 5" />
+          </div>
+          <div class="post-item" data-caption="Placeholder Caption Post 6 – hier kommt der eigentliche Instagram-Text rein. #neoskop #hannover" onclick="togglePost(this, 1)">
+            <img src="" alt="Post 6" />
+          </div>
+
+          <!-- Expand Row 1 -->
+          <div class="post-expand" data-row="1">
+            <div class="post-expand-inner">
+              <div class="post-expand-visual">
+                <img class="expand-img" src="" alt="" />
+              </div>
+              <div class="post-expand-caption">
+                <p class="post-expand-handle">@neoskop.de</p>
+                <p class="post-expand-text expand-caption-text"></p>
+                <button class="post-expand-close" onclick="togglePost(document.querySelector('#socialGrid .post-item.is-active'), Math.floor([...document.querySelectorAll('#socialGrid .post-item')].indexOf(document.querySelector('#socialGrid .post-item.is-active'))/3))">Schließen ↑</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2 -->
+          <div class="post-item" data-caption="Placeholder Caption Post 7 – hier kommt der eigentliche Instagram-Text rein. #neoskop #motion" onclick="togglePost(this, 2)">
+            <img src="" alt="Post 7" />
+          </div>
+          <div class="post-item" data-caption="Placeholder Caption Post 8 – hier kommt der eigentliche Instagram-Text rein. #neoskop #creative" onclick="togglePost(this, 2)">
+            <img src="" alt="Post 8" />
+          </div>
+          <div class="post-item" data-caption="Placeholder Caption Post 9 – hier kommt der eigentliche Instagram-Text rein. #neoskop #digital" onclick="togglePost(this, 2)">
+            <img src="" alt="Post 9" />
+          </div>
+
+          <!-- Expand Row 2 -->
+          <div class="post-expand" data-row="2">
+            <div class="post-expand-inner">
+              <div class="post-expand-visual">
+                <img class="expand-img" src="" alt="" />
+              </div>
+              <div class="post-expand-caption">
+                <p class="post-expand-handle">@neoskop.de</p>
+                <p class="post-expand-text expand-caption-text"></p>
+                <button class="post-expand-close" onclick="togglePost(document.querySelector('#socialGrid .post-item.is-active'), Math.floor([...document.querySelectorAll('#socialGrid .post-item')].indexOf(document.querySelector('#socialGrid .post-item.is-active'))/3))">Schließen ↑</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /posts-grid -->
+      </div><!-- /social-container -->
+    </div>
+
+  </div>
+</div>
+
 <!-- ── Impressum Modal ────────────────────────────────────── -->
 <div class="modal-backdrop" id="modal-impressum" role="dialog" aria-modal="true" aria-label="Impressum" onclick="handleBackdropClick(event, 'modal-impressum')">
   <div class="modal" style="max-width: 860px;">
@@ -2246,6 +2480,32 @@
 
   function handleBackdropClick(e, id) {
     if (e.target === document.getElementById(id)) closeModal(id);
+  }
+
+  function togglePost(el, row) {
+    const grid = el.closest('.posts-grid');
+    const panel = grid.querySelector('.post-expand[data-row="' + row + '"]');
+    const isActive = el.classList.contains('is-active');
+
+    // reset all
+    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
+    grid.querySelectorAll('.post-expand').forEach(p => p.classList.remove('is-open'));
+    grid.classList.remove('has-active');
+
+    if (!isActive) {
+      el.classList.add('is-active');
+      grid.classList.add('has-active');
+      // mirror image + text into panel
+      const img = el.querySelector('img');
+      const expandImg = panel.querySelector('.expand-img');
+      expandImg.src = img ? img.src : '';
+      expandImg.alt = img ? img.alt : '';
+      panel.querySelector('.expand-caption-text').innerHTML =
+        el.dataset.caption || '';
+      panel.classList.add('is-open');
+      // smooth scroll so panel is visible
+      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+    }
   }
 
   document.addEventListener('keydown', (e) => {
