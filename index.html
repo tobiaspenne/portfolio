@@ -579,7 +579,7 @@
     .blog-card-thumb {
       background: #f0f1f6;
       border-radius: 16px;
-      height: 424px;
+      aspect-ratio: 16/9;
       overflow: hidden;
       width: 100%;
       display: flex;
@@ -705,7 +705,6 @@
 
     @media (max-width: 768px) {
       .blog-cards-row { flex-direction: column; }
-      .blog-card-thumb { height: 220px; }
       .hr-snippets-grid { grid-template-columns: 1fr; }
     }
 
@@ -1973,10 +1972,10 @@
       </p>
     </div>
 
-    <div class="case-showcase" style="background: transparent; flex-direction: column; gap: 120px;">
+    <div class="case-showcase" style="background: transparent; flex-direction: column; gap: 40px;">
 
-      <!-- Blog-Artikel: zwei Karten nebeneinander -->
-      <div class="blog-cards-row">
+      <!-- Blog-Artikel: gemeinsamer grauer Wrapper -->
+      <div style="background:#f4f4f4; border-radius:16px; padding:80px; display:flex; gap:40px;">
 
         <!-- Karte 1: Config 2023 -->
         <div class="blog-card">
@@ -1998,7 +1997,7 @@
         <!-- Karte 2: Der Charity Drop -->
         <div class="blog-card">
           <div class="blog-card-thumb">
-            <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/IUUVaxr4nEXHj_4/charity-drop.webp" alt="Der Charity Drop" />
+            <img src="tp-thumb-drop.jpg" alt="Der Charity Drop" />
           </div>
           <div class="blog-card-body">
             <p class="blog-card-title">Der Charity Drop</p>
@@ -2032,16 +2031,8 @@
             Der DevOp ist schon seit Monaten in der Welt unterwegs und erledigt seine Todos aus dem Van heraus – die jungen Leute sprechen von „Workation". Andere Kollegen aktivieren für ein Jahr den Autoresponder und schieben alle ihre Tickets ins Backlog. Das ist also dieses „Sabbatical". Ok cool.
           </div>
           <div class="hr-snippet hr-snippet-full">
-            <strong>💰 VWL – WTF?!</strong>
-            Wenn man weiß, dass VWL „Vermögenswirksame Leistungen" bedeutet, ist das schon mal die halbe Miete. Und hey – vielleicht lässt sich damit mal irgendjemand beeindrucken? Wie auch immer – Neoskop zahlt dir freiwillig einen Zuschuss von 40 € für deine Vorsorge, deren Form du dir übrigens selber aussuchen kannst. Cool, oder?
-          </div>
-          <div class="hr-snippet">
             <strong>🍕 Beyond Obstkorb</strong>
             Was die Verpflegung angeht erfüllen wir sämtliche Agentur-Klischees: Obstkorb? Check. Hafer-, Soya- oder Mandelmilch? Check. Espresso aus Siebträgermaschinen? Check. Darüber hinaus kannst du dich auch gerne an unserem Müsli-Hub bedienen, dir exotische Softdrinks gönnen oder zum Feierabend ein Fläschchen Wein aus dem Regal ziehen. Cin Cin!
-          </div>
-          <div class="hr-snippet">
-            <strong>👵 Betriebliche Altersvorsorge</strong>
-            YOLO ist Schnee von gestern – Zeit sich mit wichtigen Themen zu beschäftigen: Neoskop beteiligt sich an deiner betrieblichen Altersvorsorge. Klingt langweilig? Okay, ist es auch – aber dafür ziemlich sinnvoll. Das ganze klingt übrigens komplizierter als es ist, hör dich mal bei den Kollegen um.
           </div>
         </div>
 
