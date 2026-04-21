@@ -562,36 +562,50 @@
     }
     .quote-text .bold-italic { font-weight: 700; font-style: italic; }
 
-    /* ─── Blog Accordion ────────────────────────────────── */
-    .blog-teaser {
-      background: #f4f4f4;
-      border-radius: 16px;
-      overflow: hidden;
+    /* ─── Blog Cards ─────────────────────────────────────── */
+    .blog-cards-row {
+      display: flex;
+      gap: 32px;
       width: 100%;
     }
-    .blog-teaser-header {
-      display: flex;
-      gap: 40px;
-      align-items: stretch;
-      padding: 48px;
-      cursor: pointer;
-    }
-    .blog-teaser-header:hover .blog-read-btn { opacity: 0.7; }
-    .blog-teaser-meta {
+    .blog-card {
       flex: 1;
+      background: #f4f4f4;
+      border-radius: 16px;
+      padding: 80px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 48px;
+    }
+    .blog-card-thumb {
+      background: #f0f1f6;
+      border-radius: 16px;
+      height: 320px;
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      align-items: center;
       justify-content: center;
     }
-    .blog-teaser-title {
-      font-family: 'Literata', serif;
-      font-size: 26px;
+    .blog-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .blog-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .blog-card-title {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 18px;
       font-weight: 700;
       color: var(--text);
-      line-height: 1.3;
+      line-height: normal;
     }
-    .blog-teaser-desc {
+    .blog-card-desc {
       font-family: 'Noto Sans', sans-serif;
       font-size: 18px;
       font-weight: 400;
@@ -608,38 +622,9 @@
       align-items: center;
       gap: 8px;
       transition: opacity 0.2s;
-      margin-top: 4px;
     }
     .blog-read-btn:hover { opacity: 0.75; }
-    .blog-read-btn svg {
-      transition: transform 0.2s ease;
-    }
-    .blog-teaser-thumb {
-      width: 320px;
-      flex-shrink: 0;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #e8e8e8;
-      aspect-ratio: 16/10;
-      align-self: center;
-    }
-    .blog-teaser--reversed .blog-teaser-header {
-      flex-direction: row-reverse;
-    }
-    .blog-teaser-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .blog-article {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-    .blog-teaser.is-open .blog-article {
-      max-height: 9999px;
-    }
+    .blog-read-btn svg { transition: transform 0.2s ease; }
     .blog-article-inner {
       padding: 0 48px 48px;
       padding-top: 40px;
@@ -720,10 +705,9 @@
     [data-theme="dark"] .hr-snippet { background: #2a2a2a; }
 
     @media (max-width: 768px) {
-      .blog-teaser-header,
-      .blog-teaser--reversed .blog-teaser-header { flex-direction: column; padding: 24px; }
-      .blog-teaser-thumb { width: 100%; aspect-ratio: 16/9; }
-      .blog-article-inner { padding: 0 24px 32px; padding-top: 32px; }
+      .blog-cards-row { flex-direction: column; }
+      .blog-card { padding: 32px; gap: 32px; }
+      .blog-card-thumb { height: 220px; }
       .hr-snippets-grid { grid-template-columns: 1fr; }
     }
 
@@ -1983,34 +1967,17 @@
 
     <div class="case-showcase" style="background: transparent; flex-direction: column; gap: 40px;">
 
-      <!-- Blog-Artikel Heading -->
-      <h3 style="font-family:'Literata',serif; font-size:36px; font-weight:700; color:var(--text); line-height:1.2;">Blog-Artikel</h3>
+      <!-- Blog-Artikel: zwei Karten nebeneinander -->
+      <div class="blog-cards-row">
 
-      <!-- Teaser: Der Charity Drop -->
-      <div class="blog-teaser">
-        <div class="blog-teaser-header">
-          <div class="blog-teaser-meta">
-            <p class="blog-teaser-title">Der Charity Drop</p>
-            <p class="blog-teaser-desc">Agentur-Blogs müssen nicht als SEO-Halde enden. Gut gemacht können sie sogar überraschend viel über Firmenkultur und Werte und Haltung erzählen.</p>
-            <a class="blog-read-btn" href="https://www.neoskop.de/blog/der-charity-drop" target="_blank" rel="noopener noreferrer">
-              Artikel lesen
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-            </a>
+        <!-- Karte 1: Config 2023 -->
+        <div class="blog-card">
+          <div class="blog-card-thumb">
+            <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/mCySvpaaQ4wybZ3/config2023.webp" alt="Figma Config 2023" />
           </div>
-          <div class="blog-teaser-thumb">
-            <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/IUUVaxr4nEXHj_4/charity-drop.webp" alt="Der Charity Drop" />
-          </div>
-        </div>
-      </div>
-
-      <!-- Teaser: Config 2023 -->
-      <div class="blog-teaser blog-teaser--reversed">
-        <div class="blog-teaser-header">
-          <div class="blog-teaser-meta">
-            <p class="blog-teaser-title">Figma auf dem Weg zur Love Brand</p>
-            <p class="blog-teaser-desc">Unterwegs auf der Config 2023 in San Francisco – über Weiterbildung, Silicon Valley, Community-Vibes und warum Figma auf dem besten Weg zur Love Brand ist.</p>
+          <div class="blog-card-body">
+            <p class="blog-card-title">Recap: Figma auf dem Weg zur Love Brand</p>
+            <p class="blog-card-desc">Ein textliches Recap zu unserem Trip zur Config-Konferenz nach San Francisco 2023.</p>
             <a class="blog-read-btn" href="https://www.neoskop.de/blog/unterwegs-auf-der-config-2023" target="_blank" rel="noopener noreferrer">
               Artikel lesen
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -2018,18 +1985,33 @@
               </svg>
             </a>
           </div>
-          <div class="blog-teaser-thumb">
-            <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/mCySvpaaQ4wybZ3/config2023.webp" alt="Config 2023 in San Francisco" />
+        </div>
+
+        <!-- Karte 2: Der Charity Drop -->
+        <div class="blog-card">
+          <div class="blog-card-thumb">
+            <img src="https://assets.reactbricks.com/2uB3009W-MUVbmE/images/original/IUUVaxr4nEXHj_4/charity-drop.webp" alt="Der Charity Drop" />
+          </div>
+          <div class="blog-card-body">
+            <p class="blog-card-title">Der Charity Drop</p>
+            <p class="blog-card-desc">How to good cause? Neoskop's Side-Project verrät viel über Haltung, Werte &amp; Unternehmenskultur.</p>
+            <a class="blog-read-btn" href="https://www.neoskop.de/blog/der-charity-drop" target="_blank" rel="noopener noreferrer">
+              Artikel lesen
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
           </div>
         </div>
+
       </div>
 
-      <!-- HR Text-Assets -->
+      <!-- HR Text-Snippets -->
       <div style="background:#f4f4f4; border-radius:16px; padding:80px; display:flex; flex-direction:column; gap:40px;">
 
         <div>
-          <h3 style="font-family:'Literata',serif; font-size:36px; font-weight:700; color:#000; line-height:1.2; margin-bottom:16px;">HR Text-Assets</h3>
-          <p style="font-family:'Noto Sans',sans-serif; font-size:18px; font-weight:400; line-height:30px; color:#000; max-width:560px;">Benefits – die Green-Flags im Bewerbungsprozess und zentrales Asset um Kultur und Werte nach Außen zu spiegeln.</p>
+          <h3 style="font-family:'Noto Sans',sans-serif; font-size:18px; font-weight:700; color:#000; line-height:normal; margin-bottom:16px;">HR Text-Snippets</h3>
+          <p style="font-family:'Noto Sans',sans-serif; font-size:18px; font-weight:400; line-height:30px; color:#000;">Benefits – die Green-Flags im Bewerbungsprozess und zentrales Asset um Kultur und Werte nach Außen zu spiegeln. Diese Textbausteine sind Teil von Stellenangeboten im Karrierebereich.</p>
         </div>
 
         <div class="hr-snippets-grid">
