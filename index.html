@@ -694,10 +694,44 @@
       overflow: hidden;
       background: #c8c8c8;
       flex-shrink: 0;
+      position: relative;
     }
     .post-expand-visual img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.88);
+      border: none; border-radius: 50%;
+      width: 40px; height: 40px;
+      font-size: 22px; line-height: 1;
+      cursor: pointer; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s, opacity 0.15s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .carousel-btn:hover { background: #fff; }
+    .carousel-btn:disabled { opacity: 0.25; cursor: default; }
+    .carousel-btn--prev { left: 14px; }
+    .carousel-btn--next { right: 14px; }
+    .carousel-dots {
+      position: absolute;
+      bottom: 18px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; gap: 7px; z-index: 2;
+    }
+    .carousel-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.55);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-dot.is-active {
+      background: #fff;
+      transform: scale(1.35);
     }
     .post-expand-caption {
       flex: 1;
@@ -2236,15 +2270,18 @@
           </div>
 
           <!-- Expand Row 0 -->
-          <div class="post-expand" data-row="0">
+          <div class="post-expand" data-row="0" data-carousel-images="" data-carousel-index="0">
             <div class="post-expand-inner">
               <div class="post-expand-visual">
+                <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <img class="expand-img" src="" alt="" />
+                <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
+                <div class="carousel-dots"></div>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
                 <p class="post-expand-text expand-caption-text"></p>
-                <button class="post-expand-close" onclick="togglePost(document.querySelector('#socialGrid .post-item.is-active'), Math.floor([...document.querySelectorAll('#socialGrid .post-item')].indexOf(document.querySelector('#socialGrid .post-item.is-active'))/3))">Schließen ↑</button>
+                <button class="post-expand-close" onclick="closeActivePost(this)">Schließen ↑</button>
               </div>
             </div>
           </div>
@@ -2261,15 +2298,18 @@
           </div>
 
           <!-- Expand Row 1 -->
-          <div class="post-expand" data-row="1">
+          <div class="post-expand" data-row="1" data-carousel-images="" data-carousel-index="0">
             <div class="post-expand-inner">
               <div class="post-expand-visual">
+                <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <img class="expand-img" src="" alt="" />
+                <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
+                <div class="carousel-dots"></div>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
                 <p class="post-expand-text expand-caption-text"></p>
-                <button class="post-expand-close" onclick="togglePost(document.querySelector('#socialGrid .post-item.is-active'), Math.floor([...document.querySelectorAll('#socialGrid .post-item')].indexOf(document.querySelector('#socialGrid .post-item.is-active'))/3))">Schließen ↑</button>
+                <button class="post-expand-close" onclick="closeActivePost(this)">Schließen ↑</button>
               </div>
             </div>
           </div>
@@ -2286,15 +2326,18 @@
           </div>
 
           <!-- Expand Row 2 -->
-          <div class="post-expand" data-row="2">
+          <div class="post-expand" data-row="2" data-carousel-images="" data-carousel-index="0">
             <div class="post-expand-inner">
               <div class="post-expand-visual">
+                <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
                 <img class="expand-img" src="" alt="" />
+                <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
+                <div class="carousel-dots"></div>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
                 <p class="post-expand-text expand-caption-text"></p>
-                <button class="post-expand-close" onclick="togglePost(document.querySelector('#socialGrid .post-item.is-active'), Math.floor([...document.querySelectorAll('#socialGrid .post-item')].indexOf(document.querySelector('#socialGrid .post-item.is-active'))/3))">Schließen ↑</button>
+                <button class="post-expand-close" onclick="closeActivePost(this)">Schließen ↑</button>
               </div>
             </div>
           </div>
@@ -2487,7 +2530,6 @@
     const panel = grid.querySelector('.post-expand[data-row="' + row + '"]');
     const isActive = el.classList.contains('is-active');
 
-    // reset all
     grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
     grid.querySelectorAll('.post-expand').forEach(p => p.classList.remove('is-open'));
     grid.classList.remove('has-active');
@@ -2495,17 +2537,72 @@
     if (!isActive) {
       el.classList.add('is-active');
       grid.classList.add('has-active');
-      // mirror image + text into panel
-      const img = el.querySelector('img');
-      const expandImg = panel.querySelector('.expand-img');
-      expandImg.src = img ? img.src : '';
-      expandImg.alt = img ? img.alt : '';
-      panel.querySelector('.expand-caption-text').innerHTML =
-        el.dataset.caption || '';
+
+      // Collect images: data-images (comma-separated) or fallback to thumbnail src
+      const attr = (el.dataset.images || '').trim();
+      const thumbSrc = (el.querySelector('img') || {}).src || '';
+      const images = attr ? attr.split(',').map(s => s.trim()).filter(Boolean)
+                          : (thumbSrc ? [thumbSrc] : []);
+
+      panel.dataset.carouselImages = images.join(',');
+      panel.dataset.carouselIndex  = '0';
+      panel.querySelector('.expand-caption-text').innerHTML = el.dataset.caption || '';
+      updateCarousel(panel);
+
       panel.classList.add('is-open');
-      // smooth scroll so panel is visible
-      setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+
+      // Scroll panel into center of modal viewport after animation starts
+      setTimeout(() => {
+        const modal = panel.closest('.modal');
+        if (modal) {
+          const panelTop    = panel.offsetTop;
+          const panelHeight = panel.scrollHeight;
+          const modalHeight = modal.clientHeight;
+          modal.scrollTo({ top: panelTop - (modalHeight - panelHeight) / 2, behavior: 'smooth' });
+        } else {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 180);
     }
+  }
+
+  function updateCarousel(panel) {
+    const images = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
+    const idx    = parseInt(panel.dataset.carouselIndex) || 0;
+    const img    = panel.querySelector('.expand-img');
+    const prev   = panel.querySelector('.carousel-btn--prev');
+    const next   = panel.querySelector('.carousel-btn--next');
+    const dots   = panel.querySelector('.carousel-dots');
+
+    if (img) { img.src = images[idx] || ''; img.alt = 'Bild ' + (idx + 1); }
+
+    const multi = images.length > 1;
+    if (prev) { prev.hidden = !multi; prev.disabled = idx === 0; }
+    if (next) { next.hidden = !multi; next.disabled = idx === images.length - 1; }
+    if (dots) {
+      dots.innerHTML = multi ? images.map((_, i) =>
+        '<span class="carousel-dot' + (i === idx ? ' is-active' : '') +
+        '" data-i="' + i + '"></span>'
+      ).join('') : '';
+      dots.querySelectorAll('.carousel-dot').forEach(d => {
+        d.onclick = () => { panel.dataset.carouselIndex = d.dataset.i; updateCarousel(panel); };
+      });
+    }
+  }
+
+  function carouselNav(btn, dir) {
+    const panel  = btn.closest('.post-expand');
+    const images = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
+    const idx    = parseInt(panel.dataset.carouselIndex) || 0;
+    panel.dataset.carouselIndex = Math.max(0, Math.min(images.length - 1, idx + dir));
+    updateCarousel(panel);
+  }
+
+  function closeActivePost(btn) {
+    const grid = btn.closest('.posts-grid');
+    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
+    grid.querySelectorAll('.post-expand').forEach(p => p.classList.remove('is-open'));
+    grid.classList.remove('has-active');
   }
 
   document.addEventListener('keydown', (e) => {
