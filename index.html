@@ -628,32 +628,27 @@
     .blog-read-btn svg { transition: transform 0.2s ease; }
 
     /* ─── Social Media Grid ───────────────────────────────── */
-    .social-container {
-      background: #f4f4f4;
+    /* social overlay – dims modal content behind grid */
+    .social-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 5;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
       border-radius: 16px;
-      padding: 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .stories-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .story-item {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      background: #d9d9d9;
-      overflow: hidden;
-      flex-shrink: 0;
       cursor: pointer;
-      border: 3px solid #fff;
-      transition: transform 0.2s ease;
     }
-    .story-item:hover { transform: scale(1.06); }
-    .story-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .social-overlay.is-active { opacity: 1; pointer-events: auto; }
+    /* grid lifts above overlay */
+    #modal-9 .case-showcase {
+      position: relative;
+      z-index: 6;
+      padding: 0 !important;
+      overflow: hidden;
+      border-radius: 0 0 16px 16px;
+    }
     .posts-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -689,19 +684,33 @@
       margin-top: 2px;
     }
     .post-expand-visual {
-      flex: 2;
-      aspect-ratio: 4/5;
+      flex: 1;
+      aspect-ratio: 1/1;
       overflow: hidden;
       background: #c8c8c8;
       flex-shrink: 0;
       position: relative;
     }
-    .post-expand-visual img,
-    .post-expand-visual video {
+    /* two-slot slide system */
+    .expand-slides-wrapper {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+    .expand-slide {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+    }
+    .expand-slide img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
     }
-    .post-expand-visual video { background: #000; }
+    .expand-slide video {
+      width: 100%; height: 100%;
+      object-fit: cover; display: none;
+      background: #000;
+    }
     .carousel-btn {
       position: absolute;
       top: 50%; transform: translateY(-50%);
@@ -735,6 +744,7 @@
       background: #fff;
       transform: scale(1.35);
     }
+    .post-expand-inner { position: relative; }
     .post-expand-caption {
       flex: 1;
       background: #fff;
@@ -758,20 +768,28 @@
       line-height: 26px;
       color: var(--text);
     }
-    .post-expand-close {
-      font-family: 'Noto Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--accent);
-      background: none;
+    /* close X – top-right of expand panel */
+    .post-expand-x {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
       border: none;
       cursor: pointer;
-      padding: 0;
-      text-align: left;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.15s, transform 0.15s;
+      line-height: 1;
     }
-    .post-expand-close:hover { opacity: 0.75; }
+    .post-expand-x:hover { background: #fff; transform: scale(1.08); }
     @media (max-width: 768px) {
-      .social-container { padding: 24px; }
       .post-expand-inner { flex-direction: column; }
       .post-expand-caption { padding: 24px; }
     }
@@ -2237,6 +2255,7 @@
 <div class="modal-backdrop" id="modal-9" role="dialog" aria-modal="true" aria-label="Case: Social Media" onclick="handleBackdropClick(event, 'modal-9')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-9')" aria-label="Schließen">✕</button>
+    <div class="social-overlay" id="socialOverlay" onclick="closeSocialOverlay()"></div>
 
     <div class="case-modal-header">
       <p class="case-modal-client">Neoskop</p>
@@ -2247,15 +2266,7 @@
       </p>
     </div>
 
-    <div class="case-showcase" style="background: transparent; padding-top: 0;">
-      <div class="social-container">
-
-        <!-- Stories -->
-        <div class="stories-row">
-          <div class="story-item"></div>
-          <div class="story-item"></div>
-          <div class="story-item"></div>
-        </div>
+    <div class="case-showcase" style="background: transparent;">
 
         <!-- 3×3 Posts Grid -->
         <div class="posts-grid" id="socialGrid">
@@ -2275,17 +2286,25 @@
           <div class="post-expand" data-row="0" data-carousel-images="" data-carousel-index="0">
             <div class="post-expand-inner">
               <div class="post-expand-visual">
+                <div class="expand-slides-wrapper">
+                  <div class="expand-slide" data-slot="a">
+                    <img class="slide-img" src="" alt="" />
+                    <video class="slide-video" loop playsinline></video>
+                  </div>
+                  <div class="expand-slide" data-slot="b">
+                    <img class="slide-img" src="" alt="" />
+                    <video class="slide-video" loop playsinline></video>
+                  </div>
+                </div>
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
-                <img class="expand-img" src="" alt="" />
-                <video class="expand-video" autoplay muted loop playsinline style="display:none;"></video>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
                 <p class="post-expand-text expand-caption-text"></p>
-                <button class="post-expand-close" onclick="closeActivePost(this)">Schließen ↑</button>
               </div>
+              <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
             </div>
           </div>
 
@@ -2304,17 +2323,25 @@
           <div class="post-expand" data-row="1" data-carousel-images="" data-carousel-index="0">
             <div class="post-expand-inner">
               <div class="post-expand-visual">
+                <div class="expand-slides-wrapper">
+                  <div class="expand-slide" data-slot="a">
+                    <img class="slide-img" src="" alt="" />
+                    <video class="slide-video" loop playsinline></video>
+                  </div>
+                  <div class="expand-slide" data-slot="b">
+                    <img class="slide-img" src="" alt="" />
+                    <video class="slide-video" loop playsinline></video>
+                  </div>
+                </div>
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
-                <img class="expand-img" src="" alt="" />
-                <video class="expand-video" autoplay muted loop playsinline style="display:none;"></video>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
                 <p class="post-expand-text expand-caption-text"></p>
-                <button class="post-expand-close" onclick="closeActivePost(this)">Schließen ↑</button>
               </div>
+              <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
             </div>
           </div>
 
@@ -2333,22 +2360,29 @@
           <div class="post-expand" data-row="2" data-carousel-images="" data-carousel-index="0">
             <div class="post-expand-inner">
               <div class="post-expand-visual">
+                <div class="expand-slides-wrapper">
+                  <div class="expand-slide" data-slot="a">
+                    <img class="slide-img" src="" alt="" />
+                    <video class="slide-video" loop playsinline></video>
+                  </div>
+                  <div class="expand-slide" data-slot="b">
+                    <img class="slide-img" src="" alt="" />
+                    <video class="slide-video" loop playsinline></video>
+                  </div>
+                </div>
                 <button class="carousel-btn carousel-btn--prev" onclick="carouselNav(this,-1)" hidden>&#8249;</button>
-                <img class="expand-img" src="" alt="" />
-                <video class="expand-video" autoplay muted loop playsinline style="display:none;"></video>
                 <button class="carousel-btn carousel-btn--next" onclick="carouselNav(this,1)" hidden>&#8250;</button>
                 <div class="carousel-dots"></div>
               </div>
               <div class="post-expand-caption">
                 <p class="post-expand-handle">@neoskop.de</p>
                 <p class="post-expand-text expand-caption-text"></p>
-                <button class="post-expand-close" onclick="closeActivePost(this)">Schließen ↑</button>
               </div>
+              <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
             </div>
           </div>
 
         </div><!-- /posts-grid -->
-      </div><!-- /social-container -->
     </div>
 
   </div>
@@ -2530,108 +2564,161 @@
     if (e.target === document.getElementById(id)) closeModal(id);
   }
 
-  function togglePost(el, row) {
-    const grid = el.closest('.posts-grid');
-    const panel = grid.querySelector('.post-expand[data-row="' + row + '"]');
-    const isActive = el.classList.contains('is-active');
+  // ── Social Grid ──────────────────────────────────────────────
 
-    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
-    grid.querySelectorAll('.post-expand').forEach(p => {
-      p.classList.remove('is-open');
-      const vid = p.querySelector('.expand-video');
-      if (vid) { vid.pause(); vid.src = ''; }
-    });
-    grid.classList.remove('has-active');
+  function isVideoSrc(src) { return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src); }
 
-    if (!isActive) {
-      el.classList.add('is-active');
-      grid.classList.add('has-active');
-
-      // Collect images: data-images (comma-separated) or fallback to thumbnail src
-      const attr = (el.dataset.images || '').trim();
-      const thumbSrc = (el.querySelector('img') || {}).src || '';
-      const images = attr ? attr.split(',').map(s => s.trim()).filter(Boolean)
-                          : (thumbSrc ? [thumbSrc] : []);
-
-      panel.dataset.carouselImages = images.join(',');
-      panel.dataset.carouselIndex  = '0';
-      panel.querySelector('.expand-caption-text').innerHTML = el.dataset.caption || '';
-      updateCarousel(panel);
-
-      panel.classList.add('is-open');
-
-      // Scroll panel into center of modal viewport after animation starts
-      setTimeout(() => {
-        const modal = panel.closest('.modal');
-        if (modal) {
-          const panelTop    = panel.offsetTop;
-          const panelHeight = panel.scrollHeight;
-          const modalHeight = modal.clientHeight;
-          modal.scrollTo({ top: panelTop - (modalHeight - panelHeight) / 2, behavior: 'smooth' });
-        } else {
-          panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      }, 180);
-    }
-  }
-
-  function isVideoSrc(src) {
-    return /\.(mp4|webm|ogg)(\?.*)?$/i.test(src);
-  }
-
-  function updateCarousel(panel) {
-    const images = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
-    const idx    = parseInt(panel.dataset.carouselIndex) || 0;
-    const img    = panel.querySelector('.expand-img');
-    const vid    = panel.querySelector('.expand-video');
-    const prev   = panel.querySelector('.carousel-btn--prev');
-    const next   = panel.querySelector('.carousel-btn--next');
-    const dots   = panel.querySelector('.carousel-dots');
-    const src    = images[idx] || '';
-
+  function setSlideMedia(slot, src) {
+    const img = slot.querySelector('.slide-img');
+    const vid = slot.querySelector('.slide-video');
+    if (!src) { if (img) img.style.display='none'; if (vid) vid.style.display='none'; return; }
     if (isVideoSrc(src)) {
-      if (img) img.style.display = 'none';
+      if (img) { img.style.display = 'none'; img.src = ''; }
       if (vid) {
         vid.style.display = 'block';
-        if (vid.src !== src) { vid.src = src; vid.load(); }
-        vid.play().catch(() => {});
+        if (vid.getAttribute('src') !== src) { vid.src = src; vid.load(); }
       }
     } else {
-      if (vid) { vid.pause(); vid.src = ''; vid.style.display = 'none'; }
-      if (img) { img.style.display = 'block'; img.src = src; img.alt = 'Bild ' + (idx + 1); }
+      if (vid) { vid.pause(); vid.removeAttribute('src'); vid.style.display = 'none'; }
+      if (img) { img.src = src; img.style.display = 'block'; }
     }
+  }
 
-    const multi = images.length > 1;
-    if (prev) { prev.hidden = !multi; prev.disabled = idx === 0; }
-    if (next) { next.hidden = !multi; next.disabled = idx === images.length - 1; }
+  function resetSlots(panel) {
+    panel.querySelectorAll('.expand-slide').forEach(slot => {
+      const vid = slot.querySelector('.slide-video');
+      if (vid) { vid.pause(); vid.removeAttribute('src'); }
+      slot.style.cssText = '';
+    });
+    panel.dataset.activeSlot = 'a';
+  }
+
+  function updateCarousel(panel, dir) {
+    const images = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
+    const idx    = parseInt(panel.dataset.carouselIndex) || 0;
+    const src    = images[idx] || '';
+    const multi  = images.length > 1;
+
+    // nav buttons
+    const prevBtn = panel.querySelector('.carousel-btn--prev');
+    const nextBtn = panel.querySelector('.carousel-btn--next');
+    if (prevBtn) { prevBtn.hidden = !multi; prevBtn.disabled = idx === 0; }
+    if (nextBtn) { nextBtn.hidden = !multi; nextBtn.disabled = idx === images.length - 1; }
+
+    // dots
+    const dots = panel.querySelector('.carousel-dots');
     if (dots) {
       dots.innerHTML = multi ? images.map((_, i) =>
-        '<span class="carousel-dot' + (i === idx ? ' is-active' : '') +
-        '" data-i="' + i + '"></span>'
+        '<span class="carousel-dot' + (i===idx?' is-active':'') + '" data-i="' + i + '"></span>'
       ).join('') : '';
       dots.querySelectorAll('.carousel-dot').forEach(d => {
-        d.onclick = () => { panel.dataset.carouselIndex = d.dataset.i; updateCarousel(panel); };
+        d.onclick = () => {
+          const ni = parseInt(d.dataset.i);
+          const ci = parseInt(panel.dataset.carouselIndex) || 0;
+          if (ni === ci) return;
+          panel.dataset.carouselIndex = String(ni);
+          updateCarousel(panel, ni > ci ? 1 : -1);
+        };
       });
     }
+
+    // slides
+    const slots = panel.querySelectorAll('.expand-slide');
+    if (!slots.length) return;
+    const slotA = slots[0], slotB = slots[1];
+    const curName = panel.dataset.activeSlot || 'a';
+    const curSlot = curName === 'a' ? slotA : slotB;
+    const nxtName = curName === 'a' ? 'b' : 'a';
+    const nxtSlot = curName === 'a' ? slotB : slotA;
+
+    if (!dir) {
+      // instant – no animation
+      setSlideMedia(curSlot, src);
+      curSlot.style.cssText = 'transition:none; transform:translateX(0)';
+      nxtSlot.style.cssText = 'transition:none; transform:translateX(100%)';
+      if (isVideoSrc(src)) curSlot.querySelector('.slide-video').play().catch(()=>{});
+      return;
+    }
+
+    // Instagram-style slide
+    setSlideMedia(nxtSlot, src);
+    nxtSlot.style.cssText = 'transition:none; transform:translateX(' + (dir > 0 ? '100%' : '-100%') + ')';
+    nxtSlot.getBoundingClientRect(); // force reflow
+    const ease = 'transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94)';
+    nxtSlot.style.cssText = 'transition:' + ease + '; transform:translateX(0)';
+    curSlot.style.cssText = 'transition:' + ease + '; transform:translateX(' + (dir > 0 ? '-100%' : '100%') + ')';
+    if (isVideoSrc(src)) nxtSlot.querySelector('.slide-video').play().catch(()=>{});
+    setTimeout(() => { const ov = curSlot.querySelector('.slide-video'); if (ov) ov.pause(); }, 350);
+    panel.dataset.activeSlot = nxtName;
   }
 
   function carouselNav(btn, dir) {
     const panel  = btn.closest('.post-expand');
     const images = (panel.dataset.carouselImages || '').split(',').filter(Boolean);
     const idx    = parseInt(panel.dataset.carouselIndex) || 0;
-    panel.dataset.carouselIndex = Math.max(0, Math.min(images.length - 1, idx + dir));
-    updateCarousel(panel);
+    const newIdx = Math.max(0, Math.min(images.length - 1, idx + dir));
+    if (newIdx === idx) return;
+    panel.dataset.carouselIndex = String(newIdx);
+    updateCarousel(panel, dir);
+  }
+
+  function togglePost(el, row) {
+    const grid    = el.closest('.posts-grid');
+    const panel   = grid.querySelector('.post-expand[data-row="' + row + '"]');
+    const overlay = document.getElementById('socialOverlay');
+    const isActive = el.classList.contains('is-active');
+
+    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
+    grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
+    grid.classList.remove('has-active');
+    if (overlay) overlay.classList.remove('is-active');
+
+    if (!isActive) {
+      el.classList.add('is-active');
+      grid.classList.add('has-active');
+      if (overlay) overlay.classList.add('is-active');
+
+      const attr     = (el.dataset.images || '').trim();
+      const thumbSrc = (el.querySelector('img') || {}).src || '';
+      const images   = attr ? attr.split(',').map(s => s.trim()).filter(Boolean) : (thumbSrc ? [thumbSrc] : []);
+
+      panel.dataset.carouselImages = images.join(',');
+      panel.dataset.carouselIndex  = '0';
+      panel.dataset.activeSlot     = 'a';
+      panel.querySelector('.expand-caption-text').innerHTML = el.dataset.caption || '';
+      updateCarousel(panel, 0);
+      panel.classList.add('is-open');
+
+      // Scroll expanded panel to vertical center of modal viewport
+      setTimeout(() => {
+        const backdrop = panel.closest('.modal-backdrop');
+        if (backdrop) {
+          const bRect = backdrop.getBoundingClientRect();
+          const pRect = panel.getBoundingClientRect();
+          const target = backdrop.scrollTop + pRect.top - bRect.top + pRect.height / 2 - backdrop.clientHeight / 2;
+          backdrop.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+        }
+      }, 300);
+    }
+  }
+
+  function closeSocialOverlay() {
+    const grid    = document.getElementById('socialGrid');
+    const overlay = document.getElementById('socialOverlay');
+    if (!grid) return;
+    grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
+    grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
+    grid.classList.remove('has-active');
+    if (overlay) overlay.classList.remove('is-active');
   }
 
   function closeActivePost(btn) {
-    const grid = btn.closest('.posts-grid');
+    const grid    = btn.closest('.posts-grid');
+    const overlay = document.getElementById('socialOverlay');
     grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
-    grid.querySelectorAll('.post-expand').forEach(p => {
-      p.classList.remove('is-open');
-      const vid = p.querySelector('.expand-video');
-      if (vid) { vid.pause(); vid.src = ''; }
-    });
+    grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
     grid.classList.remove('has-active');
+    if (overlay) overlay.classList.remove('is-active');
   }
 
   document.addEventListener('keydown', (e) => {
