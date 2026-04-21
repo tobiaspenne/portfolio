@@ -2644,37 +2644,24 @@
     }
   }
 
-  // Try playing with sound; if browser blocks it, fall back to muted and show sound-btn.
-  function playVideoWithSound(vid, panel) {
-    vid.muted = false;
-    const p = vid.play();
-    if (p !== undefined) {
-      p.catch(() => {
-        vid.muted = true;
-        vid.play().catch(() => {});
-        const btn = panel.querySelector('.sound-btn');
-        if (btn) { btn.textContent = '🔇'; btn.hidden = false; }
-      });
-    }
-    // Hide sound btn on successful unmuted play (p resolved)
-    if (p !== undefined) {
-      p.then(() => {
-        if (!vid.muted) {
-          const btn = panel.querySelector('.sound-btn');
-          if (btn) { btn.textContent = '🔊'; btn.hidden = false; }
-        }
-      }).catch(() => {});
-    }
+  // Start video muted (always works) + show sound button.
+  // Sound button click = direct user gesture → unmute always succeeds.
+  function playVideoMuted(vid, panel) {
+    vid.muted = true;
+    vid.play().catch(() => {});
+    const btn = panel.querySelector('.sound-btn');
+    if (btn) { btn.textContent = '🔇'; btn.hidden = false; }
   }
 
   function toggleSound(btn) {
+    // Called directly from onclick → guaranteed user-gesture context
     const panel = btn.closest('.post-expand');
     const slot  = panel.querySelector('.expand-slide[data-slot="' + (panel.dataset.activeSlot || 'a') + '"]');
     const vid   = slot && slot.querySelector('.slide-video');
     if (!vid) return;
     vid.muted = !vid.muted;
     if (!vid.muted) {
-      vid.play().catch(() => { vid.muted = true; btn.textContent = '🔇'; return; });
+      vid.play().catch(() => { vid.muted = true; btn.textContent = '🔇'; });
     }
     btn.textContent = vid.muted ? '🔇' : '🔊';
   }
@@ -2742,7 +2729,7 @@
       setSlideMedia(curSlot, src, visual);
       curSlot.style.cssText = 'transition:none; transform:translateX(0)';
       nxtSlot.style.cssText = 'transition:none; transform:translateX(100%)';
-      if (isVideoSrc(src)) playVideoWithSound(curSlot.querySelector('.slide-video'), panel);
+      if (isVideoSrc(src)) playVideoMuted(curSlot.querySelector('.slide-video'), panel);
       return;
     }
 
@@ -2753,7 +2740,7 @@
     const ease = 'transform 0.32s cubic-bezier(0.25,0.46,0.45,0.94)';
     nxtSlot.style.cssText = 'transition:' + ease + '; transform:translateX(0)';
     curSlot.style.cssText = 'transition:' + ease + '; transform:translateX(' + (dir > 0 ? '-100%' : '100%') + ')';
-    if (isVideoSrc(src)) playVideoWithSound(nxtSlot.querySelector('.slide-video'), panel);
+    if (isVideoSrc(src)) playVideoMuted(nxtSlot.querySelector('.slide-video'), panel);
     setTimeout(() => { const ov = curSlot.querySelector('.slide-video'); if (ov) ov.pause(); }, 350);
     panel.dataset.activeSlot = nxtName;
   }
