@@ -762,6 +762,7 @@
       flex: 1;
       background: #fff;
       padding: 48px 40px;
+      position: relative;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -806,11 +807,6 @@
     @media (max-width: 768px) {
       .post-expand-inner { flex-direction: column; }
       .post-expand-caption { padding: 48px 24px 24px; }
-      /* X in white area: push down past the visual (aspect-ratio 1/1, capped at 62vh) */
-      .post-expand-x {
-        top: calc(min(100vw, 62vh) + 16px);
-        right: 16px;
-      }
       /* Motion video: full width */
       .motion-video-outer { padding: 0 !important; }
       #modal-8 .motion-video-outer > div { border-radius: 0 !important; }
@@ -2371,10 +2367,9 @@
                 <button class="sound-btn" onclick="toggleSound(this)" hidden>🔇</button>
               </div>
               <div class="post-expand-caption">
-
+                <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
                 <p class="post-expand-text expand-caption-text"></p>
               </div>
-              <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
             </div>
           </div>
 
@@ -2409,10 +2404,9 @@
                 <button class="sound-btn" onclick="toggleSound(this)" hidden>🔇</button>
               </div>
               <div class="post-expand-caption">
-
+                <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
                 <p class="post-expand-text expand-caption-text"></p>
               </div>
-              <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
             </div>
           </div>
 
@@ -2447,10 +2441,9 @@
                 <button class="sound-btn" onclick="toggleSound(this)" hidden>🔇</button>
               </div>
               <div class="post-expand-caption">
-
+                <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
                 <p class="post-expand-text expand-caption-text"></p>
               </div>
-              <button class="post-expand-x" onclick="closeActivePost(this)">✕</button>
             </div>
           </div>
 
