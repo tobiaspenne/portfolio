@@ -783,22 +783,23 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.92);
+      width: 32px;
+      height: 32px;
+      border-radius: 0;
+      background: transparent;
       border: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 32px;
+      color: #ec5829;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: background 0.15s, transform 0.15s;
+      box-shadow: none;
+      transition: transform 0.15s;
       line-height: 1;
     }
-    .post-expand-x:hover { background: #fff; transform: scale(1.08); }
+    .post-expand-x:hover { transform: scale(1.15); }
     @media (max-width: 768px) {
       .post-expand-inner { flex-direction: column; }
       .post-expand-caption { padding: 24px; }
