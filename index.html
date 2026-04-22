@@ -802,7 +802,32 @@
     .post-expand-x:hover { transform: scale(1.15); }
     @media (max-width: 768px) {
       .post-expand-inner { flex-direction: column; }
-      .post-expand-caption { padding: 24px; }
+      .post-expand-caption { padding: 48px 24px 24px; }
+      /* X in white area: push down past the visual (aspect-ratio 1/1, capped at 62vh) */
+      .post-expand-x {
+        top: calc(min(100vw, 62vh) + 16px);
+        right: 16px;
+      }
+      /* Motion video: full width */
+      .motion-video-outer { padding: 0 !important; }
+      #modal-8 .motion-video-outer > div { border-radius: 0 !important; }
+      /* Copy case: one merged full-width block */
+      #modal-7 .case-showcase { gap: 0 !important; }
+      .copy-blog-wrap {
+        flex-direction: column !important;
+        padding: 32px 24px !important;
+        border-radius: 16px 16px 0 0 !important;
+        gap: 32px !important;
+      }
+      .copy-hr-wrap {
+        padding: 32px 24px !important;
+        border-radius: 0 0 16px 16px !important;
+        gap: 24px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      /* Portrait photo smaller */
+      .portrait-img-container { aspect-ratio: 4/3 !important; }
     }
     .blog-article-inner {
       padding: 0 48px 48px;
@@ -2172,7 +2197,7 @@
     <div class="case-showcase" style="background: transparent; flex-direction: column; gap: 40px;">
 
       <!-- Blog-Artikel: gemeinsamer grauer Wrapper -->
-      <div style="background:#f4f4f4; border-radius:16px; padding:80px; display:flex; gap:40px;">
+      <div class="copy-blog-wrap" style="background:#f4f4f4; border-radius:16px; padding:80px; display:flex; gap:40px;">
 
         <!-- Karte 1: Config 2023 -->
         <div class="blog-card">
@@ -2211,7 +2236,7 @@
       </div>
 
       <!-- HR Text-Snippets -->
-      <div style="background:#f4f4f4; border-radius:16px; padding:80px; display:flex; flex-direction:column; gap:40px;">
+      <div class="copy-hr-wrap" style="background:#f4f4f4; border-radius:16px; padding:80px; display:flex; flex-direction:column; gap:40px;">
 
         <div>
           <h3 style="font-family:'Noto Serif',serif; font-size:20px; font-weight:700; color:#000; line-height:normal; margin-bottom:16px;">HR Text-Snippets</h3>
@@ -2254,7 +2279,7 @@
     </div>
 
     <!-- Vimeo embed -->
-    <div style="padding: 0 80px 80px;">
+    <div class="motion-video-outer" style="padding: 0 80px 80px;">
       <div style="background:var(--modal-bg); border-radius:16px; overflow:hidden; aspect-ratio:16/9; position:relative; width:100%;">
         <iframe
           src="https://player.vimeo.com/video/1167199701?autoplay=0&title=0&byline=0&portrait=0&pip=0&speed=0&color=ec5829"
@@ -2760,13 +2785,16 @@
       updateCarousel(panel, 0);
       panel.classList.add('is-open');
 
-      // Scroll expanded panel to vertical center of modal-backdrop viewport
+      // Scroll: mobile → panel top to viewport top; desktop → center
       setTimeout(() => {
         const backdrop = panel.closest('.modal-backdrop');
         if (backdrop) {
           const bRect  = backdrop.getBoundingClientRect();
           const pRect  = panel.getBoundingClientRect();
-          const target = backdrop.scrollTop + pRect.top - bRect.top + pRect.height / 2 - backdrop.clientHeight / 2;
+          const isMobile = window.innerWidth <= 768;
+          const target = isMobile
+            ? backdrop.scrollTop + pRect.top - bRect.top
+            : backdrop.scrollTop + pRect.top - bRect.top + pRect.height / 2 - backdrop.clientHeight / 2;
           backdrop.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
         }
       }, 300);
