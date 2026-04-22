@@ -811,17 +811,17 @@
       /* Motion video: full width */
       .motion-video-outer { padding: 0 !important; }
       #modal-8 .motion-video-outer > div { border-radius: 0 !important; }
-      /* Copy case: one merged full-width block */
-      #modal-7 .case-showcase { gap: 0 !important; }
+      /* Copy case: full-width merged blocks */
+      #modal-7 .case-showcase { gap: 0 !important; padding: 0 !important; }
       .copy-blog-wrap {
         flex-direction: column !important;
         padding: 32px 24px !important;
-        border-radius: 16px 16px 0 0 !important;
+        border-radius: 0 !important;
         gap: 32px !important;
       }
       .copy-hr-wrap {
         padding: 32px 24px !important;
-        border-radius: 0 0 16px 16px !important;
+        border-radius: 0 !important;
         gap: 24px !important;
       }
     }
@@ -2783,15 +2783,17 @@
 
       // Scroll: mobile → panel top to viewport top; desktop → center
       setTimeout(() => {
-        const backdrop = panel.closest('.modal-backdrop');
-        if (backdrop) {
-          const bRect  = backdrop.getBoundingClientRect();
+        const isMobile = window.innerWidth <= 768;
+        const scrollEl = isMobile
+          ? panel.closest('.modal')
+          : panel.closest('.modal-backdrop');
+        if (scrollEl) {
+          const sRect  = scrollEl.getBoundingClientRect();
           const pRect  = panel.getBoundingClientRect();
-          const isMobile = window.innerWidth <= 768;
           const target = isMobile
-            ? backdrop.scrollTop + pRect.top - bRect.top
-            : backdrop.scrollTop + pRect.top - bRect.top + pRect.height / 2 - backdrop.clientHeight / 2;
-          backdrop.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+            ? scrollEl.scrollTop + pRect.top - sRect.top
+            : scrollEl.scrollTop + pRect.top - sRect.top + pRect.height / 2 - scrollEl.clientHeight / 2;
+          scrollEl.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
         }
       }, 300);
     }
