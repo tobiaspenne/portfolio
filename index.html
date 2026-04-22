@@ -629,39 +629,11 @@
     .blog-read-btn svg { transition: transform 0.2s ease; }
 
     /* ─── Social Media Grid ───────────────────────────────── */
-    /* social overlay – dims modal content behind grid */
-    .social-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 5;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      border-radius: 16px;
-      cursor: pointer;
-    }
-    .social-overlay.is-active { opacity: 1; pointer-events: auto; }
-    /* grid lifts above overlay */
     #modal-9 .case-showcase {
-      position: relative;
-      z-index: 6;
       padding: 0 !important;
       overflow: hidden;
       border-radius: 0 0 16px 16px;
     }
-    /* inner dim – covers ALL grid cells (incl. active card) */
-    .grid-dim {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.78);
-      z-index: 2;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      cursor: pointer;
-    }
-    .posts-grid.has-active .grid-dim { opacity: 1; pointer-events: auto; }
     /* sound button overlay on video */
     .sound-btn {
       position: absolute;
@@ -2294,7 +2266,7 @@
 <div class="modal-backdrop" id="modal-9" role="dialog" aria-modal="true" aria-label="Case: Social Media" onclick="handleBackdropClick(event, 'modal-9')">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-9')" aria-label="Schließen">✕</button>
-    <div class="social-overlay" id="socialOverlay" onclick="closeSocialOverlay()"></div>
+
 
     <div class="case-modal-header">
       <p class="case-modal-client">Neoskop</p>
@@ -2308,7 +2280,7 @@
 
         <!-- 3×3 Posts Grid -->
         <div class="posts-grid" id="socialGrid">
-          <div class="grid-dim" onclick="closeSocialOverlay()"></div>
+
 
           <!-- Row 0: 5 · 2 · 9 -->
           <div class="post-item" data-images="social/5/01.jpg,social/5/02.jpg" data-caption="Machen wir uns nichts vor: das Leben besteht nicht nur aus großen Relaunches – aber hey, alles halb so wild. In der Zwischenzeit haben wir unseren Freunden von @enercity_ag dabei geholfen, ihre Jobsuche etwas zu optimieren. Dabei herausgekommen ist ein smartes Job-Alert Feature, das dem Nutzer auf Basis von Directus, regelmässig relevante Jobangebote per Mail sendet. Die Rechnung ist schon überwiesen – einen Schulterklopfer gab es auch, alles gut! 👌🥳" onclick="togglePost(this, 0)">
@@ -2756,25 +2728,19 @@
   }
 
   function _closeSocialGrid(grid) {
-    const overlay = document.getElementById('socialOverlay');
     grid.querySelectorAll('.post-item').forEach(p => p.classList.remove('is-active'));
     grid.querySelectorAll('.post-expand').forEach(p => { p.classList.remove('is-open'); resetSlots(p); });
-    grid.classList.remove('has-active');
-    if (overlay) overlay.classList.remove('is-active');
   }
 
   function togglePost(el, row) {
     const grid    = el.closest('.posts-grid');
     const panel   = grid.querySelector('.post-expand[data-row="' + row + '"]');
-    const overlay = document.getElementById('socialOverlay');
     const isActive = el.classList.contains('is-active');
 
     _closeSocialGrid(grid);
 
     if (!isActive) {
       el.classList.add('is-active');
-      grid.classList.add('has-active');
-      if (overlay) overlay.classList.add('is-active');
 
       const attr   = (el.dataset.images || '').trim();
       const thumb  = (el.querySelector('img') || {}).src || '';
