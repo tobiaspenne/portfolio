@@ -1384,27 +1384,26 @@
       #modal-impressum h1 { font-size: 32px !important; margin-bottom: 32px !important; }
       #modal-impressum h2 { font-size: 20px !important; }
 
-      /* ── Modals: fullscreen, slide-up, backdrop scrolls ── */
+      /* ── Modals: modal fixed to viewport, scrolls natively ── */
       .modal-backdrop {
         padding: 0;
         background: none;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
-        align-items: flex-start;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
+        align-items: flex-end;
+        overflow: hidden;
       }
       .modal {
+        position: fixed;
+        inset: 0;
         border-radius: 0;
-        max-width: 100%;
         width: 100%;
-        height: auto;
-        min-height: 100vh;
-        min-height: 100dvh;
-        min-height: unset;
-        overflow-y: visible;
-        transform: translateY(40px);
+        height: 100%;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        transform: translateY(100%);
         background: var(--modal-bg);
+        z-index: 501;
       }
       .modal-backdrop.is-open .modal {
         transform: translateY(0);
@@ -2612,16 +2611,17 @@
     el.classList.toggle('is-open');
   }
 
-  // iOS: prevent background touchmove but allow inside open modal-backdrop
+  // iOS: block background scroll, allow inside modal
   function _blockBgTouch(e) {
-    if (!e.target.closest('.modal-backdrop')) e.preventDefault();
+    if (!e.target.closest('.modal')) e.preventDefault();
   }
 
   function openModal(id) {
     savedScrollY = window.scrollY;
     const el = document.getElementById(id);
     el.classList.add('is-open');
-    el.scrollTop = 0;
+    const modal = el.querySelector('.modal');
+    if (modal) modal.scrollTop = 1; // avoid iOS top rubber-band
     document.body.style.overflow = 'hidden';
     document.addEventListener('touchmove', _blockBgTouch, { passive: false });
   }
