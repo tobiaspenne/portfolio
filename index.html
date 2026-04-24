@@ -1402,7 +1402,6 @@
         min-height: unset;
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
         transform: translateY(40px);
         background: var(--modal-bg);
       }
@@ -2612,24 +2611,24 @@
     el.classList.toggle('is-open');
   }
 
+  // iOS: prevent background touchmove but allow inside .modal
+  function _blockBgTouch(e) {
+    if (!e.target.closest('.modal')) e.preventDefault();
+  }
+
   function openModal(id) {
     savedScrollY = window.scrollY;
     const el = document.getElementById(id);
     el.classList.add('is-open');
     el.scrollTop = 0;
-    // iOS scroll lock: position:fixed prevents background scroll without blocking modal scroll
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${savedScrollY}px`;
-    document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
+    document.addEventListener('touchmove', _blockBgTouch, { passive: false });
   }
 
   function closeModal(id) {
     document.getElementById(id).classList.remove('is-open');
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
     document.body.style.overflow = '';
+    document.removeEventListener('touchmove', _blockBgTouch);
     window.scrollTo({ top: savedScrollY, behavior: 'instant' });
   }
 
