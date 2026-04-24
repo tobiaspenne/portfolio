@@ -1384,24 +1384,25 @@
       #modal-impressum h1 { font-size: 32px !important; margin-bottom: 32px !important; }
       #modal-impressum h2 { font-size: 20px !important; }
 
-      /* ── Modals: fullscreen, slide-up, no backdrop ────── */
+      /* ── Modals: fullscreen, slide-up, backdrop scrolls ── */
       .modal-backdrop {
         padding: 0;
         background: none;
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
-        align-items: flex-end;
-        overflow: hidden;
+        align-items: flex-start;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
       }
       .modal {
         border-radius: 0;
         max-width: 100%;
         width: 100%;
-        height: 100vh;
-        height: 100dvh;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
         min-height: unset;
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
+        overflow-y: visible;
         transform: translateY(40px);
         background: var(--modal-bg);
       }
@@ -2611,9 +2612,9 @@
     el.classList.toggle('is-open');
   }
 
-  // iOS: prevent background touchmove but allow inside .modal
+  // iOS: prevent background touchmove but allow inside open modal-backdrop
   function _blockBgTouch(e) {
-    if (!e.target.closest('.modal')) e.preventDefault();
+    if (!e.target.closest('.modal-backdrop')) e.preventDefault();
   }
 
   function openModal(id) {
