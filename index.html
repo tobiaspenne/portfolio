@@ -1401,6 +1401,7 @@
         min-height: unset;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
         transform: translateY(40px);
         background: var(--modal-bg);
       }
@@ -2615,11 +2616,18 @@
     const el = document.getElementById(id);
     el.classList.add('is-open');
     el.scrollTop = 0;
+    // iOS scroll lock: position:fixed prevents background scroll without blocking modal scroll
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${savedScrollY}px`;
+    document.body.style.width = '100%';
     document.body.style.overflow = 'hidden';
   }
 
   function closeModal(id) {
     document.getElementById(id).classList.remove('is-open');
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
     document.body.style.overflow = '';
     window.scrollTo({ top: savedScrollY, behavior: 'instant' });
   }
